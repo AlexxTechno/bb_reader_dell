@@ -955,7 +955,6 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				if(my_str="I")path = L"\\\\.\\I:";
 				if(my_str="J")path = L"\\\\.\\J:";
 				if(my_str="K")path = L"\\\\.\\K:";
-
 					
 				// Дескриптор файлового устройства (раздела диска).
 				HANDLE partition = INVALID_HANDLE_VALUE;
@@ -993,7 +992,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				}
 				else 
 				{
-					MessageBox::Show("раздел" + my_str + ": jnrhsdftncz");	 
+					MessageBox::Show("раздел" + my_str + ": открывается");	 
 					delete[] buffer;
 					CloseHandle(partition);;
 				}
