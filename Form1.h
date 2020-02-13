@@ -9,6 +9,7 @@ namespace BB_reader_all_dell {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Сводка для Form1
@@ -106,6 +107,9 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::Label^  label20;
 	private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape3;
 	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
+	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+
+
 
 	private:
 		/// <summary>
@@ -184,6 +188,7 @@ namespace BB_reader_all_dell {
 			this->lineShape1 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
@@ -268,19 +273,20 @@ namespace BB_reader_all_dell {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(167, 527);
+			this->button7->Location = System::Drawing::Point(167, 521);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(88, 23);
 			this->button7->TabIndex = 13;
 			this->button7->Text = L"Показать";
 			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
 			// 
 			// label20
 			// 
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label20->Location = System::Drawing::Point(11, 530);
+			this->label20->Location = System::Drawing::Point(11, 525);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(57, 16);
 			this->label20->TabIndex = 9;
@@ -288,7 +294,7 @@ namespace BB_reader_all_dell {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(167, 484);
+			this->button6->Location = System::Drawing::Point(167, 447);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(88, 23);
 			this->button6->TabIndex = 13;
@@ -297,7 +303,7 @@ namespace BB_reader_all_dell {
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(61, 484);
+			this->button5->Location = System::Drawing::Point(61, 447);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(100, 23);
 			this->button5->TabIndex = 13;
@@ -310,7 +316,7 @@ namespace BB_reader_all_dell {
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label19->Location = System::Drawing::Point(212, 442);
+			this->label19->Location = System::Drawing::Point(120, 508);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(36, 13);
 			this->label19->TabIndex = 7;
@@ -319,7 +325,7 @@ namespace BB_reader_all_dell {
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(220, 460);
+			this->checkBox26->Location = System::Drawing::Point(128, 526);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -330,7 +336,7 @@ namespace BB_reader_all_dell {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label18->Location = System::Drawing::Point(171, 442);
+			this->label18->Location = System::Drawing::Point(79, 508);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(27, 13);
 			this->label18->TabIndex = 7;
@@ -339,7 +345,7 @@ namespace BB_reader_all_dell {
 			// checkBox25
 			// 
 			this->checkBox25->AutoSize = true;
-			this->checkBox25->Location = System::Drawing::Point(179, 460);
+			this->checkBox25->Location = System::Drawing::Point(87, 526);
 			this->checkBox25->Name = L"checkBox25";
 			this->checkBox25->Size = System::Drawing::Size(15, 14);
 			this->checkBox25->TabIndex = 10;
@@ -347,7 +353,7 @@ namespace BB_reader_all_dell {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(12, 484);
+			this->button4->Location = System::Drawing::Point(12, 447);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(43, 23);
 			this->button4->TabIndex = 12;
@@ -358,13 +364,13 @@ namespace BB_reader_all_dell {
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label17->Location = System::Drawing::Point(10, 442);
+			this->label17->Location = System::Drawing::Point(41, 495);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(96, 32);
+			this->label17->Size = System::Drawing::Size(115, 13);
 			this->label17->TabIndex = 7;
-			this->label17->Text = L"Отказ от \r\nблокировок";
+			this->label17->Text = L"Отказ от блокировок";
 			// 
 			// checkBox24
 			// 
@@ -752,9 +758,9 @@ namespace BB_reader_all_dell {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(4, 7);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(35, 13);
+			this->label1->Size = System::Drawing::Size(132, 13);
 			this->label1->TabIndex = 6;
-			this->label1->Text = L"label1";
+			this->label1->Text = L"Откройте диск или файл";
 			// 
 			// button3
 			// 
@@ -773,6 +779,7 @@ namespace BB_reader_all_dell {
 			this->button2->TabIndex = 4;
 			this->button2->Text = L"Открыть файл";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// progressBar1
 			// 
@@ -800,7 +807,7 @@ namespace BB_reader_all_dell {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(270, 28);
+			this->dataGridView1->Location = System::Drawing::Point(270, 4);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(531, 98);
 			this->dataGridView1->TabIndex = 0;
@@ -821,8 +828,8 @@ namespace BB_reader_all_dell {
 			this->lineShape3->Name = L"lineShape3";
 			this->lineShape3->X1 = 12;
 			this->lineShape3->X2 = 250;
-			this->lineShape3->Y1 = 515;
-			this->lineShape3->Y2 = 515;
+			this->lineShape3->Y1 = 478;
+			this->lineShape3->Y2 = 478;
 			// 
 			// lineShape2
 			// 
@@ -855,6 +862,12 @@ namespace BB_reader_all_dell {
 			this->folderBrowserDialog1->Description = L"Выберите диск для считывыания даных";
 			this->folderBrowserDialog1->RootFolder = System::Environment::SpecialFolder::MyComputer;
 			this->folderBrowserDialog1->ShowNewFolderButton = false;
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"file";
+			this->openFileDialog1->Filter = L"(*.dat)|*.dat";
+			this->openFileDialog1->RestoreDirectory = true;
 			// 
 			// Form1
 			// 
@@ -899,8 +912,6 @@ namespace BB_reader_all_dell {
 				checkBox22->Checked = true;
 				checkBox23->Checked = true;
 				checkBox24->Checked = true;
-				checkBox25->Checked = true;
-				checkBox26->Checked = true;	
 				
 			 }
 		// кнопка СБРОСИТЬ ВСЕ
@@ -930,8 +941,6 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 				checkBox22->Checked = false;
 				checkBox23->Checked = false;
 				checkBox24->Checked = false;
-				checkBox25->Checked = false;
-				checkBox26->Checked = false;	
 
 		 }
 		// кнопка ОТКРЫТЬ ДИСК
@@ -945,16 +954,16 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 		//----- Работа с диском --------------------------------------------
 				LPCWSTR path ;	
 				
-				if(my_str="A")path = L"\\\\.\\A:";
-				if(my_str="B")path = L"\\\\.\\B:";
-				if(my_str="D")path = L"\\\\.\\D:";
-				if(my_str="E")path = L"\\\\.\\E:";
-				if(my_str="F")path = L"\\\\.\\F:";
-				if(my_str="G")path = L"\\\\.\\G:";
-				if(my_str="H")path = L"\\\\.\\H:";
-				if(my_str="I")path = L"\\\\.\\I:";
-				if(my_str="J")path = L"\\\\.\\J:";
-				if(my_str="K")path = L"\\\\.\\K:";
+				if(my_str=="A")path = L"\\\\.\\A:";
+				if(my_str=="B")path = L"\\\\.\\B:";
+				if(my_str=="D")path = L"\\\\.\\D:";
+				if(my_str=="E")path = L"\\\\.\\E:";
+				if(my_str=="F")path = L"\\\\.\\F:";
+				if(my_str=="G")path = L"\\\\.\\G:";
+				if(my_str=="H")path = L"\\\\.\\H:";
+				if(my_str=="I")path = L"\\\\.\\I:";
+				if(my_str=="J")path = L"\\\\.\\J:";
+				if(my_str=="K")path = L"\\\\.\\K:";
 					
 				// Дескриптор файлового устройства (раздела диска).
 				HANDLE partition = INVALID_HANDLE_VALUE;
@@ -986,19 +995,226 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				if (partition == INVALID_HANDLE_VALUE)
 				{
 					// CreateFile() не работает
-					MessageBox::Show("Невозможно открыть раздел" + my_str + ":");	 
+					MessageBox::Show("Невозможно открыть раздел " + my_str + ":");	 
 					delete[] buffer;
 					CloseHandle(partition);
 				}
 				else 
 				{
-					MessageBox::Show("раздел" + my_str + ": открывается");	 
+					MessageBox::Show("Раздел " + my_str + ": успешно открывается");	 
+
+
+				//-------- ТУТ БУДЕТ ПРОДОЛЖЕНИЕ ------- 	
+				//----------- РАБОТЫ С ДИСКОМ ---------- 
+
+
+
 					delete[] buffer;
 					CloseHandle(partition);;
 				}
 
 			}
 			else MessageBox::Show( "Диск не выбран!" );
+		 }
+		// кнопка ОТКРЫТЬ ФАЙЛ
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			openFileDialog1->ShowDialog();
+			String^ file = openFileDialog1->FileName;
+		// Проверка файла на расширение .dat 
+			
+			Form1::Text = "BB_reader_dell  |  " + file;		
+		
+		//----------- РАБОТА С ФАЙЛОМ ---------- 
+			//-- создаем поток для чтения ----
+			FileStream^ fs = gcnew FileStream(file, FileMode::Open, FileAccess::Read);	
+			//-- проверка наличия файла ------
+			if ( File::Exists( file )==false )
+			{
+				MessageBox::Show( "Файл не найден!" );
+				fs->Close();
+			}
+			else 
+			{
+				MessageBox::Show( "Файл найден!"+"\n"+file );				
+				label1->Text="Данные из файла";
+
+				BinaryReader^ r = gcnew BinaryReader(fs);	// Создаем читателя.
+				unsigned char z[513];						// блок данных 512 байт
+				int lim = 121875*30;						// количество блоков по 512
+				unsigned char norma = 0;
+				
+				//--- диапазон дат в данных архива
+				unsigned char min_D = 31;	    // день
+				unsigned char min_M = 12;		// месяц
+				unsigned char min_G = 99;		// год начальная дата
+				unsigned char max_D = 1;		// день
+				unsigned char max_M = 1;		// месяц
+				unsigned char max_G = 0;		// год конечная дата
+				//**********************************
+				
+				progressBar1->Value=0;
+				progressBar1->Maximum = lim;
+				progressBar1->Visible = true;
+				
+				// Читаем данные из файла
+				for (int j = 1; j < lim; j++)
+				{
+					progressBar1->Value=j;
+					for (int i = 1; i < 513; i++)
+					{
+						z[i]=r->ReadByte();					// получили блок
+					
+					//***************************************************
+					//--- Анализируем блок с данными ----------						
+
+					//--- считаем что данные или полезные из дисплея или чисто
+						if((z[511]==13)&&(z[512]==10))		// есть хвост блока
+						{
+							//----- первая строка -------------------------------
+							if((z[99]==13)&&(z[100]==10))	// есть хвост строки
+							{
+								// проверка даты в допустимом диапазоне сразу все
+								//     число				месяц				год
+								if((z[1]<32)&&(z[1]>0)&&(z[2]<13)&&(z[2]>0)&&(z[3]<100)&&(z[3]>0))
+								{
+									//-- определяеи минимум
+									if(z[1]<min_D) min_D = z[1];			
+									if(z[2]<min_M) min_M = z[2];			
+									if(z[3]<min_G) min_G = z[3];
+				
+									//-- определяеи максимум
+									if(z[1]>max_D) max_D = z[1];
+									if(z[2]>max_M) max_M = z[2];
+									if(z[3]>max_G) max_G = z[3];
+				
+									norma = 1;
+								}
+								else{ norma = 0; }		// в строке косячная дата			
+							}
+							else { norma = 0; }		// косячная строка
+		
+							//----- вторая строка -------------------------------
+							if((z[199]==13)&&(z[200]==10))	// есть хвост строки
+							{
+								// проверка даты в допустимом диапазоне сразу все
+								//     число				месяц				год
+								if((z[101]<32)&&(z[101]>0)&&(z[102]<13)&&(z[102]>0)&&(z[103]<100)&&(z[103]>0))
+								{
+									//-- определяеи минимум
+									if(z[101]<min_D) min_D = z[101];			
+									if(z[102]<min_M) min_M = z[102];			
+									if(z[103]<min_G) min_G = z[103];
+				
+									//-- определяеи максимум
+									if(z[101]>max_D) max_D = z[101];
+									if(z[102]>max_M) max_M = z[102];
+									if(z[103]>max_G) max_G = z[103];
+				
+									norma = 1;
+								}
+								else{ norma = 0; }		// в строке косячная дата			
+							}
+							else { norma = 0; }		// косячная строка
+		
+							//----- третья строка -------------------------------
+							if((z[299]==13)&&(z[300]==10))	// есть хвост строки
+							{
+								// проверка даты в допустимом диапазоне сразу все
+								//     число				месяц				год
+								if((z[201]<32)&&(z[201]>0)&&(z[202]<13)&&(z[202]>0)&&(z[203]<100)&&(z[203]>0))
+								{
+									//-- определяеи минимум
+									if(z[201]<min_D) min_D = z[201];			
+									if(z[202]<min_M) min_M = z[202];			
+									if(z[203]<min_G) min_G = z[203];
+				
+									//-- определяеи максимум
+									if(z[201]>max_D) max_D = z[201];
+									if(z[202]>max_M) max_M = z[202];
+									if(z[203]>max_G) max_G = z[203];
+				
+									norma = 1;
+								}
+								else{ norma = 0; }		// в строке косячная дата			
+							}
+							else { norma = 0; }		// косячная строка
+		
+							//----- четвертая строка -------------------------------
+							if((z[399]==13)&&(z[400]==10))	// есть хвост строки
+							{
+								// проверка даты в допустимом диапазоне сразу все
+								//     число				месяц				год
+								if((z[301]<32)&&(z[301]>0)&&(z[302]<13)&&(z[302]>0)&&(z[303]<100)&&(z[303]>0))
+								{
+									//-- определяеи минимум
+									if(z[301]<min_D) min_D = z[301];			
+									if(z[302]>min_M) min_M = z[302];			
+									if(z[303]>min_G) min_G = z[303];
+				
+									//-- определяеи максимум
+									if(z[301]>max_D) max_D = z[301];
+									if(z[302]>max_M) max_M = z[302];
+									if(z[303]>max_G) max_G = z[303];
+				
+									norma = 1;
+								}
+								else{ norma = 0; }		// в строке косячная дата			
+							}
+							else { norma = 0; }		// косячная строка		
+
+							//----- пятая строка -------------------------------
+							if((z[499]==13)&&(z[500]==10))	// есть хвост строки
+							{
+								// проверка даты в допустимом диапазоне сразу все
+								//     число				месяц				год
+								if((z[401]<32)&&(z[401]>0)&&(z[402]<13)&&(z[402]>0)&&(z[403]<100)&&(z[403]>0))
+								{
+									//-- определяеи минимум
+									if(z[401]<min_D) min_D = z[401];			
+									if(z[402]<min_M) min_M = z[402];			
+									if(z[403]<min_G) min_G = z[403];
+				
+									//-- определяеи максимум
+									if(z[401]>max_D) max_D = z[401];
+									if(z[402]>max_M) max_M = z[402];
+									if(z[403]>max_G) max_G = z[403];
+				
+									norma = 1;
+								}
+								else{ norma = 0; }		// в строке косячная дата			
+							}
+							else { norma = 0; }		// косячная строка		
+						}
+						else  { norma = 0; }// косячный блок;
+
+				// --------- все по определению min-max  -----------------
+					
+					}
+				}
+
+				if(norma = 1) {
+					
+					label1->Text = "Данные с " + min_D.ToString() + "-" + min_M.ToString() + "-" + (2000+min_G).ToString() + 
+										 " по " + max_D.ToString() + "-" + max_M.ToString() + "-" + (2000+max_G).ToString();
+				
+				//--- ставим календарь на диапвазон мин-мах -------
+				monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
+				monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );
+				
+				}
+					
+				else label1->Text = "Данных нет!";
+
+				
+				fs->Close();
+				progressBar1->Visible = false;
+			}
+
+		 }
+		// кнопка Uсети - напряжение и блокировки по току и Uсети
+private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
+			
 		 }
 };
 }
