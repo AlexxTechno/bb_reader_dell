@@ -10,6 +10,7 @@ namespace BB_reader_all_dell {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+	using namespace System::Text;
 
 	/// <summary>
 	/// Сводка для Form1
@@ -110,6 +111,9 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 
 
+	private: System::Windows::Forms::ListBox^  listBox1;
+
+
 
 	private:
 		/// <summary>
@@ -126,6 +130,7 @@ namespace BB_reader_all_dell {
 		{
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->button6 = (gcnew System::Windows::Forms::Button());
@@ -201,11 +206,12 @@ namespace BB_reader_all_dell {
 			this->tabControl1->Location = System::Drawing::Point(0, 3);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(983, 610);
+			this->tabControl1->Size = System::Drawing::Size(900, 610);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->listBox1);
 			this->tabPage1->Controls->Add(this->button7);
 			this->tabPage1->Controls->Add(this->label20);
 			this->tabPage1->Controls->Add(this->button6);
@@ -266,14 +272,22 @@ namespace BB_reader_all_dell {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(975, 584);
+			this->tabPage1->Size = System::Drawing::Size(892, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(5, 88);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(96, 95);
+			this->listBox1->TabIndex = 16;
+			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(167, 521);
+			this->button7->Location = System::Drawing::Point(167, 522);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(88, 23);
 			this->button7->TabIndex = 13;
@@ -286,7 +300,7 @@ namespace BB_reader_all_dell {
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label20->Location = System::Drawing::Point(11, 525);
+			this->label20->Location = System::Drawing::Point(11, 527);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(57, 16);
 			this->label20->TabIndex = 9;
@@ -316,7 +330,7 @@ namespace BB_reader_all_dell {
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label19->Location = System::Drawing::Point(120, 508);
+			this->label19->Location = System::Drawing::Point(120, 510);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(36, 13);
 			this->label19->TabIndex = 7;
@@ -325,7 +339,7 @@ namespace BB_reader_all_dell {
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(128, 526);
+			this->checkBox26->Location = System::Drawing::Point(128, 528);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -336,7 +350,7 @@ namespace BB_reader_all_dell {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label18->Location = System::Drawing::Point(79, 508);
+			this->label18->Location = System::Drawing::Point(79, 510);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(27, 13);
 			this->label18->TabIndex = 7;
@@ -345,7 +359,7 @@ namespace BB_reader_all_dell {
 			// checkBox25
 			// 
 			this->checkBox25->AutoSize = true;
-			this->checkBox25->Location = System::Drawing::Point(87, 526);
+			this->checkBox25->Location = System::Drawing::Point(87, 528);
 			this->checkBox25->Name = L"checkBox25";
 			this->checkBox25->Size = System::Drawing::Size(15, 14);
 			this->checkBox25->TabIndex = 10;
@@ -364,11 +378,11 @@ namespace BB_reader_all_dell {
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label17->Location = System::Drawing::Point(41, 495);
+			this->label17->Location = System::Drawing::Point(38, 492);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(115, 13);
+			this->label17->Size = System::Drawing::Size(134, 13);
 			this->label17->TabIndex = 7;
 			this->label17->Text = L"Отказ от блокировок";
 			// 
@@ -756,7 +770,7 @@ namespace BB_reader_all_dell {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(4, 7);
+			this->label1->Location = System::Drawing::Point(4, 5);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(132, 13);
 			this->label1->TabIndex = 6;
@@ -764,18 +778,18 @@ namespace BB_reader_all_dell {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(4, 127);
+			this->button3->Location = System::Drawing::Point(4, 66);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(97, 61);
+			this->button3->Size = System::Drawing::Size(97, 21);
 			this->button3->TabIndex = 5;
-			this->button3->Text = L"Сохранить\r\nдиск в\r\nфайл";
+			this->button3->Text = L"Диск в файл";
 			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(3, 77);
+			this->button2->Location = System::Drawing::Point(3, 44);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(97, 47);
+			this->button2->Size = System::Drawing::Size(97, 21);
 			this->button2->TabIndex = 4;
 			this->button2->Text = L"Открыть файл";
 			this->button2->UseVisualStyleBackColor = true;
@@ -785,20 +799,20 @@ namespace BB_reader_all_dell {
 			// 
 			this->progressBar1->Location = System::Drawing::Point(270, 4);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(531, 20);
+			this->progressBar1->Size = System::Drawing::Size(616, 20);
 			this->progressBar1->TabIndex = 3;
 			// 
 			// monthCalendar1
 			// 
-			this->monthCalendar1->Location = System::Drawing::Point(103, 26);
+			this->monthCalendar1->Location = System::Drawing::Point(103, 22);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 2;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(3, 26);
+			this->button1->Location = System::Drawing::Point(3, 22);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(98, 49);
+			this->button1->Size = System::Drawing::Size(98, 21);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Открыть диск";
 			this->button1->UseVisualStyleBackColor = true;
@@ -809,7 +823,7 @@ namespace BB_reader_all_dell {
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(270, 4);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(531, 98);
+			this->dataGridView1->Size = System::Drawing::Size(616, 540);
 			this->dataGridView1->TabIndex = 0;
 			// 
 			// shapeContainer1
@@ -819,7 +833,7 @@ namespace BB_reader_all_dell {
 			this->shapeContainer1->Name = L"shapeContainer1";
 			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(3) {this->lineShape3, 
 				this->lineShape2, this->lineShape1});
-			this->shapeContainer1->Size = System::Drawing::Size(969, 578);
+			this->shapeContainer1->Size = System::Drawing::Size(886, 578);
 			this->shapeContainer1->TabIndex = 11;
 			this->shapeContainer1->TabStop = false;
 			// 
@@ -873,7 +887,7 @@ namespace BB_reader_all_dell {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(984, 612);
+			this->ClientSize = System::Drawing::Size(894, 612);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"Form1";
 			this->Text = L"BB_reader_dell";
@@ -1037,12 +1051,14 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			else 
 			{
 				MessageBox::Show( "Файл найден!"+"\n"+file );				
-				label1->Text="Данные из файла";
+				label1->Text="Работаем с файлом";
 
+				//--- Переменные для работы с файлом ------------------------------
 				BinaryReader^ r = gcnew BinaryReader(fs);	// Создаем читателя.
 				unsigned char z[513];						// блок данных 512 байт
 				int lim = 121875*30;						// количество блоков по 512
-				unsigned char norma = 0;
+				unsigned char norma = 0;					// данные в блоке есть
+				//-------------------------------------------------------------------
 				
 				//--- диапазон дат в данных архива
 				unsigned char min_D = 31;	    // день
@@ -1064,7 +1080,14 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					for (int i = 1; i < 513; i++)
 					{
 						z[i]=r->ReadByte();					// получили блок
-					
+						
+					// Текущщая дата из каждой строки
+					//	String^ data1           = z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г";
+					//	String^ data2 			= z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г";
+					//	String^ data3 			= z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г";
+					//	String^ data4 			= z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г";
+					//	String^ data5 			= z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г";
+			
 					//***************************************************
 					//--- Анализируем блок с данными ----------						
 
@@ -1089,6 +1112,10 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									if(z[3]>max_G) max_G = z[3];
 				
 									norma = 1;
+									
+									// в каждой строке поиск новой даты
+									if (!(listBox1->Items->Contains(z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г"))) listBox1->Items->Add(z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г");
+										
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1111,7 +1138,10 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									if(z[102]>max_M) max_M = z[102];
 									if(z[103]>max_G) max_G = z[103];
 				
-									norma = 1;
+									norma = 1;	
+									
+									if (!(listBox1->Items->Contains(z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г"))) listBox1->Items->Add(z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г");								
+							
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1135,6 +1165,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									if(z[203]>max_G) max_G = z[203];
 				
 									norma = 1;
+									
+									if (!(listBox1->Items->Contains(z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г"))) listBox1->Items->Add(z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г");
+									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1158,6 +1191,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									if(z[303]>max_G) max_G = z[303];
 				
 									norma = 1;
+									
+									if (!(listBox1->Items->Contains(z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г"))) listBox1->Items->Add(z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г");
+									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1181,6 +1217,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									if(z[403]>max_G) max_G = z[403];
 				
 									norma = 1;
+									
+									if (!(listBox1->Items->Contains(z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г"))) listBox1->Items->Add(z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г");
+									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1198,9 +1237,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					label1->Text = "Данные с " + min_D.ToString() + "-" + min_M.ToString() + "-" + (2000+min_G).ToString() + 
 										 " по " + max_D.ToString() + "-" + max_M.ToString() + "-" + (2000+max_G).ToString();
 				
-				//--- ставим календарь на диапвазон мин-мах -------
-				monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
-				monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );
+					//--- ставим календарь на диапвазон мин-мах -------
+					monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
+					monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );			
 				
 				}
 					
@@ -1214,7 +1253,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 		// кнопка Uсети - напряжение и блокировки по току и Uсети
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			
+
+		
+			 
 		 }
 };
 }
