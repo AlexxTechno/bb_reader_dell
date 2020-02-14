@@ -302,9 +302,9 @@ namespace BB_reader_all_dell {
 				static_cast<System::Byte>(204)));
 			this->label20->Location = System::Drawing::Point(11, 527);
 			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(57, 16);
+			this->label20->Size = System::Drawing::Size(77, 16);
 			this->label20->TabIndex = 9;
-			this->label20->Text = L"U сети";
+			this->label20->Text = L"Uсети (В)";
 			// 
 			// button6
 			// 
@@ -330,7 +330,7 @@ namespace BB_reader_all_dell {
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label19->Location = System::Drawing::Point(120, 510);
+			this->label19->Location = System::Drawing::Point(125, 510);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(36, 13);
 			this->label19->TabIndex = 7;
@@ -339,7 +339,7 @@ namespace BB_reader_all_dell {
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(128, 528);
+			this->checkBox26->Location = System::Drawing::Point(133, 528);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -350,7 +350,7 @@ namespace BB_reader_all_dell {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label18->Location = System::Drawing::Point(79, 510);
+			this->label18->Location = System::Drawing::Point(93, 510);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(27, 13);
 			this->label18->TabIndex = 7;
@@ -359,7 +359,7 @@ namespace BB_reader_all_dell {
 			// checkBox25
 			// 
 			this->checkBox25->AutoSize = true;
-			this->checkBox25->Location = System::Drawing::Point(87, 528);
+			this->checkBox25->Location = System::Drawing::Point(101, 528);
 			this->checkBox25->Name = L"checkBox25";
 			this->checkBox25->Size = System::Drawing::Size(15, 14);
 			this->checkBox25->TabIndex = 10;
@@ -380,7 +380,7 @@ namespace BB_reader_all_dell {
 			this->label17->AutoSize = true;
 			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label17->Location = System::Drawing::Point(38, 492);
+			this->label17->Location = System::Drawing::Point(94, 492);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(134, 13);
 			this->label17->TabIndex = 7;
@@ -866,7 +866,7 @@ namespace BB_reader_all_dell {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(975, 584);
+			this->tabPage2->Size = System::Drawing::Size(892, 584);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -891,6 +891,7 @@ namespace BB_reader_all_dell {
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"Form1";
 			this->Text = L"BB_reader_dell";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
@@ -1009,13 +1010,13 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				if (partition == INVALID_HANDLE_VALUE)
 				{
 					// CreateFile() не работает
-					MessageBox::Show("Невозможно открыть раздел " + my_str + ":");	 
+					MessageBox::Show("Невозможно открыть диск " + my_str + ":");	 
 					delete[] buffer;
 					CloseHandle(partition);
 				}
 				else 
 				{
-					MessageBox::Show("Раздел " + my_str + ": успешно открывается");	 
+					MessageBox::Show("Диск " + my_str + ": успешно открывается");	 
 
 
 				//-------- ТУТ БУДЕТ ПРОДОЛЖЕНИЕ ------- 	
@@ -1045,13 +1046,15 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			//-- проверка наличия файла ------
 			if ( File::Exists( file )==false )
 			{
-				MessageBox::Show( "Файл не найден!" );
 				fs->Close();
+				MessageBox::Show( "Файл не найден!" );				
 			}
 			else 
 			{
-				MessageBox::Show( "Файл найден!"+"\n"+file );				
 				label1->Text="Работаем с файлом";
+				listBox1->Items->Clear() ;
+				MessageBox::Show( "Файл найден!"+"\n"+file );	
+				listBox1->Visible = false;
 
 				//--- Переменные для работы с файлом ------------------------------
 				BinaryReader^ r = gcnew BinaryReader(fs);	// Создаем читателя.
@@ -1059,15 +1062,23 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				int lim = 121875*30;						// количество блоков по 512
 				unsigned char norma = 0;					// данные в блоке есть
 				//-------------------------------------------------------------------
+
+				//--- Текущщая дата из каждой строки ----------------------------------------------------------
+				//	String^ data1 = z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г";
+				//	String^ data2 = z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г";
+				//	String^ data3 = z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г";
+				//	String^ data4 = z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г";
+				//	String^ data5 = z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г";
+				//---------------------------------------------------------------------------------------------
 				
-				//--- диапазон дат в данных архива
+				//--- диапазон дат в данных архива ------------------
 				unsigned char min_D = 31;	    // день
 				unsigned char min_M = 12;		// месяц
 				unsigned char min_G = 99;		// год начальная дата
 				unsigned char max_D = 1;		// день
 				unsigned char max_M = 1;		// месяц
 				unsigned char max_G = 0;		// год конечная дата
-				//**********************************
+				//---------------------------------------------------
 				
 				progressBar1->Value=0;
 				progressBar1->Maximum = lim;
@@ -1079,16 +1090,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					progressBar1->Value=j;
 					for (int i = 1; i < 513; i++)
 					{
-						z[i]=r->ReadByte();					// получили блок
-						
-					// Текущщая дата из каждой строки
-					//	String^ data1           = z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г";
-					//	String^ data2 			= z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г";
-					//	String^ data3 			= z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г";
-					//	String^ data4 			= z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г";
-					//	String^ data5 			= z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г";
-			
-					//***************************************************
+						z[i]=r->ReadByte();					// получили блок						
+					
 					//--- Анализируем блок с данными ----------						
 
 					//--- считаем что данные или полезные из дисплея или чисто
@@ -1114,7 +1117,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 									norma = 1;
 									
 									// в каждой строке поиск новой даты
-									if (!(listBox1->Items->Contains(z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г"))) listBox1->Items->Add(z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г");
+									if (!(listBox1->Items->Contains(z[1].ToString("D2")  +"-"+z[2].ToString("D2")  +"-"+(2000+z[3]).ToString("D4")   +" г"))) listBox1->Items->Add(z[1].ToString("D2")  +"-"+z[2].ToString("D2")  +"-"+(2000+z[3]).ToString("D4")  +" г");
 										
 								}
 								else{ norma = 0; }		// в строке косячная дата			
@@ -1140,7 +1143,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;	
 									
-									if (!(listBox1->Items->Contains(z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г"))) listBox1->Items->Add(z[101].ToString()+"-"+z[102].ToString()+"-"+(2000+z[103]).ToString() +" г");								
+									if (!(listBox1->Items->Contains(z[101].ToString("D2")+"-"+z[102].ToString("D2")+"-"+(2000+z[103]).ToString("D4") +" г"))) listBox1->Items->Add(z[101].ToString("D2")+"-"+z[102].ToString("D2")+"-"+(2000+z[103]).ToString("D4") +" г");								
 							
 								}
 								else{ norma = 0; }		// в строке косячная дата			
@@ -1166,7 +1169,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
-									if (!(listBox1->Items->Contains(z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г"))) listBox1->Items->Add(z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г");
+									if (!(listBox1->Items->Contains(z[201].ToString("D2")+"-"+z[202].ToString("D2")+"-"+(2000+z[203]).ToString("D4") +" г"))) listBox1->Items->Add(z[201].ToString("D2")+"-"+z[202].ToString("D2")+"-"+(2000+z[203]).ToString("D4") +" г");
 									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
@@ -1192,7 +1195,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
-									if (!(listBox1->Items->Contains(z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г"))) listBox1->Items->Add(z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г");
+									if (!(listBox1->Items->Contains(z[301].ToString("D2")+"-"+z[302].ToString("D2")+"-"+(2000+z[303]).ToString("D4") +" г"))) listBox1->Items->Add(z[301].ToString("D2")+"-"+z[302].ToString("D2")+"-"+(2000+z[303]).ToString("D4") +" г");
 									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
@@ -1218,7 +1221,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
-									if (!(listBox1->Items->Contains(z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г"))) listBox1->Items->Add(z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г");
+									if (!(listBox1->Items->Contains(z[401].ToString("D2")+"-"+z[402].ToString("D2")+"-"+(2000+z[403]).ToString("D4") +" г"))) listBox1->Items->Add(z[401].ToString("D2")+"-"+z[402].ToString("D2")+"-"+(2000+z[403]).ToString("D4") +" г");
 									
 								}
 								else{ norma = 0; }		// в строке косячная дата			
@@ -1233,29 +1236,31 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				}
 
 				if(norma = 1) {
-					
-					label1->Text = "Данные с " + min_D.ToString() + "-" + min_M.ToString() + "-" + (2000+min_G).ToString() + 
-										 " по " + max_D.ToString() + "-" + max_M.ToString() + "-" + (2000+max_G).ToString();
+
+					listBox1->Visible = true;
+					label1->Text = "Данные с "  + min_D.ToString("D2") + "-" + min_M.ToString("D2") + "-" + (2000+min_G).ToString("D4") + 
+										 " по " + max_D.ToString("D2") + "-" + max_M.ToString("D2") + "-" + (2000+max_G).ToString("D4");
 				
 					//--- ставим календарь на диапвазон мин-мах -------
 					monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
 					monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );			
 				
+				}					
+				else {
+					label1->Text = "Данных нет!";
+					listBox1->Visible = false;
 				}
-					
-				else label1->Text = "Данных нет!";
-
-				
 				fs->Close();
 				progressBar1->Visible = false;
 			}
 
 		 }
 		// кнопка Uсети - напряжение и блокировки по току и Uсети
-private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-
-		
+private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {		
 			 
+		 }
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+			 listBox1->Visible = false;
 		 }
 };
 }
