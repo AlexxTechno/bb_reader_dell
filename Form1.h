@@ -1243,8 +1243,12 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 					//--- ставим календарь на диапвазон мин-мах -------
 					monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
-					monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );			
-				
+					monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );
+					
+					//--- выбор  на max --------
+					monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
+					//label1->Text += monthCalendar1->SelectionStart.ToString();	 
+					
 				}					
 				else {
 					label1->Text = "Данных нет!";
