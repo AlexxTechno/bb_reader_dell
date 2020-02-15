@@ -1247,7 +1247,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					
 					//--- выбор  на max --------
 					monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
-					//label1->Text += monthCalendar1->SelectionStart.ToString();	 
+					label1->Text += monthCalendar1->SelectionStart.ToString();	 // проверка выбора
 					
 				}					
 				else {
