@@ -1143,6 +1143,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;	
 									
+									// в каждой строке поиск новой даты
 									if (!(listBox1->Items->Contains(z[101].ToString("D2")+"-"+z[102].ToString("D2")+"-"+(2000+z[103]).ToString("D4") +" г"))) listBox1->Items->Add(z[101].ToString("D2")+"-"+z[102].ToString("D2")+"-"+(2000+z[103]).ToString("D4") +" г");								
 							
 								}
@@ -1169,8 +1170,19 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
+									// в каждой строке поиск новой даты
 									if (!(listBox1->Items->Contains(z[201].ToString("D2")+"-"+z[202].ToString("D2")+"-"+(2000+z[203]).ToString("D4") +" г"))) listBox1->Items->Add(z[201].ToString("D2")+"-"+z[202].ToString("D2")+"-"+(2000+z[203]).ToString("D4") +" г");
-									
+								
+									// Тут добавиться поиск срабатывания защит по дате для формирования сводной таблицы
+									// дата	(М1)-> защита
+									//		(М2)-> защита 
+									//		(М3)-> защита 
+									//		(М4)-> защита 
+									//		(М5)-> защита 
+									//		(М6)-> защита 																											//		(М3)-> защита 
+									//		(М7)-> защита																																				//		(М3)-> защита 
+									//      маслобак -> защита																																													//		(М3)-> защита 
+								
 								}
 								else{ norma = 0; }		// в строке косячная дата			
 							}
@@ -1195,6 +1207,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
+									// в каждой строке поиск новой даты
 									if (!(listBox1->Items->Contains(z[301].ToString("D2")+"-"+z[302].ToString("D2")+"-"+(2000+z[303]).ToString("D4") +" г"))) listBox1->Items->Add(z[301].ToString("D2")+"-"+z[302].ToString("D2")+"-"+(2000+z[303]).ToString("D4") +" г");
 									
 								}
@@ -1221,6 +1234,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				
 									norma = 1;
 									
+									// в каждой строке поиск новой даты
 									if (!(listBox1->Items->Contains(z[401].ToString("D2")+"-"+z[402].ToString("D2")+"-"+(2000+z[403]).ToString("D4") +" г"))) listBox1->Items->Add(z[401].ToString("D2")+"-"+z[402].ToString("D2")+"-"+(2000+z[403]).ToString("D4") +" г");
 									
 								}
