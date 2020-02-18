@@ -1012,20 +1012,77 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 					// CreateFile() не работает
 					MessageBox::Show("Невозможно открыть диск " + my_str + ":");	 
 					delete[] buffer;
-					CloseHandle(partition);
+					CloseHandle(partition);					
 				}
 				else 
-				{
-					MessageBox::Show("Диск " + my_str + ": успешно открывается");	 
-
-
-				//-------- ТУТ БУДЕТ ПРОДОЛЖЕНИЕ ------- 	
-				//----------- РАБОТЫ С ДИСКОМ ---------- 
-
-
-
-					delete[] buffer;
-					CloseHandle(partition);;
+				{							
+				// Запрашиваем сведения о геометрии диска, на котором расположен раздел.
+					if (!DeviceIoControl(partition,
+						IOCTL_DISK_GET_DRIVE_GEOMETRY,
+						NULL,
+						0,
+						&diskGeometry,
+						sizeof (DISK_GEOMETRY),
+						&bytesReturned,
+						(LPOVERLAPPED)NULL))
+					{
+						MessageBox::Show("Ошибка запроса сведений о геометрии диска "  + my_str + ":");
+						CloseHandle(partition);
+					}
+					else
+					{
+					// Запрашиваем сведения о разделе.
+						if (!DeviceIoControl(partition,
+							IOCTL_DISK_GET_PARTITION_INFO,
+							NULL,
+							0,&partitionInfo,
+							sizeof (PARTITION_INFORMATION),
+							&bytesReturned,
+							(LPOVERLAPPED)NULL))
+						{
+							MessageBox::Show("Ошибка запроса сведений о разделе" + my_str + ":");
+							CloseHandle(partition);
+						}
+						else
+						{	
+							MessageBox::Show("Диск " + my_str + ": все ОК");
+					//-------- РАБОТА С ДИСКОМ ------- 	
+				
+							int myBuf = 512 * 10   ;  	// 5120*325*30 = 49 920 000 б		// 121875*30;
+							int zykl  = 325 * 300   ;  	// 5120*325*30 = 490 920 000 б		// 325*30;
+							
+						// Выделение памяти для буфера указанного размера.	
+							bufferSize = myBuf;        						
+							buffer = new BYTE[bufferSize+1];
+							
+							progressBar1->Value=0;
+							progressBar1->Maximum = zykl;
+							progressBar1->Visible = true;
+							
+							for (int i=1; i<(zykl+1); i++)   // было 326 
+							{	
+								result = ReadFile(partition, buffer, bufferSize, &bytesReturned, NULL);			
+								if (!result)
+								{
+									MessageBox::Show("Ошибка чтения секторов в разделе" + my_str + ":");
+									delete[] buffer;
+									
+								}
+								else
+								{
+									progressBar1->Value=i;
+									
+								}
+							}
+					
+					
+					//------ / РАБОТА С ДИСКОМ ---------- 
+					
+							progressBar1->Visible = false;
+							delete[] buffer;
+							CloseHandle(partition);
+						}
+					}						
 				}
 
 			}
