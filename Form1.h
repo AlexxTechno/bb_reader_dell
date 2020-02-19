@@ -131,6 +131,7 @@ namespace BB_reader_all_dell {
 		{
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->label21 = (gcnew System::Windows::Forms::Label());
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->label20 = (gcnew System::Windows::Forms::Label());
@@ -195,7 +196,6 @@ namespace BB_reader_all_dell {
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->label21 = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
@@ -280,6 +280,15 @@ namespace BB_reader_all_dell {
 			this->tabPage1->Text = L"Защиты и блокировки";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// label21
+			// 
+			this->label21->AutoSize = true;
+			this->label21->Location = System::Drawing::Point(3, 567);
+			this->label21->Name = L"label21";
+			this->label21->Size = System::Drawing::Size(41, 13);
+			this->label21->TabIndex = 17;
+			this->label21->Text = L"label21";
+			// 
 			// listBox1
 			// 
 			this->listBox1->FormattingEnabled = true;
@@ -333,7 +342,7 @@ namespace BB_reader_all_dell {
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label19->Location = System::Drawing::Point(125, 510);
+			this->label19->Location = System::Drawing::Point(93, 511);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(36, 13);
 			this->label19->TabIndex = 7;
@@ -342,7 +351,7 @@ namespace BB_reader_all_dell {
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(133, 528);
+			this->checkBox26->Location = System::Drawing::Point(101, 529);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -353,7 +362,7 @@ namespace BB_reader_all_dell {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label18->Location = System::Drawing::Point(93, 510);
+			this->label18->Location = System::Drawing::Point(130, 511);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(27, 13);
 			this->label18->TabIndex = 7;
@@ -362,7 +371,7 @@ namespace BB_reader_all_dell {
 			// checkBox25
 			// 
 			this->checkBox25->AutoSize = true;
-			this->checkBox25->Location = System::Drawing::Point(101, 528);
+			this->checkBox25->Location = System::Drawing::Point(138, 529);
 			this->checkBox25->Name = L"checkBox25";
 			this->checkBox25->Size = System::Drawing::Size(15, 14);
 			this->checkBox25->TabIndex = 10;
@@ -886,15 +895,6 @@ namespace BB_reader_all_dell {
 			this->openFileDialog1->Filter = L"(*.dat)|*.dat";
 			this->openFileDialog1->RestoreDirectory = true;
 			// 
-			// label21
-			// 
-			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(3, 567);
-			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(41, 13);
-			this->label21->TabIndex = 17;
-			this->label21->Text = L"label21";
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1332,7 +1332,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					
 					//--- выбор  на max --------
 					monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
-					label1->Text += monthCalendar1->SelectionStart.ToString();	 // проверка выбора
+					// label1->Text += monthCalendar1->SelectionStart.ToString();	 // проверка выбора
 					
 				}					
 				else {
@@ -1347,21 +1347,57 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		// кнопка Uсети - напряжение и блокировки по току и Uсети
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {	
 
+		//--- заморозить кнопки и др. ------------		
+		button1->Enabled=false;
+		button2->Enabled=false;
+		button3->Enabled=false;
+		button4->Enabled=false;
+		button5->Enabled=false;
+		button6->Enabled=false;	
+		monthCalendar1->Enabled=false;
+
 		//--- работаем с файлом ----
 		//- путь в label21
 		int lim = 121875*30;	// для 1872 000 000 байт
 		unsigned char z[513];
-		
+		String^ U_error;		// напряжение сети + %от Uном		
 		String^ block_U ;		// фраза для блоокировки по Uсети
 		String^ block_I ;		// фраза для блоокировки по I
-		
+
+		//--- таблица в dataGridView1 ---------
 		DataTable ^ tabl_U = gcnew DataTable();
-		// шапка таблицы ******************
+		//-- шапка таблицы -------------
 		tabl_U->Columns->Add("Время");
-		tabl_U->Columns->Add("Uсети, В");
-		tabl_U->Columns->Add("Блокировка Uсети");
-		tabl_U->Columns->Add("Блокировка I");
+		tabl_U->Columns->Add("Uсети, В");		
 		
+		// переменная для определения столбцов в будущей таблице
+		// if (checkBox26->Checked==true)	tabl_U->Columns->Add("Блокировка Uсети");
+		// if (checkBox25->Checked==true)	tabl_U->Columns->Add("Блокировка по току");
+		unsigned char ch = 0;
+		if ((checkBox26->Checked==true)&&(checkBox25->Checked==true)) 
+		{
+			ch = 3;
+			tabl_U->Columns->Add("Блокировка по Uсети");
+			tabl_U->Columns->Add("Блокировка по току");
+		}
+		else 
+		{
+			if(checkBox26->Checked==true) 
+			{
+				ch = 1;
+				tabl_U->Columns->Add("Блокировка Uсети");
+			}
+			else 
+			{
+				if(checkBox25->Checked==true)	
+				{
+					ch = 2;
+					tabl_U->Columns->Add("Блокировка по току");
+				}
+				else	ch = 0;
+			}
+		}
+			
 		// пробуем читать файл
 		String^ path = label21->Text;
 		FileStream^ fs = gcnew FileStream(path, FileMode::Open, FileAccess::Read);
@@ -1374,9 +1410,10 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		{
 			progressBar1->Value = 0 ;
 			progressBar1->Maximum = lim ;
-			progressBar1->Visible=true;			
+			progressBar1->Visible=true;	
 			
 			dataGridView1->Visible=false;
+			
 		// Создаем читателя.
 			BinaryReader^ r = gcnew BinaryReader(fs);
 
@@ -1393,156 +1430,201 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		// подготавливаем строки если корректный блок
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 				{
-// -1-	
+//------------------------------------- -1-	---------------------------------------------------
 					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)) 
 					{	
-					/*-- Блокировка по Uсети --*/
-					if((z[36]&4)>0) block_U = "";
-					else 			block_U = "отключена";
+						/*-- Блокировка по Uсети --*/
+						if((z[36]&4)>0) block_U = "отключена";
+						else 			block_U = "";
 					
-					/*-- Блокировка по I --*/
-					if((z[36]&8)>0) block_I = "";
-					else 			block_I = "отключена";
+						/*-- Блокировка по I --*/
+						if((z[36]&8)>0) block_I = "отключена";
+						else 			block_I = "";
 
-					/*-- Напряжение питания --*/
-					if (z[53]&16)
+						/*-- Напряжение питания --*/
+						if (z[53]&16) 	U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+						else			U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/66).ToString()  + "%Uном)" ;	// 660В
+						
+						switch (ch)
 						{
-						/* -------------- 1140 В --------------- */
-							/* не норма по величине  */
-							if ((z[54]*7)<798) 	tabl_U->Rows->Add(z[4].ToString("D2") + ":" + z[5].ToString("D2") + ":" + z[6].ToString("D2"), (z[54]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else 			   	tabl_U->Rows->Add(z[4].ToString("D2") + ":" + z[5].ToString("D2") + ":" + z[6].ToString("D2"), (z[54]*7).ToString() +  "", block_U, block_I);
-						}
-						else
-						/*--------  660 В----------------------------- */
-						{	/* не норма по величине  */
-							if ((z[54]*7)<462)	tabl_U->Rows->Add(z[4].ToString("D2") + ":" + z[5].ToString("D2") + ":" + z[6].ToString("D2"), (z[54]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else 				tabl_U->Rows->Add(z[4].ToString("D2") + ":" + z[5].ToString("D2") + ":" + z[6].ToString("D2"), (z[54]*7).ToString() + "", block_U, block_I);
-						}
+							case 3:								
+							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_U, block_I);
+							break;
+							
+							case 2:								
+							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_I);
+							break;
+							
+							case 1:								
+							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_U);
+							break;
+							
+							case 0:								
+							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error);
+						}	
+							
 					}					
-// -2-						
+//------------------------------------- -2-	---------------------------------------------------					
 					if ((z[199]==13)&&(z[200]==10)&&(z[101]==(monthCalendar1->SelectionStart.Day))&&(z[102]==(monthCalendar1->SelectionStart.Month))&&(z[103]==(monthCalendar1->SelectionStart.Year)-2000))
 					{
 						/*-- Блокировка по Uсети --*/
-						if((z[136]&4)>0) block_U = "";
-						else 			 block_U = "отключена";
+						if((z[136]&4)>0) block_U = "отключена";
+						else 			 block_U = "";
 					
 						/*-- Блокировка по I --*/
-						if((z[136]&8)>0) block_I = "";
-						else 			 block_I = "отключена";
+						if((z[136]&8)>0) block_I = "отключена";
+						else 			 block_I = "";
 
-						/*-- Напряжение питания --*/
-						if (z[153]&16)
-						/* -------------- 1140 В --------------- */								
-						{									
-							/* не норма по величине  */
-							if ((z[154]*7)<798)	tabl_U->Rows->Add(z[104].ToString("D2") + ":" + z[105].ToString("D2") + ":" + z[106].ToString("D2"), (z[154]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[104].ToString("D2") + ":" + z[105].ToString("D2") + ":" + z[106].ToString("D2"), (z[154]*7).ToString() + "", block_U, block_I);
-						}
-						else
-						/*--------  660 В----------------------------- */
-						{	/* не норма по величине  */								
-							if ((z[154]*7)<462) tabl_U->Rows->Add(z[104].ToString("D2") + ":" + z[105].ToString("D2") + ":" + z[106].ToString("D2"), (z[154]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */	
-							else				tabl_U->Rows->Add(z[104].ToString("D2") + ":" + z[105].ToString("D2") + ":" + z[106].ToString("D2"), (z[154]*7).ToString() + "", block_U, block_I);
+						/*-- Напряжение питания --*/						
+						if (z[153]&16) 	U_error =(z[154]*7).ToString() + " (" + ((z[154]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+						else			U_error =(z[154]*7).ToString() + " (" + ((z[154]*70)/66).ToString()  + "%Uном)" ;	// 660В
+						
+						switch (ch)
+						{
+							case 3:								
+							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_U, block_I);
+							break;
+							
+							case 2:								
+							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_I);
+							break;
+							
+							case 1:								
+							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_U);
+							break;
+							
+							case 0:								
+							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error);
 						}
 					}
-// -3-
+//------------------------------------- -3- ---------------------------------------------------
 					if ((z[299]==13)&&(z[300]==10)&&(z[201]==(monthCalendar1->SelectionStart.Day))&&(z[202]==(monthCalendar1->SelectionStart.Month))&&(z[203]==(monthCalendar1->SelectionStart.Year)-2000))
 					{
 						/*-- Блокировка по Uсети --*/
-						if((z[236]&4)>0) block_U = "";
-						else 			 block_U = "отключена";
+						if((z[236]&4)>0) block_U = "отключена";
+						else 			 block_U = "";
 					
 						/*-- Блокировка по I --*/
-						if((z[236]&8)>0) block_I = "";
-						else 			 block_I = "отключена";
+						if((z[236]&8)>0) block_I = "отключена";
+						else 			 block_I = "";
 
-						/*-- Напряжение питания --*/						
-						if (z[253]&16)
-						/* -------------- 1140 В --------------- */								
-						{	/* не норма по величине  */								
-							if ((z[254]*7)<798)	tabl_U->Rows->Add(z[204].ToString("D2") + ":" + z[205].ToString("D2") + ":" + z[206].ToString("D2"), (z[254]*7).ToString("D2") + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[204].ToString("D2") + ":" + z[205].ToString("D2") + ":" + z[206].ToString("D2"), (z[254]*7).ToString("D2") + "", block_U, block_I);
-						}
-						else
-						/*--------  660 В----------------------------- */
-						{	/* не норма по величине  */								
-							if ((z[254]*7)<462)	tabl_U->Rows->Add(z[204].ToString("D2") + ":" + z[205].ToString("D2") + ":" + z[206].ToString("D2"), (z[254]*7).ToString("D2") + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[204].ToString("D2") + ":" + z[205].ToString("D2") + ":" + z[206].ToString("D2"), (z[254]*7).ToString("D2") + "", block_U, block_I);
+						/*-- Напряжение питания --*/
+						if (z[253]&16) 	U_error =(z[254]*7).ToString() + " (" + ((z[254]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+						else			U_error =(z[254]*7).ToString() + " (" + ((z[254]*70)/66).ToString()  + "%Uном)" ;	// 660В
+						
+						switch (ch)
+						{
+							case 3:								
+							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_U, block_I);
+							break;
+							
+							case 2:								
+							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_I);
+							break;
+							
+							case 1:								
+							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_U);
+							break;
+							
+							case 0:								
+							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error);
 						}
 					}
-// -4-
+//------------------------------------- -4- ---------------------------------------------------
 					if ((z[399]==13)&&(z[400]==10)&&(z[301]==(monthCalendar1->SelectionStart.Day))&&(z[302]==(monthCalendar1->SelectionStart.Month))&&(z[303]==(monthCalendar1->SelectionStart.Year)-2000))
 					{
 						/*-- Блокировка по Uсети --*/
-						if((z[336]&4)>0) block_U = "";
-						else 			 block_U = "отключена";
+						if((z[336]&4)>0) block_U = "отключена";
+						else 			 block_U = "";
 					
 						/*-- Блокировка по I --*/
-						if((z[336]&8)>0) block_I = "";
-						else 			 block_I = "отключена";
+						if((z[336]&8)>0) block_I = "отключена";
+						else 			 block_I = "";
 
 						/*-- Напряжение питания --*/
-						if (z[353]&16)
-						/* -------------- 1140 В --------------- */								
-						{	/* не норма по величине  */								
-							if ((z[354]*7)<798)	tabl_U->Rows->Add(z[304].ToString("D2") + ":" + z[305].ToString("D2") + ":" + z[306].ToString("D2"), (z[354]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[304].ToString("D2") + ":" + z[305].ToString("D2") + ":" + z[306].ToString(), (z[354]*7).ToString() + "", block_U, block_I);
+						if (z[353]&16) 	U_error =(z[354]*7).ToString() + " (" + ((z[354]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+						else			U_error =(z[354]*7).ToString() + " (" + ((z[354]*70)/66).ToString()  + "%Uном)" ;	// 660В
+						
+						switch (ch)
+						{
+							case 3:								
+							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_U, block_I);
+							break;
+							
+							case 2:								
+							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_I);
+							break;
+							
+							case 1:								
+							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_U);
+							break;
+							
+							case 0:								
+							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error);
 						}
-						else
-						/*--------  660 В----------------------------- */
-						{	/* не норма по величине  */								
-							if ((z[354]*7)<462)	tabl_U->Rows->Add(z[304].ToString("D2") + ":" + z[305].ToString("D2") + ":" + z[306].ToString("D2"), (z[354]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[304].ToString("D2") + ":" + z[305].ToString("D2") + ":" + z[306].ToString("D2"), (z[354]*7).ToString() + "", block_U, block_I);
-						}					
 					}
-// -5-
+//------------------------------------- -5- ---------------------------------------------------
 					if ((z[499]==13)&&(z[500]==10)&&(z[401]==(monthCalendar1->SelectionStart.Day))&&(z[402]==(monthCalendar1->SelectionStart.Month))&&(z[403]==(monthCalendar1->SelectionStart.Year)-2000))
 					{
 						/*-- Блокировка по Uсети --*/
-						if((z[436]&4)>0) block_U = "";
-						else 			 block_U = "отключена";
+						if((z[436]&4)>0) block_U = "отключена";
+						else 			 block_U = "";
 					
 						/*-- Блокировка по I --*/
-						if((z[436]&8)>0) block_I = "";
-						else 			 block_I = "отключена";
+						if((z[436]&8)>0) block_I = "отключена";
+						else 			 block_I = "";
 
 						/*-- Напряжение питания --*/
-						if (z[453]&16)
-							/* -------------- 1140 В --------------- */								
-						{	/* не норма по величине  */								
-							if ((z[454]*7)<798)	tabl_U->Rows->Add(z[404].ToString("D2") + ":" + z[405].ToString("D2") + ":" + z[406].ToString("D2"), (z[454]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);		
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[404].ToString("D2") + ":" + z[405].ToString("D2") + ":" + z[406].ToString("D2"), (z[454]*7).ToString() + "", block_U, block_I);
+						if (z[453]&16) 	U_error =(z[454]*7).ToString() + " (" + ((z[454]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+						else			U_error =(z[454]*7).ToString() + " (" + ((z[454]*70)/66).ToString()  + "%Uном)" ;	// 660В
+												
+						switch (ch)
+						{
+							case 3:								
+							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_U, block_I);
+							break;
+							
+							case 2:								
+							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_I);
+							break;
+							
+							case 1:								
+							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_U);
+							break;
+							
+							case 0:								
+							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error);
 						}
-						else
-						/*--------  660 В----------------------------- */
-						{	/* не норма по величине  */								
-							if ((z[454]*7)<462)	tabl_U->Rows->Add(z[404].ToString("D2") + ":" + z[405].ToString("D2") + ":" + z[406].ToString("D2"), (z[454]*7).ToString() + " меньше 70%(Uном)", block_U, block_I);
-							/* норма по величине  */
-							else				tabl_U->Rows->Add(z[404].ToString("D2") + ":" + z[405].ToString("D2") + ":" + z[406].ToString("D2"), (z[454]*7).ToString() + "", block_U, block_I);
-						}			
 					}
 				}	
 			}
 		}	
 					
 		fs->Close();							// закрыть поток
+		
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_U;		// заполнить таблицу
+		
 		progressBar1->Visible=false;			// спрятать прогресс
+		
+		//--- разморозить кнопки и др. ------------		
+		button1->Enabled=true;
+		button2->Enabled=true;
+		button3->Enabled=true;
+		button4->Enabled=true;
+		button5->Enabled=true;
+		button6->Enabled=true;	
+		monthCalendar1->Enabled=true;
 			 
 	}
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 listBox1->Visible = false;
 		 }
+
+public: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
+			return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
+		}
+		
 };
 }
 
