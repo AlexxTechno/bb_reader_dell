@@ -1423,9 +1423,14 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 				progressBar1->Value=j;
 				for (int i = 1; i < 513; i++)
 				{
-					z[i]=r->ReadByte();
+					try{
+						z[i]=r->ReadByte();
+					}
+					catch (Exception^ e)
+					{
+						MessageBox::Show("Ошибка считывания файла!");
+					}
 				}
-
 		//----------------------------
 		// подготавливаем строки если корректный блок
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
