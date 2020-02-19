@@ -326,6 +326,7 @@ namespace BB_reader_all_dell {
 			this->button6->TabIndex = 13;
 			this->button6->Text = L"Показать";
 			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &Form1::button6_Click);
 			// 
 			// button5
 			// 
@@ -1623,13 +1624,35 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 			 
 	}
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
-			 listBox1->Visible = false;
-		 }
+		listBox1->Visible = false;
+	}
 
 public: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
-			return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
-		}
+		return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
+	}
+		// кнопка Срабатывание защит и блокировок
+private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		
+		//--- разморозить кнопки и др. ------------		
+		button1->Enabled=false;
+		button2->Enabled=false;
+		button3->Enabled=false;
+		button4->Enabled=false;
+		button5->Enabled=false;
+		button7->Enabled=false;	
+		monthCalendar1->Enabled=false;
+		
+		
+		
+		//--- разморозить кнопки и др. ------------		
+		button1->Enabled=true;
+		button2->Enabled=true;
+		button3->Enabled=true;
+		button4->Enabled=true;
+		button5->Enabled=true;
+		button7->Enabled=true;	
+		monthCalendar1->Enabled=true;
+	}
 };
 }
 
