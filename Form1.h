@@ -1660,6 +1660,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 	}
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 		listBox1->Visible = false;
+		button6->Enabled  = false;  // все защиты
 		maska = 0;
 //		label21->Text = maska.ToString();
 	}
@@ -1668,13 +1669,13 @@ private: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigne
 		return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
 	}
 private: unsigned int power(int n){
-			 unsigned int result = 1;
-			 if (n==0) return 1;
-			 for(int i=0; i<(n-1); i++){
-				 result *= 2;
-			 }
-			 return result;
-		 }
+			unsigned int result = 1;
+			if (n==0) return 1;
+			for(int i=0; i<(n-1); i++){ 
+			 result *= 2;
+			}
+			return result;
+		}
 		// кнопка Срабатывание защит и блокировок
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		
@@ -1687,6 +1688,8 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		button7->Enabled=false;	
 		monthCalendar1->Enabled=false;
 		
+		//--- спрятать прогресс
+		progressBar1->Visible=false;
 		//--- спрятать таблицу ---
 		dataGridView1->Visible=false;	
 		
@@ -1707,20 +1710,23 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 
 		//--- таблица в dataGridView1 ---------
 		DataTable ^ tabl_z = gcnew DataTable();
+		
 		//--- формируем шапку таблицы ----
-		tabl_z->Columns->Add("Время");  // время есть всегда	
+		tabl_z->Columns->Add("Время");  // время есть всегда
+		if((maska&power(1))||(maska&power(8))||(maska&power(15)))						tabl_z->Columns->Add("М1");  // М1
+		if((maska&power(2))||(maska&power(9))||(maska&power(16)))						tabl_z->Columns->Add("М2");  // М2
+		if((maska&power(3))||(maska&power(10))||(maska&power(17)))						tabl_z->Columns->Add("М3");  // М3
+		if((maska&power(4))||(maska&power(11))||(maska&power(17)))						tabl_z->Columns->Add("М4");  // М4
+		if((maska&power(5))||(maska&power(12))||(maska&power(18))||(maska&power(21)))	tabl_z->Columns->Add("М5");  // М5
+		if((maska&power(6))||(maska&power(13))||(maska&power(19))||(maska&power(22)))	tabl_z->Columns->Add("М6");  // М6
+		if((maska&power(7))||(maska&power(14))||(maska&power(20)))						tabl_z->Columns->Add("М7");  // М7	
+		if((maska&power(23))||(maska&power(24)))										tabl_z->Columns->Add("Маслобак");  // Маслобак
+		
+		//*****************************************************************************
+		//--- Работа с файлом --------
 
-		if((checkBox1->Checked==true)||(checkBox8->Checked==true)||(checkBox15->Checked==true))  tabl_z->Columns->Add("М1");  // М1
-		if((checkBox2->Checked==true)||(checkBox9->Checked==true)||(checkBox16->Checked==true))  tabl_z->Columns->Add("М2");  // М2
-		if((checkBox3->Checked==true)||(checkBox10->Checked==true)||(checkBox17->Checked==true)) tabl_z->Columns->Add("М3");  // М3
-		if((checkBox4->Checked==true)||(checkBox11->Checked==true)||(checkBox17->Checked==true)) tabl_z->Columns->Add("М4");  // М4
-		if((checkBox5->Checked==true)||(checkBox12->Checked==true)||(checkBox18->Checked==true)||(checkBox21->Checked==true)) tabl_z->Columns->Add("М5"); // М5
-		if((checkBox6->Checked==true)||(checkBox13->Checked==true)||(checkBox19->Checked==true)||(checkBox22->Checked==true)) tabl_z->Columns->Add("М6"); // М6
-		if((checkBox7->Checked==true)||(checkBox14->Checked==true)||(checkBox20->Checked==true)) tabl_z->Columns->Add("М7");  // М7
 
-		
-		
-		
+		//--- / Работа с файлом --------
 		
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_z;		// заполнить таблицу	
@@ -1786,6 +1792,9 @@ private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::
 		else						  maska &= ~power(24);		// 2^23		
 		
 		label21->Text = maska.ToString();
+
+		if(maska>0) button6->Enabled=true;
+		else		button6->Enabled=false;		// спрятать кнопку если ничего не выбрано
 	}
 };
 }
