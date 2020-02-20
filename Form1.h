@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <math.h>
 
 namespace BB_reader_all_dell {
 
@@ -43,6 +44,11 @@ namespace BB_reader_all_dell {
 				delete components;
 			}
 		}
+		
+	//--- глобальные переменные	-----------------------------------
+	private: unsigned int maska;	// маска защит и блокировок по приводам	
+	//-------------------------------------------------------------
+		
 	private: System::Windows::Forms::TabControl^  tabControl1;
 	protected: 
 	private: System::Windows::Forms::TabPage^  tabPage1;
@@ -407,6 +413,7 @@ namespace BB_reader_all_dell {
 			this->checkBox24->Size = System::Drawing::Size(15, 14);
 			this->checkBox24->TabIndex = 10;
 			this->checkBox24->UseVisualStyleBackColor = true;
+			this->checkBox24->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox23
 			// 
@@ -416,6 +423,7 @@ namespace BB_reader_all_dell {
 			this->checkBox23->Size = System::Drawing::Size(15, 14);
 			this->checkBox23->TabIndex = 10;
 			this->checkBox23->UseVisualStyleBackColor = true;
+			this->checkBox23->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox22
 			// 
@@ -425,6 +433,7 @@ namespace BB_reader_all_dell {
 			this->checkBox22->Size = System::Drawing::Size(15, 14);
 			this->checkBox22->TabIndex = 10;
 			this->checkBox22->UseVisualStyleBackColor = true;
+			this->checkBox22->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox21
 			// 
@@ -434,6 +443,7 @@ namespace BB_reader_all_dell {
 			this->checkBox21->Size = System::Drawing::Size(15, 14);
 			this->checkBox21->TabIndex = 10;
 			this->checkBox21->UseVisualStyleBackColor = true;
+			this->checkBox21->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox20
 			// 
@@ -443,6 +453,7 @@ namespace BB_reader_all_dell {
 			this->checkBox20->Size = System::Drawing::Size(15, 14);
 			this->checkBox20->TabIndex = 10;
 			this->checkBox20->UseVisualStyleBackColor = true;
+			this->checkBox20->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox19
 			// 
@@ -452,6 +463,7 @@ namespace BB_reader_all_dell {
 			this->checkBox19->Size = System::Drawing::Size(15, 14);
 			this->checkBox19->TabIndex = 10;
 			this->checkBox19->UseVisualStyleBackColor = true;
+			this->checkBox19->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox18
 			// 
@@ -461,6 +473,7 @@ namespace BB_reader_all_dell {
 			this->checkBox18->Size = System::Drawing::Size(15, 14);
 			this->checkBox18->TabIndex = 10;
 			this->checkBox18->UseVisualStyleBackColor = true;
+			this->checkBox18->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox17
 			// 
@@ -470,6 +483,7 @@ namespace BB_reader_all_dell {
 			this->checkBox17->Size = System::Drawing::Size(15, 14);
 			this->checkBox17->TabIndex = 10;
 			this->checkBox17->UseVisualStyleBackColor = true;
+			this->checkBox17->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox16
 			// 
@@ -479,6 +493,7 @@ namespace BB_reader_all_dell {
 			this->checkBox16->Size = System::Drawing::Size(15, 14);
 			this->checkBox16->TabIndex = 10;
 			this->checkBox16->UseVisualStyleBackColor = true;
+			this->checkBox16->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox15
 			// 
@@ -488,6 +503,7 @@ namespace BB_reader_all_dell {
 			this->checkBox15->Size = System::Drawing::Size(15, 14);
 			this->checkBox15->TabIndex = 10;
 			this->checkBox15->UseVisualStyleBackColor = true;
+			this->checkBox15->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox14
 			// 
@@ -497,6 +513,7 @@ namespace BB_reader_all_dell {
 			this->checkBox14->Size = System::Drawing::Size(15, 14);
 			this->checkBox14->TabIndex = 10;
 			this->checkBox14->UseVisualStyleBackColor = true;
+			this->checkBox14->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox13
 			// 
@@ -506,6 +523,7 @@ namespace BB_reader_all_dell {
 			this->checkBox13->Size = System::Drawing::Size(15, 14);
 			this->checkBox13->TabIndex = 10;
 			this->checkBox13->UseVisualStyleBackColor = true;
+			this->checkBox13->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox12
 			// 
@@ -515,6 +533,7 @@ namespace BB_reader_all_dell {
 			this->checkBox12->Size = System::Drawing::Size(15, 14);
 			this->checkBox12->TabIndex = 10;
 			this->checkBox12->UseVisualStyleBackColor = true;
+			this->checkBox12->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox11
 			// 
@@ -524,6 +543,7 @@ namespace BB_reader_all_dell {
 			this->checkBox11->Size = System::Drawing::Size(15, 14);
 			this->checkBox11->TabIndex = 10;
 			this->checkBox11->UseVisualStyleBackColor = true;
+			this->checkBox11->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox10
 			// 
@@ -533,6 +553,7 @@ namespace BB_reader_all_dell {
 			this->checkBox10->Size = System::Drawing::Size(15, 14);
 			this->checkBox10->TabIndex = 10;
 			this->checkBox10->UseVisualStyleBackColor = true;
+			this->checkBox10->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox9
 			// 
@@ -542,6 +563,7 @@ namespace BB_reader_all_dell {
 			this->checkBox9->Size = System::Drawing::Size(15, 14);
 			this->checkBox9->TabIndex = 10;
 			this->checkBox9->UseVisualStyleBackColor = true;
+			this->checkBox9->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox8
 			// 
@@ -551,6 +573,7 @@ namespace BB_reader_all_dell {
 			this->checkBox8->Size = System::Drawing::Size(15, 14);
 			this->checkBox8->TabIndex = 10;
 			this->checkBox8->UseVisualStyleBackColor = true;
+			this->checkBox8->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox7
 			// 
@@ -560,6 +583,7 @@ namespace BB_reader_all_dell {
 			this->checkBox7->Size = System::Drawing::Size(15, 14);
 			this->checkBox7->TabIndex = 10;
 			this->checkBox7->UseVisualStyleBackColor = true;
+			this->checkBox7->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox6
 			// 
@@ -569,6 +593,7 @@ namespace BB_reader_all_dell {
 			this->checkBox6->Size = System::Drawing::Size(15, 14);
 			this->checkBox6->TabIndex = 10;
 			this->checkBox6->UseVisualStyleBackColor = true;
+			this->checkBox6->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox5
 			// 
@@ -578,6 +603,7 @@ namespace BB_reader_all_dell {
 			this->checkBox5->Size = System::Drawing::Size(15, 14);
 			this->checkBox5->TabIndex = 10;
 			this->checkBox5->UseVisualStyleBackColor = true;
+			this->checkBox5->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox4
 			// 
@@ -587,6 +613,7 @@ namespace BB_reader_all_dell {
 			this->checkBox4->Size = System::Drawing::Size(15, 14);
 			this->checkBox4->TabIndex = 10;
 			this->checkBox4->UseVisualStyleBackColor = true;
+			this->checkBox4->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox3
 			// 
@@ -596,6 +623,7 @@ namespace BB_reader_all_dell {
 			this->checkBox3->Size = System::Drawing::Size(15, 14);
 			this->checkBox3->TabIndex = 10;
 			this->checkBox3->UseVisualStyleBackColor = true;
+			this->checkBox3->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox2
 			// 
@@ -605,6 +633,7 @@ namespace BB_reader_all_dell {
 			this->checkBox2->Size = System::Drawing::Size(15, 14);
 			this->checkBox2->TabIndex = 10;
 			this->checkBox2->UseVisualStyleBackColor = true;
+			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// checkBox1
 			// 
@@ -614,6 +643,7 @@ namespace BB_reader_all_dell {
 			this->checkBox1->Size = System::Drawing::Size(15, 14);
 			this->checkBox1->TabIndex = 10;
 			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// label14
 			// 
@@ -941,6 +971,8 @@ namespace BB_reader_all_dell {
 				checkBox23->Checked = true;
 				checkBox24->Checked = true;
 				
+				button6->Enabled=true;	
+				checkBox1_CheckedChanged(sender, e);
 			 }
 		// кнопка СБРОСИТЬ ВСЕ
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -969,7 +1001,10 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 				checkBox22->Checked = false;
 				checkBox23->Checked = false;
 				checkBox24->Checked = false;
+				
+				button6->Enabled=false;	
 
+				checkBox1_CheckedChanged(sender, e);
 		 }
 		// кнопка ОТКРЫТЬ ДИСК
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1625,11 +1660,21 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 	}
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 		listBox1->Visible = false;
+		maska = 0;
+//		label21->Text = maska.ToString();
 	}
-
-public: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
+	//---  формирователь даты для таблиц ----
+private: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
 		return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
 	}
+private: unsigned int power(int n){
+			 unsigned int result = 1;
+			 if (n==0) return 1;
+			 for(int i=0; i<(n-1); i++){
+				 result *= 2;
+			 }
+			 return result;
+		 }
 		// кнопка Срабатывание защит и блокировок
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		
@@ -1642,7 +1687,43 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		button7->Enabled=false;	
 		monthCalendar1->Enabled=false;
 		
+		//--- спрятать таблицу ---
+		dataGridView1->Visible=false;	
 		
+		//--- работаем с файлом ----
+		//- путь в label21
+		int lim = 121875*30;	// для 1872 000 000 байт
+		unsigned char z[513];
+
+		//--- фразы отказов ----
+		String^ m1_error ;		
+		String^ m2_error ;		
+		String^ m3_error ;
+		String^ m4_error ;
+		String^ m5_error ;
+		String^ m6_error ;
+		String^ m7_error ;
+		String^ maslobak ;
+
+		//--- таблица в dataGridView1 ---------
+		DataTable ^ tabl_z = gcnew DataTable();
+		//--- формируем шапку таблицы ----
+		tabl_z->Columns->Add("Время");  // время есть всегда	
+
+		if((checkBox1->Checked==true)||(checkBox8->Checked==true)||(checkBox15->Checked==true))  tabl_z->Columns->Add("М1");  // М1
+		if((checkBox2->Checked==true)||(checkBox9->Checked==true)||(checkBox16->Checked==true))  tabl_z->Columns->Add("М2");  // М2
+		if((checkBox3->Checked==true)||(checkBox10->Checked==true)||(checkBox17->Checked==true)) tabl_z->Columns->Add("М3");  // М3
+		if((checkBox4->Checked==true)||(checkBox11->Checked==true)||(checkBox17->Checked==true)) tabl_z->Columns->Add("М4");  // М4
+		if((checkBox5->Checked==true)||(checkBox12->Checked==true)||(checkBox18->Checked==true)||(checkBox21->Checked==true)) tabl_z->Columns->Add("М5"); // М5
+		if((checkBox6->Checked==true)||(checkBox13->Checked==true)||(checkBox19->Checked==true)||(checkBox22->Checked==true)) tabl_z->Columns->Add("М6"); // М6
+		if((checkBox7->Checked==true)||(checkBox14->Checked==true)||(checkBox20->Checked==true)) tabl_z->Columns->Add("М7");  // М7
+
+		
+		
+		
+		
+		dataGridView1->Visible=true;			// показать таблицу
+		dataGridView1->DataSource = tabl_z;		// заполнить таблицу	
 		
 		//--- разморозить кнопки и др. ------------		
 		button1->Enabled=true;
@@ -1652,6 +1733,59 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		button5->Enabled=true;
 		button7->Enabled=true;	
 		monthCalendar1->Enabled=true;
+	}
+		// обработка чекбоксов фильтра для кнопки Все защиты
+private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+		if(checkBox1->Checked==true)  maska |= power(1);
+		else						  maska &= ~power(1);		// 2^0
+		if(checkBox2->Checked==true)  maska |= power(2);	
+		else						  maska &= ~power(2);		// 2^1
+		if(checkBox3->Checked==true)  maska |= power(3);
+		else						  maska &= ~power(3);		// 2^2
+		if(checkBox4->Checked==true)  maska |= power(4);
+		else						  maska &= ~power(4);		// 2^3
+		if(checkBox5->Checked==true)  maska |= power(5);
+		else						  maska &= ~power(5);		// 2^4		
+		if(checkBox6->Checked==true)  maska |= power(6);
+		else						  maska &= ~power(6);		// 2^5			
+		if(checkBox7->Checked==true)  maska |= power(7);
+		else						  maska &= ~power(7);		// 2^6			
+		if(checkBox8->Checked==true)  maska |= power(8);
+		else						  maska &= ~power(8);		// 2^7			
+		if(checkBox9->Checked==true)  maska |= power(9);
+		else						  maska &= ~power(9);		// 2^8			
+		if(checkBox10->Checked==true) maska |= power(10);
+		else						  maska &= ~power(10);		// 2^9			
+		if(checkBox11->Checked==true) maska |= power(11);
+		else						  maska &= ~power(11);		// 2^10			
+		if(checkBox12->Checked==true) maska |= power(12);
+		else						  maska &= ~power(12);		// 2^11		
+		if(checkBox13->Checked==true) maska |= power(13);
+		else						  maska &= ~power(13);		// 2^12			
+		if(checkBox14->Checked==true) maska |= power(14);
+		else						  maska &= ~power(14);		// 2^13			
+		if(checkBox15->Checked==true) maska |= power(15);
+		else						  maska &= ~power(15);		// 2^14			
+		if(checkBox16->Checked==true) maska |= power(16);
+		else						  maska &= ~power(16);		// 2^15			
+		if(checkBox17->Checked==true) maska |= power(17);
+		else						  maska &= ~power(17);		// 2^16			
+		if(checkBox18->Checked==true) maska |= power(18);
+		else						  maska &= ~power(18);		// 2^17			
+		if(checkBox19->Checked==true) maska |= power(19);
+		else						  maska &= ~power(19);		// 2^18			
+		if(checkBox20->Checked==true) maska |= power(20);
+		else						  maska &= ~power(20);		// 2^19			
+		if(checkBox21->Checked==true) maska |= power(21);
+		else						  maska &= ~power(21);		// 2^20			
+		if(checkBox22->Checked==true) maska |= power(22);
+		else						  maska &= ~power(22);		// 2^21			
+		if(checkBox23->Checked==true) maska |= power(23);
+		else						  maska &= ~power(23);		// 2^22			
+		if(checkBox24->Checked==true) maska |= power(24);			
+		else						  maska &= ~power(24);		// 2^23		
+		
+		label21->Text = maska.ToString();
 	}
 };
 }
