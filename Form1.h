@@ -1,6 +1,5 @@
 #pragma once
 #include <windows.h>
-#include <math.h>
 
 namespace BB_reader_all_dell {
 
@@ -1658,26 +1657,10 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		monthCalendar1->Enabled=true;
 			 
 	}
-private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
-		listBox1->Visible = false;
-		button6->Enabled  = false;  // все защиты
-		maska = 0;
-//		label21->Text = maska.ToString();
-	}
-	//---  формирователь даты для таблиц ----
-private: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
-		return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
-	}
-private: unsigned int power(int n){
-			unsigned int result = 1;
-			if (n==0) return 1;
-			for(int i=0; i<(n-1); i++){ 
-			 result *= 2;
-			}
-			return result;
-		}
+
 		// кнопка Срабатывание защит и блокировок
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+
 		
 		//--- разморозить кнопки и др. ------------		
 		button1->Enabled=false;
@@ -1699,14 +1682,14 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		unsigned char z[513];
 
 		//--- фразы отказов ----
-		String^ m1_error ;		
-		String^ m2_error ;		
-		String^ m3_error ;
-		String^ m4_error ;
-		String^ m5_error ;
-		String^ m6_error ;
-		String^ m7_error ;
-		String^ maslobak ;
+		String^ m1_error = "";		
+		String^ m2_error = "";		
+		String^ m3_error = "";
+		String^ m4_error = "";
+		String^ m5_error = "";
+		String^ m6_error = "";
+		String^ m7_error = "";
+		String^ maslobak = "";
 
 		//--- таблица в dataGridView1 ---------
 		DataTable ^ tabl_z = gcnew DataTable();
@@ -1724,7 +1707,200 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		
 		//*****************************************************************************
 		//--- Работа с файлом --------
+			
+		// пробуем читать файл
+		String^ path = label21->Text;
+		FileStream^ fs = gcnew FileStream(path, FileMode::Open, FileAccess::Read);
+		// Ругаемся, если файла нет.
+		if ( File::Exists( path )==false )
+		{
+			MessageBox::Show( "Файл не найден!" );
+		}
+		else 
+		{
+			progressBar1->Value = 0 ;
+			progressBar1->Maximum = lim ;
+			progressBar1->Visible=true;	
+			
+			dataGridView1->Visible=false;
+			
+		// Создаем читателя.
+			BinaryReader^ r = gcnew BinaryReader(fs);
 
+		// Read data from BB.dat.
+			for (int j = 1; j < lim; j++)
+			{
+				progressBar1->Value=j;
+				for (int i = 1; i < 513; i++)
+				{
+					try{
+						z[i]=r->ReadByte();
+					}
+					catch (Exception^ e)
+					{
+						MessageBox::Show("Ошибка считывания файла!");
+					}
+				}
+		//--- блок 512 -------------------
+		// подготавливаем строки если корректный блок
+				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
+				{
+			//------------------------------------- -1-	---------------------------------------------------
+					
+			
+					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)) 
+					{	
+					//--- M1 --------------------------------------------------------------------------------
+						/*-- М1 Ток БКТ1 или БКТ2   --*/			
+						if((maska&power(1))&&(((z[45]&24)==8)||((z[48]&24)==8)))	
+						{	m1_error="Тех перегруз";	//+++++++++++ новая строка +++++++++++					
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);
+						}						
+						if((maska&power(1))&&(((z[45]&24)==16)||((z[48]&24)==16)))
+						{	m1_error="Опрокид";			//+++++++++++ новая строка +++++++++++
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);
+						}
+						if((maska&power(1))&&(((z[45]&24)==24)||((z[48]&24)==24)))
+						{	m1_error="КЗ";				//+++++++++++ новая строка +++++++++++
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);
+						}				
+						/*-- М1 БКДТ  --*/
+						if((maska&power(8))&&((z[52]&1)>0))	
+						{	m1_error="t° авария";		//+++++++++++ новая строка +++++++++++
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);
+						}
+						/*-- М1 БКИ  --*/
+						if((maska&power(15))&&((z[55]&24)==8))
+						{	m1_error="Rи внимание";		//+++++++++++ новая строка +++++++++++
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);
+						}
+						if((maska&power(15))&&((z[55]&24)==16))
+						{	m1_error="Rи авария";		//+++++++++++ новая строка +++++++++++
+							AddRow(z[4], z[5], z[6], m1_error, 1, tabl_z);			
+						}
+							
+					//--- M2 --------------------------------------------------------------------------------	
+						/*-- М2 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(2))&&(((z[45]&3)==1)||((z[48]&3)==1)))	m2_error="Тех перегруз";
+						if((maska&power(2))&&(((z[45]&3)==2)||((z[48]&3)==2)))	m2_error="Опрокид";
+						if((maska&power(2))&&(((z[45]&3)==3)||((z[48]&3)==3)))	m2_error="КЗ";
+						
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М2 БКДТ  --*/
+						if((maska&power(9))&&((z[52]&2)>0))	m2_error="t° авария";
+						
+							//+++++++++++ новая строка +++++++++++	
+
+						/*-- М2 БКИ  --*/
+						if((maska&power(16))&&((z[55]&3)==1))	m2_error="Rи внимание";
+						if((maska&power(16))&&((z[55]&3)==2))	m2_error="Rи авария";
+						
+							//+++++++++++ новая строка +++++++++++	
+					//--- M3 --------------------------------------------------------------------------------	
+						/*-- М3 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(3))&&(((z[46]&12)==4)||((z[49]&12)==4)))	m3_error="Тех перегруз";
+						if((maska&power(3))&&(((z[46]&12)==8)||((z[49]&12)==8)))	m3_error="Опрокид";
+						if((maska&power(3))&&(((z[46]&12)==12)||((z[49]&12)==12)))	m3_error="КЗ";
+												
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М3 БКДТ  --*/
+						if((maska&power(10))&&((z[52]&4)>0))	m3_error="t° авария";
+					
+							//+++++++++++ новая строка +++++++++++	
+
+						/*-- М3 М4 БКИ  --*/
+						if((maska&power(17))&&((z[56]&24)==8))	{ m3_error="Rи внимание"; m4_error = "--"; }
+						if((maska&power(17))&&((z[56]&24)==16))	{ m3_error="Rи авария";   m4_error = "--"; }
+						
+							//+++++++++++ новая строка +++++++++++	
+					//--- M4 --------------------------------------------------------------------------------	
+						/*-- М4 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(4))&&(((z[46]&3)==1)||((z[49]&3)==1)))	m4_error="Тех перегруз";
+						if((maska&power(4))&&(((z[46]&3)==2)||((z[49]&3)==2)))	m4_error="Опрокид";
+						if((maska&power(4))&&(((z[46]&3)==3)||((z[49]&3)==3)))	m4_error="КЗ";	
+						
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М4 БКДТ  --*/
+						if((maska&power(11))&&((z[52]&8)>0))	m4_error="t° авария";
+						
+							//+++++++++++ новая строка +++++++++++						
+					//--- M5 --------------------------------------------------------------------------------	
+						/*-- М5 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(5))&&(((z[47]&192)==64)||((z[50]&192)==64)))	m5_error="Тех перегруз";
+						if((maska&power(5))&&(((z[47]&192)==128)||((z[50]&192)==128)))	m5_error="Опрокид";
+						if((maska&power(5))&&(((z[47]&192)==192)||((z[50]&192)==192)))	m5_error="КЗ";							
+					
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М5 БКДТ  --*/
+						if((maska&power(12))&&((z[52]&16)>0))	m5_error="t° авария";
+					
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М5 БКИ  --*/
+						if((maska&power(18))&&((z[56]&3)==1))	m5_error="Rи внимание"; 
+						if((maska&power(18))&&((z[56]&3)==2))	m5_error="Rи авария";
+						
+							//+++++++++++ новая строка +++++++++++	
+						
+						/*-- М5 БКЗ  --*/
+						if((maska&power(21))&&((z[74]&8)>0))	m5_error="Rз авария"; 
+						
+							//+++++++++++ новая строка +++++++++++		
+					//--- M6 --------------------------------------------------------------------------------	
+						/*-- М6 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(6))&&(((z[47]&48)==16)||((z[50]&48)==16)))	m6_error="Тех перегруз";
+						if((maska&power(6))&&(((z[47]&48)==32)||((z[50]&48)==32)))	m6_error="Опрокид";
+						if((maska&power(6))&&(((z[47]&48)==48)||((z[50]&48)==48)))	m6_error="КЗ";	
+						
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М6 БКДТ  --*/
+						if((maska&power(13))&&((z[52]&32)>0))	m6_error="t° авария";
+					
+							//+++++++++++ новая строка +++++++++++	
+								
+						/*-- М6 БКИ  --*/
+						if((maska&power(19))&&((z[57]&24)==8))	m6_error="Rи внимание"; 
+						if((maska&power(19))&&((z[57]&24)==16))	m6_error="Rи авария";
+						
+							//+++++++++++ новая строка +++++++++++	
+							
+						/*-- М6 БКЗ  --*/
+						if((maska&power(22))&&((z[74]&4)>0))	m6_error="Rз авария"; 
+						
+							//+++++++++++ новая строка +++++++++++
+					//--- M7 --------------------------------------------------------------------------------	
+						/*-- М7 Ток БКТ1 или БКТ2   --*/
+						if((maska&power(7))&&(((z[47]&3)==1)||((z[50]&3)==1)))	m7_error="Тех перегруз";
+						if((maska&power(7))&&(((z[47]&3)==2)||((z[50]&3)==2)))	m7_error="Опрокид";
+						if((maska&power(7))&&(((z[47]&3)==3)||((z[50]&3)==3)))	m7_error="КЗ";
+						
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М7 БКДТ  --*/
+						if((maska&power(14))&&((z[52]&128)>0))	m7_error="t° авария";
+					
+							//+++++++++++ новая строка +++++++++++
+							
+						/*-- М7 БКИ  --*/
+						if((maska&power(20))&&((z[57]&192)==64))	m7_error="Rи внимание"; 
+						if((maska&power(20))&&((z[57]&192)==128))	m7_error="Rи авария";
+						
+							//+++++++++++ новая строка +++++++++++	
+					//--- Mаслобак --------------------------------------------------------------------------------	
+					
+					}
+				}
+		//--- / блок 512 -------------------		
+			}			
+		}			
+		fs->Close();
+		
+		progressBar1->Visible=false;			// спрятать прогресс			
 
 		//--- / Работа с файлом --------
 		
@@ -1738,7 +1914,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		button4->Enabled=true;
 		button5->Enabled=true;
 		button7->Enabled=true;	
-		monthCalendar1->Enabled=true;
+		monthCalendar1->Enabled=true;	
 	}
 		// обработка чекбоксов фильтра для кнопки Все защиты
 private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -1791,11 +1967,40 @@ private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::
 		if(checkBox24->Checked==true) maska |= power(24);			
 		else						  maska &= ~power(24);		// 2^23		
 		
-		label21->Text = maska.ToString();
+		// label21->Text = maska.ToString();
 
 		if(maska>0) button6->Enabled=true;
 		else		button6->Enabled=false;		// спрятать кнопку если ничего не выбрано
 	}
+	
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		listBox1->Visible = false;
+		button6->Enabled  = false;  // все защиты
+		maska = 0;
+		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
+	}
+	
+	//---  формирователь даты для таблиц ----
+private: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigned char my_sec){
+		return (my_hour.ToString("D2") + ":" + my_minute.ToString("D2") + ":" + my_sec.ToString("D2"));
+	}
+	//--- power(1) = 2^0 ----
+private: unsigned int power(int n){
+			unsigned int result = 1;
+			if (n==0) return 1;
+			for(int i=0; i<(n-1); i++){ 
+			 result *= 2;
+			}
+			return result;
+		}	
+//*****************************************************************************
+		//--- внутренний метод добавления строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
+private:
+
+		void AddRow(unsigned char my_hour, unsigned char my_minute, unsigned char my_second, String^ error, unsigned char n, DataTable ^tabl)
+		{
+			if (n==1) tabl->Rows->Add(my_time(my_hour, my_minute, my_second), error, "", "", "", "", "", "", "");				
+		};
+		//*****************************************************************************	
 };
 }
-
