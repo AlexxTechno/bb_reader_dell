@@ -303,7 +303,7 @@ namespace BB_reader_all_dell {
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(317, 557);
+			this->label23->Location = System::Drawing::Point(518, 560);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(41, 13);
 			this->label23->TabIndex = 20;
@@ -863,18 +863,19 @@ namespace BB_reader_all_dell {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(4, 66);
+			this->button3->Location = System::Drawing::Point(3, 66);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(97, 21);
+			this->button3->Size = System::Drawing::Size(98, 21);
 			this->button3->TabIndex = 5;
 			this->button3->Text = L"Диск в файл";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(3, 44);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(97, 21);
+			this->button2->Size = System::Drawing::Size(98, 21);
 			this->button2->TabIndex = 4;
 			this->button2->Text = L"Открыть файл";
 			this->button2->UseVisualStyleBackColor = true;
@@ -905,6 +906,7 @@ namespace BB_reader_all_dell {
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(270, 4);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -1420,10 +1422,19 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
 					// label1->Text += monthCalendar1->SelectionStart.ToString();	 // проверка выбора
 					
+					//--- показываю кнопки ----------
+					button4->Enabled  = true;  // выбрать все 
+					button5->Enabled  = true;  // сбросить все
+					button7->Enabled  = true;  // Uсети
 				}					
 				else {
 					label1->Text = "Данных нет!";
 					listBox1->Visible = false;
+
+					//--- прячу кнопки ----------
+					button4->Enabled  = false;  // выбрать все 
+					button5->Enabled  = false;  // сбросить все
+					button7->Enabled  = false;  // Uсети
 				}
 				fs->Close();
 				progressBar1->Visible = false;
@@ -1440,6 +1451,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		button4->Enabled=false;
 		button5->Enabled=false;
 		button6->Enabled=false;	
+		button8->Enabled=false;
 		monthCalendar1->Enabled=false;
 
 		//--- работаем с файлом ----
@@ -1695,6 +1707,8 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_U;		// заполнить таблицу
+		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
+		
 		
 		progressBar1->Visible=false;			// спрятать прогресс
 		
@@ -1705,6 +1719,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		button4->Enabled=true;
 		button5->Enabled=true;
 		button6->Enabled=true;	
+		button8->Enabled=true;
 		monthCalendar1->Enabled=true;
 			 
 	}
@@ -2050,14 +2065,14 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		//--- / блок 512  -------------------		
 			}			
 		}			
-		fs->Close();
-		
+		fs->Close();		
 		progressBar1->Visible=false;			// спрятать прогресс			
 
 		//--- / Работа с файлом --------
 		
 		dataGridView1->Visible=true;			// показать таблицу
-		dataGridView1->DataSource = tabl_z;		// заполнить таблицу	
+		dataGridView1->DataSource = tabl_z;		// заполнить таблицу
+		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
 		
 		//--- разморозить кнопки и др. ------------		
 		button1->Enabled=true;
@@ -2120,17 +2135,23 @@ private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::
 		else						  maska &= ~power(23);		// 2^22
 		if(checkBox24->Checked==true) maska |= power(24);
 		else						  maska &= ~power(24);		// 2^23
-		if(maska>0) button6->Enabled=true;
-		else		button6->Enabled=false;		// спрятать кнопку если ничего не выбрано
+		
+		if((maska>0)&&label21->Text != "") 	button6->Enabled=true;		// выбрано и есть откуда читать 
+		else								button6->Enabled=false;		// спрятать кнопку если ничего не выбрано
 	}
-	
+	//--- инициализация/первая прогрузка формы
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 		listBox1->Visible = false;
+		button4->Enabled  = false;  // выбрать все 
+		button5->Enabled  = false;  // сбросить все
 		button6->Enabled  = false;  // все защиты
+		button7->Enabled  = false;  // Uсети
+		button8->Enabled  = false;  // сохранить PDF
 		maska = 0;
 		label21->Text = "";
 		label22->Text = "";
 		label23->Text = "";
+		progressBar1->Visible=false;
 		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
 	}
 	
@@ -2273,6 +2294,10 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		button5->Enabled=true;
 		button6->Enabled=true;
 		button7->Enabled=true;				 
+	}
+	//--- Диск в файл ----------------------------
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+
 	}
 };
 }
