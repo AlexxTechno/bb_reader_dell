@@ -2297,7 +2297,156 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 	}
 	//--- Диск в файл ----------------------------
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+					if ((folderBrowserDialog1->ShowDialog()==System::Windows::Forms::DialogResult::OK)&&(folderBrowserDialog1->SelectedPath->Substring(0, 1) != "C"))
+			{				
+				String^ my_str = folderBrowserDialog1->SelectedPath;
+				my_str = my_str->Substring(0, 1);	// Отделяем от пути первые два символа
+				label1->Text= "Диск " + my_str + ":" ;
 
+		//----- Работа с диском --------------------------------------------
+				LPCWSTR path ;	
+				
+				if(my_str=="A")path = L"\\\\.\\A:";
+				if(my_str=="B")path = L"\\\\.\\B:";
+				if(my_str=="D")path = L"\\\\.\\D:";
+				if(my_str=="E")path = L"\\\\.\\E:";
+				if(my_str=="F")path = L"\\\\.\\F:";
+				if(my_str=="G")path = L"\\\\.\\G:";
+				if(my_str=="H")path = L"\\\\.\\H:";
+				if(my_str=="I")path = L"\\\\.\\I:";
+				if(my_str=="J")path = L"\\\\.\\J:";
+				if(my_str=="K")path = L"\\\\.\\K:";
+					
+				// Дескриптор файлового устройства (раздела диска).
+				HANDLE partition = INVALID_HANDLE_VALUE;
+				// Сведения о разделе.
+				PARTITION_INFORMATION partitionInfo = {0};
+				// Сведения о геометрии диска, на котором расположен раздел.
+				DISK_GEOMETRY diskGeometry = {0};
+				// Дескриптор файла для сохранения образа раздела.
+				HANDLE file = INVALID_HANDLE_VALUE;
+				// Буфер для чтения.
+				BYTE* buffer = NULL;
+				// Размер буфера.
+				DWORD bufferSize = 0;
+				// Количество возвращенных байт.
+				DWORD bytesReturned = 0;
+				// Количество записанных байт.
+				DWORD bytesWritten = 0;
+				// Результат выполнения.
+				BOOL result;
+				// Открываем раздел диска читаем.
+				partition = CreateFile(
+					path,
+					GENERIC_READ,
+					FILE_SHARE_READ | FILE_SHARE_WRITE,
+					NULL,
+					OPEN_EXISTING,
+					0,
+					NULL); 
+				if (partition == INVALID_HANDLE_VALUE)
+				{
+					// CreateFile() не работает
+					MessageBox::Show("Невозможно открыть диск " + my_str + ":");	 
+					delete[] buffer;
+					CloseHandle(partition);					
+				}
+				else 
+				{							
+				// Запрашиваем сведения о геометрии диска, на котором расположен раздел.
+					if (!DeviceIoControl(partition,
+						IOCTL_DISK_GET_DRIVE_GEOMETRY,
+						NULL,
+						0,
+						&diskGeometry,
+						sizeof (DISK_GEOMETRY),
+						&bytesReturned,
+						(LPOVERLAPPED)NULL))
+					{
+						MessageBox::Show("Ошибка запроса сведений о геометрии диска "  + my_str + ":");
+						CloseHandle(partition);
+					}
+					else
+					{
+					// Запрашиваем сведения о разделе.
+						if (!DeviceIoControl(partition,
+							IOCTL_DISK_GET_PARTITION_INFO,
+							NULL,
+							0,&partitionInfo,
+							sizeof (PARTITION_INFORMATION),
+							&bytesReturned,
+							(LPOVERLAPPED)NULL))
+						{
+							MessageBox::Show("Ошибка запроса сведений о разделе" + my_str + ":");
+							CloseHandle(partition);
+						}
+						else
+						{	
+							MessageBox::Show("Диск " + my_str + ": все ОК");
+							
+							String^ file_dat = "B:\\test.dat";
+							
+					//-------- РАБОТА С ДИСКОМ ------- 	
+				
+						//	из файла - побайтно	(блоком 512)		| c диска - побуферно			
+						//	121875 * 30								| 73125
+						//	512										| 512 * 50
+						//------------								|---------------------
+						//  1 872 000 000							| 1 872 000 000
+
+							int myBuf = 512 * 50   ;    // 121875*30;
+							int zykl  = 73125  ;  		// 512;
+							
+						// Выделение памяти для буфера указанного размера.	
+							bufferSize = myBuf;        						
+							buffer = new BYTE[bufferSize+1];
+							
+						// Подготовка записи в файл	
+							FileStream^ fs = gcnew FileStream(file_dat, FileMode::CreateNew);	// поток для соддания файла       
+							BinaryWriter^ w = gcnew BinaryWriter(fs);							// поток для записи в файл								
+							
+							progressBar1->Value=0;
+							progressBar1->Maximum = zykl;
+							progressBar1->Visible = true;
+							
+							for (int i=1; i<(zykl+1); i++)   // было 326 
+							{	
+								result = ReadFile(partition, buffer, bufferSize, &bytesReturned, NULL);			
+								if (!result)
+								{
+									MessageBox::Show("Ошибка чтения секторов в разделе" + my_str + ":");
+									delete[] buffer;
+									
+								}
+								else
+								{
+									progressBar1->Value=i;
+									
+									//--- буфер корректно считан - надо сохранять в файл ---
+									for (int nn=0; nn<(myBuf); nn++)
+									{
+										w->Write(buffer[nn]);
+									}
+									
+								}
+							}
+					
+					
+					//------ / РАБОТА С ДИСКОМ ---------- 
+					
+							progressBar1->Visible = false;
+							delete[] buffer;
+							
+							w->Close();				// закрываем потоки после считывания данных
+							fs->Close();
+							CloseHandle(partition);
+							CloseHandle(file);
+						}
+					}						
+				}
+
+			}
+			else MessageBox::Show( "Диск не выбран!" );
 	}
 };
 }
