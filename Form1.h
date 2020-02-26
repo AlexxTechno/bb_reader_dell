@@ -2205,9 +2205,10 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		//--- спрятать прогресс
 		progressBar1->Visible=false;	
 		 
+		// в свойствах насроить 
 		saveFileDialog1->ShowDialog();
 		String^ file = saveFileDialog1->FileName; 
-		label23->Text = file;
+		//label23->Text = file;
 		
 		if(file!="")
 		{
