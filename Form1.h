@@ -127,6 +127,7 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 	private: System::Windows::Forms::Label^  label23;
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog2;
+private: System::Windows::Forms::RichTextBox^  richTextBox1;
 
 
 
@@ -212,6 +213,7 @@ namespace BB_reader_all_dell {
 			this->lineShape2 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->lineShape1 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
@@ -219,6 +221,7 @@ namespace BB_reader_all_dell {
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
+			this->tabPage2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -233,6 +236,7 @@ namespace BB_reader_all_dell {
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->tabPage1->Controls->Add(this->label23);
 			this->tabPage1->Controls->Add(this->button8);
 			this->tabPage1->Controls->Add(this->label22);
@@ -301,12 +305,11 @@ namespace BB_reader_all_dell {
 			this->tabPage1->Size = System::Drawing::Size(892, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
-			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(518, 560);
+			this->label23->Location = System::Drawing::Point(560, 558);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(41, 13);
 			this->label23->TabIndex = 20;
@@ -342,6 +345,7 @@ namespace BB_reader_all_dell {
 			// 
 			// listBox1
 			// 
+			this->listBox1->BackColor = System::Drawing::SystemColors::MenuBar;
 			this->listBox1->FormattingEnabled = true;
 			this->listBox1->Location = System::Drawing::Point(5, 88);
 			this->listBox1->Name = L"listBox1";
@@ -911,6 +915,7 @@ namespace BB_reader_all_dell {
 			// 
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->GridColor = System::Drawing::SystemColors::Control;
 			this->dataGridView1->Location = System::Drawing::Point(270, 4);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(616, 540);
@@ -953,6 +958,7 @@ namespace BB_reader_all_dell {
 			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->richTextBox1);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
@@ -960,6 +966,17 @@ namespace BB_reader_all_dell {
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
 			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->BackColor = System::Drawing::SystemColors::InactiveCaption;
+			this->richTextBox1->Location = System::Drawing::Point(6, 6);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(877, 567);
+			this->richTextBox1->TabIndex = 0;
+			this->richTextBox1->Text = L"BB_Reader версия v3.0\n**********************************************\nПрограмма пр" 
+				L"едназначена для расшифровки данных, записанных на SD карте\n\n\n\n\n\n****************" 
+				L"******************************";
 			// 
 			// folderBrowserDialog1
 			// 
@@ -1002,6 +1019,7 @@ namespace BB_reader_all_dell {
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->EndInit();
+			this->tabPage2->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -1201,7 +1219,10 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 		// кнопка ОТКРЫТЬ ФАЙЛ
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-
+			
+			button1->Enabled=false;		// открыть диск
+			button3->Enabled=false;		// диск в файл
+		
 			openFileDialog1->ShowDialog();
 			String^ file = openFileDialog1->FileName;
 		// Проверка файла на расширение .dat 
@@ -1267,6 +1288,18 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					//--- считаем что данные или полезные из дисплея или чисто
 						if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 						{
+							//--- Тип аппаратуры		
+							switch (z[501])
+							{
+								case 59:
+								label22->Text = "АУКП.02";
+								break;
+								case 77:
+								label22->Text = "АУКП.01";
+								break;
+								default:
+								label22->Text = "--";						
+							}
 							//----- первая строка -------------------------------
 							if((z[99]==13)&&(z[100]==10))	// есть хвост строки
 							{
@@ -1448,9 +1481,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 					button7->Enabled  = false;  // Uсети
 				}
 				fs->Close();
+				
 				progressBar1->Visible = false;
 			}
-
+			button1->Enabled=true;		// открыть диск
+			button3->Enabled=true;		// диск в файл
 		 }
 		// кнопка Uсети - напряжение и блокировки по току и Uсети
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {	
