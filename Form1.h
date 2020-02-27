@@ -1200,6 +1200,12 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 								else
 								{
 									progressBar1->Value=i;
+								
+							//--- тут вся ботва с чтением с диска ---
+							//-- buffer[nn] = 512*10
+									
+								//-- анализ первой строки ------
+									
 									
 								}
 							}
@@ -1225,7 +1231,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		
 			openFileDialog1->ShowDialog();
 			String^ file = openFileDialog1->FileName;
-		// Проверка файла на расширение .dat 
+			
+		// Проверка файла на расширение .dat - в настройках openFileDialog1
+		// на extention
 			
 			Form1::Text = "BB_reader_dell  |  " + file;		
 		
