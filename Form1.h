@@ -1186,8 +1186,9 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							MessageBox::Show("Диск " + my_str + ": все ОК");
 					//-------- РАБОТА С ДИСКОМ ------- 	
 				
-							int myBuf = 512 * 10   ;  	// 5120*325*30 = 49 920 000 б		// 121875*30;
-							int zykl  = 325 * 300   ;  	// 5120*325*30 = 490 920 000 б		// 325*30;
+							int myBuf = 512 * 10  ;  	// 5120*325*30 = 49 920 000 б		// 121875*30;
+							int zykl  = 325 * 300 ;  	// 5120*325*30 = 490 920 000 б		// 325*30;
+							unsigned char z[513]  ;
 							
 						// Выделение памяти для буфера указанного размера.	
 							bufferSize = myBuf;        						
@@ -1203,20 +1204,26 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 								if (!result)
 								{
 									MessageBox::Show("Ошибка чтения секторов в разделе" + my_str + ":");
-									delete[] buffer;
-									
+									delete[] buffer;									
 								}
 								else
 								{
 									progressBar1->Value=i;
 								
-							//--- тут вся ботва с чтением с диска ---
-							//-- buffer[nn] = 512*10
-								}	
-									
+							//-------------------------------
+							//-- buffer[nn] = 512*10 = 5120
+							//--- блок на анализ по датам ------	
+									for(int j=0; j<10; j++){
+										for(int k=0; k<513; k++){ 
+											z[k+1] = buffer[k+(512*j)];
+										}
+										analise_date(z);									
+									}						
+								}										
 							}
-					//------ / РАБОТА С ДИСКОМ ---------- 				
+					//------ / РАБОТА С ДИСКОМ ---------- 		
 					
+							result_date();
 							progressBar1->Visible = false;
 							delete[] buffer;
 							CloseHandle(partition);
@@ -1669,19 +1676,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		// подготавливаем строки если корректный блок
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 				{
-			//--- Тип аппаратуры		
-					switch (z[501])
-					{
-						case 59:
-						label22->Text = "АУКП.02";
-						break;
-						case 77:
-						label22->Text = "АУКП.01";
-						break;
-						default:
-						label22->Text = "Ошибка";						
-					}
-					
+				
 			//----- цикл разбора пяти строк в блоке 512 --------------------
 					for(int s = 0; s < 5; s++)
 					{						
@@ -2095,10 +2090,12 @@ private: void result_date(){
 			//--- выбор  на max --------
 			monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
 					
+			if(label21->Text!=""){		//-- если от кнопки Открыть Файл
 			//--- показываю кнопки ----------
-			button4->Enabled  = true;  // выбрать все 
-			button5->Enabled  = true;  // сбросить все
-			button7->Enabled  = true;  // Uсети
+				button4->Enabled  = true;  // выбрать все 
+				button5->Enabled  = true;  // сбросить все
+				button7->Enabled  = true;  // Uсети
+			}
 		}					
 		else {
 			label1->Text = "Данных нет!";
@@ -2242,8 +2239,7 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		button7->Enabled=true;				 
 	}
 	//--- Диск в файл ----------------------------
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {	
 	
 		if ((folderBrowserDialog1->ShowDialog()==System::Windows::Forms::DialogResult::OK)&&(folderBrowserDialog1->SelectedPath->Substring(0, 1) != "C"))
 		{				
@@ -2403,15 +2399,13 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 							CloseHandle(partition);
 							CloseHandle(file);								
 								
-				//--- / тут вся ботва с чтением и записью ---------		
-							
+				//--- / тут вся ботва с чтением и записью ---------									
 
 						}
 						else 
 						{
 							MessageBox::Show("Путь для файла не задан!" );
-							CloseHandle(partition);
-							
+							CloseHandle(partition);							
 						}					
 					}
 				}						
