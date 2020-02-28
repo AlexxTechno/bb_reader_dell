@@ -48,8 +48,17 @@ namespace BB_reader_all_dell {
 			}
 		}
 		
-	//--- глобальные переменные	-----------------------------------
+	//--- Глобальные переменные	-----------------------------------	
 	private: unsigned int maska;	// маска защит и блокировок по приводам	
+	//-- Переменные для определения дат записи
+	private: static unsigned char norma = 0;		// данные в блоке есть
+	//--- диапазон дат в данных архива ------------------
+	private: static unsigned char min_D = 31;	    // день
+	private: static unsigned char min_M = 12;		// месяц
+	private: static unsigned char min_G = 99;		// год начальная дата
+	private: static unsigned char max_D = 1;		// день
+	private: static unsigned char max_M = 1;		// месяц
+	private: static unsigned char max_G = 0;		// год конечная дата
 	//-------------------------------------------------------------
 		
 	private: System::Windows::Forms::TabControl^  tabControl1;
@@ -1095,22 +1104,6 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				my_str = my_str->Substring(0, 1);	// Отделяем от пути первые два символа
 				label1->Text= "Диск " + my_str + ":" ;				
 				
-				/*
-				
-				//--- Переменные для анализа даты -------------------
-				unsigned char norma = 0;		// данные в блоке есть			
-				//--- диапазон дат в данных архива ------------------
-				unsigned char min_D = 31;	    // день
-				unsigned char min_M = 12;		// месяц
-				unsigned char min_G = 99;		// год начальная дата
-				unsigned char max_D = 1;		// день
-				unsigned char max_M = 1;		// месяц
-				unsigned char max_G = 0;		// год конечная дата
-				//---------------------------------------------------
-				
-				*/
-				
-
 		//----- Работа с диском --------------------------------------------
 				LPCWSTR path ;	
 				
@@ -1259,7 +1252,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			}
 			else 
 			{
-				label1->Text="Работаем с файлом";
+				label1->Text="Считывание данных из файла";
 				listBox1->Items->Clear() ;
 				MessageBox::Show( "Файл найден!"+"\n"+file );	
 				listBox1->Visible = false;
@@ -1270,7 +1263,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				BinaryReader^ r = gcnew BinaryReader(fs);	// Создаем читателя.
 				unsigned char z[513];						// блок данных 512 байт
 				int lim = 121875*30;						// количество блоков по 512
-				unsigned char norma = 0;					// данные в блоке есть
+				
 				//-------------------------------------------------------------------
 
 				//--- Текущщая дата из каждой строки ----------------------------------------------------------
@@ -1279,16 +1272,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				//	String^ data3 = z[201].ToString()+"-"+z[202].ToString()+"-"+(2000+z[203]).ToString() +" г";
 				//	String^ data4 = z[301].ToString()+"-"+z[302].ToString()+"-"+(2000+z[303]).ToString() +" г";
 				//	String^ data5 = z[401].ToString()+"-"+z[402].ToString()+"-"+(2000+z[403]).ToString() +" г";
-				//---------------------------------------------------------------------------------------------
-				
-				//--- диапазон дат в данных архива ------------------
-				unsigned char min_D = 31;	    // день
-				unsigned char min_M = 12;		// месяц
-				unsigned char min_G = 99;		// год начальная дата
-				unsigned char max_D = 1;		// день
-				unsigned char max_M = 1;		// месяц
-				unsigned char max_G = 0;		// год конечная дата
-				//---------------------------------------------------
+				//---------------------------------------------------------------------------------------------			
 				
 				progressBar1->Value=0;
 				progressBar1->Maximum = lim;
@@ -1303,99 +1287,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 						z[i]=r->ReadByte();					// получили блок						
 					}
 					
-					//--- Анализируем блок с данными ----------						
-
-					//--- считаем что данные или полезные из дисплея или чисто
-					if((z[511]==13)&&(z[512]==10))		// есть хвост блока
-					{
-						//--- Тип аппаратуры		
-						switch (z[501])
-						{
-							case 59:
-							label22->Text = "АУКП.02";
-							break;
-							case 77:
-							label22->Text = "АУКП.01";
-							break;
-							default:
-							label22->Text = "--";						
-						}
-							
-						//----- цикл разбора пяти строк в блоке 512 --------------------
-						for(int s = 0; s < 5; s++)
-						{
-							
-							//----- первая строка -------------------------------
-							if((z[99+(100*s)]==13)&&(z[100+(100*s)]==10))	// есть хвост строки
-							{
-								// проверка даты в допустимом диапазоне сразу все
-								//     число				месяц				год
-								if((z[1+(100*s)]<32)&&(z[1+(100*s)]>0)&&(z[2+(100*s)]<13)&&(z[2+(100*s)]>0)&&(z[3+(100*s)]<100)&&(z[3+(100*s)]>0))
-								{
-									//-- определяеи минимум
-									if(z[1+(100*s)]<min_D) min_D = z[1+(100*s)];			
-									if(z[2+(100*s)]<min_M) min_M = z[2+(100*s)];			
-									if(z[3+(100*s)]<min_G) min_G = z[3+(100*s)];
-					
-									//-- определяеи максимум
-									if(z[1+(100*s)]>max_D) max_D = z[1+(100*s)];
-									if(z[2+(100*s)]>max_M) max_M = z[2+(100*s)];
-									if(z[3+(100*s)]>max_G) max_G = z[3+(100*s)];
-					
-									norma = 1;
-										
-									// в каждой строке поиск новой даты
-									if (!(listBox1->Items->Contains(z[1+(100*s)].ToString("D2")+"-"+z[2+(100*s)].ToString("D2")+"-"+(2000+z[3+(100*s)]).ToString("D4") +" г"))) listBox1->Items->Add(z[1+(100*s)].ToString("D2")+"-"+z[2+(100*s)].ToString("D2")+"-"+(2000+z[3+(100*s)]).ToString("D4") +" г");								
-									
-									// Тут возможно добавится поиск срабатывания защит по дате для формирования сводной неподробной таблицы
-									// дата	(М1)-> защита
-									//		(М2)-> защита 
-									//		(М3)-> защита 
-									//		(М4)-> защита 
-									//		(М5)-> защита 
-									//		(М6)-> защита 																											
-									//		(М7)-> защита																																			
-									//      маслобак -> защита	
-								}											
-							}
-						}					
-					}						
-
-				// --------- все по определению min-max  -----------------
-					
-					
+					//--- блок на анализ по датам ------	
+					analise_date(z);				
 				}
-
-				if(norma == 1) {
-
-					listBox1->Visible = true;
-					label1->Text = "Данные с "  + min_D.ToString("D2") + "-" + min_M.ToString("D2") + "-" + (2000+min_G).ToString("D4") + 
-										 " по " + max_D.ToString("D2") + "-" + max_M.ToString("D2") + "-" + (2000+max_G).ToString("D4");
-				
-					//--- ставим календарь на диапвазон мин-мах -------
-					monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
-					monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );
-					
-					//--- выбор  на max --------
-					monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
-					// label1->Text += monthCalendar1->SelectionStart.ToString();	 // проверка выбора
-					
-					//--- показываю кнопки ----------
-					button4->Enabled  = true;  // выбрать все 
-					button5->Enabled  = true;  // сбросить все
-					button7->Enabled  = true;  // Uсети
-				}					
-				else {
-					label1->Text = "Данных нет!";
-					listBox1->Visible = false;
-
-					//--- прячу кнопки ----------
-					button4->Enabled  = false;  // выбрать все 
-					button5->Enabled  = false;  // сбросить все
-					button7->Enabled  = false;  // Uсети
-				}
+				result_date();
 				fs->Close();
-				
 				progressBar1->Visible = false;
 			}
 			button1->Enabled=true;		// открыть диск
@@ -1429,8 +1325,6 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		tabl_U->Columns->Add("Uсети, В");		
 		
 		// переменная для определения столбцов в будущей таблице
-		// if (checkBox26->Checked==true)	tabl_U->Columns->Add("Блокировка Uсети");
-		// if (checkBox25->Checked==true)	tabl_U->Columns->Add("Блокировка по току");
 		unsigned char ch = 0;
 		if ((checkBox26->Checked==true)&&(checkBox25->Checked==true)) 
 		{
@@ -2124,16 +2018,108 @@ private: String^ my_time(unsigned char my_hour, unsigned char my_minute, unsigne
 //private: String^ my_data(unsigned char my_day, unsigned char my_month, unsigned char my_year){
 //		return (my_day.ToString("D2") + "-" + my_month.ToString("D2") + "-" + (2000+my_year).ToString("D4")  +" г");
 //	}
+
+	//--- анализ блока 512 байт - поиск мин макс даты - составления перечня дат с данными
+private: System::Void analise_date(unsigned char buf[513]){
+		
+		//--- Анализируем блок с данными ----------						
+
+		if((buf[511]==13)&&(buf[512]==10))		// есть хвост блока
+		{
+			//--- Тип аппаратуры		
+			switch (buf[501])
+			{
+				case 59:
+				label22->Text = "АУКП.02";
+				break;
+				case 77:
+				label22->Text = "АУКП.01";
+				break;
+				default:
+				label22->Text = "--";						
+			}
+							
+			//----- цикл разбора пяти строк в блоке 512 --------------------
+			for(int s = 0; s < 5; s++)
+			{			
+				//----- строка -------------------------------
+				if((buf[99+(100*s)]==13)&&(buf[100+(100*s)]==10))	// есть хвост строки
+				{
+					// проверка даты в допустимом диапазоне сразу все
+					//     число				месяц				год
+					if((buf[1+(100*s)]<32)&&(buf[1+(100*s)]>0)&&(buf[2+(100*s)]<13)&&(buf[2+(100*s)]>0)&&(buf[3+(100*s)]<100)&&(buf[3+(100*s)]>0))
+					{
+						//-- определяеи минимум
+						if(buf[1+(100*s)]<min_D) min_D = buf[1+(100*s)];			
+						if(buf[2+(100*s)]<min_M) min_M = buf[2+(100*s)];			
+						if(buf[3+(100*s)]<min_G) min_G = buf[3+(100*s)];
+					
+						//-- определяеи максимум
+						if(buf[1+(100*s)]>max_D) max_D = buf[1+(100*s)];
+						if(buf[2+(100*s)]>max_M) max_M = buf[2+(100*s)];
+						if(buf[3+(100*s)]>max_G) max_G = buf[3+(100*s)];
+
+						norma = 1;
+										
+						// в каждой строке поиск новой даты
+						if (!(listBox1->Items->Contains(buf[1+(100*s)].ToString("D2")+"-"+buf[2+(100*s)].ToString("D2")+"-"+(2000+buf[3+(100*s)]).ToString("D4") +" г"))) listBox1->Items->Add(buf[1+(100*s)].ToString("D2")+"-"+buf[2+(100*s)].ToString("D2")+"-"+(2000+buf[3+(100*s)]).ToString("D4") +" г");								
+									
+						// Тут возможно добавится поиск срабатывания защит по дате для формирования сводной неподробной таблицы
+						// дата	(М1)-> защита
+						//		(М2)-> защита 
+						//		(М3)-> защита 
+						//		(М4)-> защита 
+						//		(М5)-> защита 
+						//		(М6)-> защита 																											
+						//		(М7)-> защита																																			
+						//      маслобак -> защита	
+					}											
+				}
+			}					
+		}
+	}
+	
+	//--- Вывод результатов после анализа дат в данных ---------
+private: void result_date(){	
+	
+		if(norma == 1) {
+
+			listBox1->Visible = true;
+			label1->Text = "Данные с "  + min_D.ToString("D2") + "-" + min_M.ToString("D2") + "-" + (2000+min_G).ToString("D4") + 
+								 " по " + max_D.ToString("D2") + "-" + max_M.ToString("D2") + "-" + (2000+max_G).ToString("D4");
+		
+			//--- ставим календарь на диапвазон мин-мах -------
+			monthCalendar1->MaxDate = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );
+			monthCalendar1->MinDate = System::DateTime( min_G+2000, min_M, min_D , 0, 0, 0, 0 );
+					
+			//--- выбор  на max --------
+			monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
+					
+			//--- показываю кнопки ----------
+			button4->Enabled  = true;  // выбрать все 
+			button5->Enabled  = true;  // сбросить все
+			button7->Enabled  = true;  // Uсети
+		}					
+		else {
+			label1->Text = "Данных нет!";
+			listBox1->Visible = false;
+
+			//--- прячу кнопки ----------
+			button4->Enabled  = false;  // выбрать все 
+			button5->Enabled  = false;  // сбросить все
+			button7->Enabled  = false;  // Uсети
+		}
+	}
 	
 	//--- power(1) = 2^0 ----
 private: unsigned int power(int n){
-			unsigned int result = 1;
-			if (n==0) return 1;
-			for(int i=0; i<(n-1); i++){ 
-			 result *= 2;
-			}
-			return result;
-		}	
+		unsigned int result = 1;
+		if (n==0) return 1;
+		for(int i=0; i<(n-1); i++){ 
+			result *= 2;
+		}
+		return result;
+	}	
 //*****************************************************************************
 		//--- внутренний метод добавления строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
 private: void AddRow(unsigned char my_hour, unsigned char my_minute, unsigned char my_second, String^ error, unsigned char n, DataTable ^tabl)
