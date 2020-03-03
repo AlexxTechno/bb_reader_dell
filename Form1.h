@@ -1,6 +1,5 @@
 #pragma once
 #include <windows.h>
-
 namespace BB_reader_all_dell {
 
 	using namespace System;
@@ -10,12 +9,13 @@ namespace BB_reader_all_dell {
 	using namespace System::Windows;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace System::Drawing::Printing;
+//	using namespace System::Drawing;
+//	using namespace System::Drawing::Printing;
 	using namespace System::IO;
-	using namespace System::Text;
+//	using namespace System::Text;
 	using namespace iTextSharp::text;
 	using namespace iTextSharp::text::pdf;
+
 	/// <summary>
 	/// Сводка для Form1
 	///
@@ -59,7 +59,9 @@ namespace BB_reader_all_dell {
 	private: static unsigned char max_D = 1;		// день
 	private: static unsigned char max_M = 1;		// месяц
 	private: static unsigned char max_G = 0;		// год конечная дата
-	//-------------------------------------------------------------
+	//---- таймер длительности процессов -------------------------
+	private: static WORD sec = 0;
+	private: static WORD min = 0; 
 		
 	private: System::Windows::Forms::TabControl^  tabControl1;
 	protected: 
@@ -138,13 +140,18 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog2;
 private: System::Windows::Forms::RichTextBox^  richTextBox1;
 
+private: System::Windows::Forms::Label^  label24;
+private: System::Windows::Forms::Label^  label26;
+private: System::Windows::Forms::Label^  label25;
+private: System::ComponentModel::IContainer^  components;
+
 
 
 	private:
 		/// <summary>
 		/// Требуется переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -156,6 +163,9 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->label26 = (gcnew System::Windows::Forms::Label());
+			this->label25 = (gcnew System::Windows::Forms::Label());
+			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->label22 = (gcnew System::Windows::Forms::Label());
@@ -246,6 +256,9 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 			// tabPage1
 			// 
 			this->tabPage1->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->tabPage1->Controls->Add(this->label26);
+			this->tabPage1->Controls->Add(this->label25);
+			this->tabPage1->Controls->Add(this->label24);
 			this->tabPage1->Controls->Add(this->label23);
 			this->tabPage1->Controls->Add(this->button8);
 			this->tabPage1->Controls->Add(this->label22);
@@ -314,6 +327,39 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 			this->tabPage1->Size = System::Drawing::Size(892, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
+			// 
+			// label26
+			// 
+			this->label26->AutoSize = true;
+			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label26->Location = System::Drawing::Point(391, 551);
+			this->label26->Name = L"label26";
+			this->label26->Size = System::Drawing::Size(16, 24);
+			this->label26->TabIndex = 23;
+			this->label26->Text = L":";
+			// 
+			// label25
+			// 
+			this->label25->AutoSize = true;
+			this->label25->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label25->Location = System::Drawing::Point(364, 552);
+			this->label25->Name = L"label25";
+			this->label25->Size = System::Drawing::Size(32, 24);
+			this->label25->TabIndex = 22;
+			this->label25->Text = L"00";
+			// 
+			// label24
+			// 
+			this->label24->AutoSize = true;
+			this->label24->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label24->Location = System::Drawing::Point(402, 552);
+			this->label24->Name = L"label24";
+			this->label24->Size = System::Drawing::Size(32, 24);
+			this->label24->TabIndex = 21;
+			this->label24->Text = L"00";
 			// 
 			// label23
 			// 
@@ -902,6 +948,7 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 			this->progressBar1->Location = System::Drawing::Point(270, 4);
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(616, 20);
+			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 3;
 			// 
 			// monthCalendar1
@@ -979,13 +1026,11 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 			// richTextBox1
 			// 
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::InactiveCaption;
-			this->richTextBox1->Location = System::Drawing::Point(6, 6);
+			this->richTextBox1->Location = System::Drawing::Point(9, 0);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(877, 567);
+			this->richTextBox1->Size = System::Drawing::Size(466, 514);
 			this->richTextBox1->TabIndex = 0;
-			this->richTextBox1->Text = L"BB_Reader версия v3.0\n**********************************************\nПрограмма пр" 
-				L"едназначена для расшифровки данных, записанных на SD карте\n\n\n\n\n\n****************" 
-				L"******************************";
+			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
 			// 
 			// folderBrowserDialog1
 			// 
@@ -1185,18 +1230,24 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 						{	
 							MessageBox::Show("Диск " + my_str + ": все ОК");
 					//-------- РАБОТА С ДИСКОМ ------- 	
-				
-							int myBuf = 512 * 10  ;  	// 5120*325*30 = 49 920 000 б		// 121875*30;
-							int zykl  = 325 * 300 ;  	// 5120*325*30 = 490 920 000 б		// 325*30;
+														//-- последний вариант -----
+							int myBuf = 512 * 50 ;  	//  512 * 10   					// 5120*325*30 = 49 920 000 б	// 121875*30;
+							int zykl  = 73125 ;  		//	325 * 300					// 5120*325*30 = 490 920 000 б	// 325*30;
 							unsigned char z[513]  ;
 							
 						// Выделение памяти для буфера указанного размера.	
 							bufferSize = myBuf;        						
-							buffer = new BYTE[bufferSize+1];
+							buffer = new BYTE[bufferSize+1];							
 							
 							progressBar1->Value=0;
 							progressBar1->Maximum = zykl;
 							progressBar1->Visible = true;
+							
+						//-- Старт отсчета времени процесса --------
+							label24->Text = "";  	// секунды
+							label25->Text = "";		// минуты						
+
+						//---------------------------------------------------	
 							
 							for (int i=1; i<(zykl+1); i++)   // было 326 
 							{	
@@ -1211,9 +1262,9 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 									progressBar1->Value=i;
 								
 							//-------------------------------
-							//-- buffer[nn] = 512*10 = 5120
+							//-- buffer[nn] = 512*50 
 							//--- блок на анализ по датам ------	
-									for(int j=0; j<10; j++){
+									for(int j=0; j<50; j++){
 										for(int k=0; k<513; k++){ 
 											z[k+1] = buffer[k+(512*j)];
 										}
@@ -1226,7 +1277,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							result_date();
 							progressBar1->Visible = false;
 							delete[] buffer;
-							CloseHandle(partition);
+							CloseHandle(partition);						
+
 						}
 					}						
 				}
@@ -2000,7 +2052,11 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		label21->Text = "";
 		label22->Text = "";
 		label23->Text = "";
+		label24->Text = "";
+		label25->Text = "";
+		label26->Text = "";
 		progressBar1->Visible=false;
+		
 		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
 	}
 	
@@ -2417,5 +2473,6 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			label21->Text= "";
 		}			
 	}
+
 };
 }
