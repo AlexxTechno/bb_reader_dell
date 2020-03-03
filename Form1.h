@@ -255,7 +255,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// tabPage1
 			// 
-			this->tabPage1->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->tabPage1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
 			this->tabPage1->Controls->Add(this->label26);
 			this->tabPage1->Controls->Add(this->label25);
 			this->tabPage1->Controls->Add(this->label24);
@@ -1025,7 +1025,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// richTextBox1
 			// 
-			this->richTextBox1->BackColor = System::Drawing::SystemColors::InactiveCaption;
+			this->richTextBox1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
 			this->richTextBox1->Location = System::Drawing::Point(9, 0);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(466, 514);
@@ -1063,7 +1063,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(894, 612);
+			this->ClientSize = System::Drawing::Size(904, 612);
 			this->Controls->Add(this->tabControl1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
