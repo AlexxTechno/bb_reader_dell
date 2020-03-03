@@ -1104,9 +1104,8 @@ private: System::ComponentModel::IContainer^  components;
 				checkBox21->Checked = true;
 				checkBox22->Checked = true;
 				checkBox23->Checked = true;
-				checkBox24->Checked = true;
+				checkBox24->Checked = true;				
 				
-				button6->Enabled=true;	
 				checkBox1_CheckedChanged(sender, e);
 			 }
 		// ЙМНОЙЮ яапняхрэ бяе
