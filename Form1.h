@@ -1,5 +1,8 @@
 #pragma once
 #include <windows.h>
+
+SYSTEMTIME sm;
+
 namespace BB_reader_all_dell {
 
 	using namespace System;
@@ -1242,11 +1245,14 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							progressBar1->Maximum = zykl;
 							progressBar1->Visible = true;
 							
-						//-- Старт отсчета времени процесса --------
-							label24->Text = "";  	// секунды
-							label25->Text = "";		// минуты						
-
-						//---------------------------------------------------	
+						//-- Старт секундомер процесса считывания --------
+							SYSTEMTIME st;
+							GetSystemTime(&st);
+							label24->Text = "00";  	// секунды
+							label25->Text = "00";	// минуты	
+							DWORD start_sec = st.wSecond;
+							DWORD start_min = st.wMinute;						
+						//------------------------------------------------	
 							
 							for (int i=1; i<(zykl+1); i++)   // было 326 
 							{	
@@ -1271,8 +1277,25 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 									}						
 								}										
 							}
-					//------ / РАБОТА С ДИСКОМ ---------- 		
-					
+					//------ / РАБОТА С ДИСКОМ ---------- 
+
+							//-- cтоп секундомер -------
+							SYSTEMTIME st1;
+							GetSystemTime(&st1);
+							//- секунды ---
+							if(st1.wSecond>start_sec)		label24->Text = (st1.wSecond-start_sec).ToString("D2");
+							else{
+								if(st1.wSecond<start_sec)	label24->Text = ((60-start_sec)+st1.wSecond).ToString("D2");
+								else /* == */				label24->Text = "";
+							}
+							//- минуты ---
+							if(st1.wMinute>start_min)		label25->Text = (st1.wMinute-start_min).ToString("D2");
+							else{
+								if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
+								else /* == */				label25->Text = "";						
+							}							
+							//--------------------------
+							
 							result_date();
 							progressBar1->Visible = false;
 							delete[] buffer;
@@ -2051,9 +2074,9 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		label21->Text = "";
 		label22->Text = "";
 		label23->Text = "";
-		label24->Text = "";
-		label25->Text = "";
-		label26->Text = "";
+		label24->Text = "00";
+		label25->Text = "00";
+		label26->Text = ":";
 		progressBar1->Visible=false;
 		
 		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
