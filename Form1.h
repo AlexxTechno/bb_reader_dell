@@ -388,7 +388,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// button8
 			// 
-			this->button8->Location = System::Drawing::Point(665, 552);
+			this->button8->Location = System::Drawing::Point(660, 552);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(169, 23);
 			this->button8->TabIndex = 19;
@@ -1260,14 +1260,15 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							progressBar1->Maximum = zykl;
 							progressBar1->Visible = true;
 							
-						//-- Старт секундомер процесса считывания --------
+							//-- Старт секундомер процесса считывания --------
+							panel1->Visible = false;
 							SYSTEMTIME st;
 							GetSystemTime(&st);
 							//label24->Text = "00";  	// секунды
 							//label25->Text = "00";	// минуты	
 							DWORD start_sec = st.wSecond;
 							DWORD start_min = st.wMinute;						
-						//------------------------------------------------	
+							//------------------------------------------------	
 							
 							for (int i=1; i<(zykl+1); i++)   // было 326 
 							{	
@@ -1315,8 +1316,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							result_date();
 							progressBar1->Visible = false;
 							delete[] buffer;
-							CloseHandle(partition);						
-
+							CloseHandle(partition);	
 						}
 					}						
 				}
@@ -1359,9 +1359,18 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				//--- Переменные для работы с файлом ------------------------------
 				BinaryReader^ r = gcnew BinaryReader(fs);	// Создаем читателя.
 				unsigned char z[513];						// блок данных 512 байт
-				int lim = 121875*30;						// количество блоков по 512
-				
+				int lim = 121875*30;						// количество блоков по 512				
 				//-------------------------------------------------------------------
+
+				//-- Старт секундомер процесса считывания --------
+				panel1->Visible = false;
+				SYSTEMTIME st;
+				GetSystemTime(&st);
+				//label24->Text = "00";  	// секунды
+				//label25->Text = "00";		// минуты	
+				DWORD start_sec = st.wSecond;
+				DWORD start_min = st.wMinute;						
+				//------------------------------------------------	
 
 				//--- Текущщая дата из каждой строки ----------------------------------------------------------
 				//	String^ data1 = z[1].ToString()  +"-"+z[2].ToString()  +"-"+(2000+z[3]).ToString()   +" г";
@@ -1390,6 +1399,24 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				result_date();
 				fs->Close();
 				progressBar1->Visible = false;
+
+				//-- cтоп секундомер -------
+				SYSTEMTIME st1;
+				GetSystemTime(&st1);
+				//- секунды ---
+				if(st1.wSecond>start_sec)		label24->Text = (st1.wSecond-start_sec).ToString("D2");
+				else{
+					if(st1.wSecond<start_sec)	label24->Text = ((60-start_sec)+st1.wSecond).ToString("D2");
+					else /* == */				label24->Text = "";
+				}
+				//- минуты ---
+				if(st1.wMinute>start_min)		label25->Text = (st1.wMinute-start_min).ToString("D2");
+				else{
+					if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
+					else /* == */				label25->Text = "";						
+				}	
+				panel1->Visible = true;
+				//--------------------------
 			}
 			button1->Enabled=true;		// открыть диск
 			button3->Enabled=true;		// диск в файл
@@ -1405,7 +1432,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		button5->Enabled=false;
 		button6->Enabled=false;	
 		button8->Enabled=false;
-		monthCalendar1->Enabled=false;
+		// monthCalendar1->Enabled=false;
 
 		//--- работаем с файлом ----
 		//- путь в label21
@@ -1446,6 +1473,16 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 				else	ch = 0;
 			}
 		}
+
+		//-- Старт секундомер процесса считывания --------
+		panel1->Visible = false;
+		SYSTEMTIME st;
+		GetSystemTime(&st);
+		//label24->Text = "00";  	// секунды
+		//label25->Text = "00";		// минуты	
+		DWORD start_sec = st.wSecond;
+		DWORD start_min = st.wMinute;						
+		//------------------------------------------------
 			
 		// пробуем читать файл
 		String^ path = label21->Text;
@@ -1462,7 +1499,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 			progressBar1->Visible=true;	
 			
 			dataGridView1->Visible=false;
-			
+
 		// Создаем читателя.
 			BinaryReader^ r = gcnew BinaryReader(fs);
 
@@ -1662,6 +1699,24 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		
 		
 		progressBar1->Visible=false;			// спрятать прогресс
+
+		//-- cтоп секундомер -------
+		SYSTEMTIME st1;
+		GetSystemTime(&st1);
+		//- секунды ---
+		if(st1.wSecond>start_sec)		label24->Text = (st1.wSecond-start_sec).ToString("D2");
+		else{
+			if(st1.wSecond<start_sec)	label24->Text = ((60-start_sec)+st1.wSecond).ToString("D2");
+			else /* == */				label24->Text = "";
+		}
+		//- минуты ---
+		if(st1.wMinute>start_min)		label25->Text = (st1.wMinute-start_min).ToString("D2");
+		else{
+			if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
+			else /* == */				label25->Text = "";						
+		}	
+		panel1->Visible = true;
+		//--------------------------
 		
 		//--- разморозить кнопки и др. ------------		
 		button1->Enabled=true;
@@ -1685,7 +1740,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		button5->Enabled=false;
 		button7->Enabled=false;	
 		button8->Enabled=false;
-		monthCalendar1->Enabled=false;
+		// monthCalendar1->Enabled=false;
 		
 		//--- спрятать прогресс
 		progressBar1->Visible=false;
@@ -1724,7 +1779,17 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		tabl_z->Columns->Add("М5");  		// М5
 		tabl_z->Columns->Add("М6");  		// М6
 		tabl_z->Columns->Add("М7");  		// М7	
-		tabl_z->Columns->Add("Маслобак");  	// Маслобак		
+		tabl_z->Columns->Add("Маслобак");  	// Маслобак	
+
+		//-- Старт секундомер процесса считывания --------
+		panel1->Visible = false;
+		SYSTEMTIME st;
+		GetSystemTime(&st);
+		//label24->Text = "00";  	// секунды
+		//label25->Text = "00";		// минуты	
+		DWORD start_sec = st.wSecond;
+		DWORD start_min = st.wMinute;						
+			//------------------------------------------------	
 		
 		//*****************************************************************************
 		//--- Работа с файлом --------
@@ -1743,7 +1808,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 			progressBar1->Maximum = lim ;
 			progressBar1->Visible=true;	
 			
-			dataGridView1->Visible=false;
+			dataGridView1->Visible=false;			
 			
 		// Создаем читателя.
 			BinaryReader^ r = gcnew BinaryReader(fs);
@@ -2012,6 +2077,24 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_z;		// заполнить таблицу
 		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
+		
+		//-- cтоп секундомер -------
+		SYSTEMTIME st1;
+		GetSystemTime(&st1);
+		//- секунды ---
+		if(st1.wSecond>start_sec)		label24->Text = (st1.wSecond-start_sec).ToString("D2");
+		else{
+			if(st1.wSecond<start_sec)	label24->Text = ((60-start_sec)+st1.wSecond).ToString("D2");
+			else /* == */				label24->Text = "";
+		}
+		//- минуты ---
+		if(st1.wMinute>start_min)		label25->Text = (st1.wMinute-start_min).ToString("D2");
+		else{
+			if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
+			else /* == */				label25->Text = "";						
+		}	
+		panel1->Visible = true;
+		//--------------------------		
 		
 		//--- разморозить кнопки и др. ------------		
 		button1->Enabled=true;
@@ -2469,6 +2552,16 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 
 							int myBuf = 512 * 50   ;    // 121875*30;
 							int zykl  = 73125  ;  		// 512;
+
+							//-- Старт секундомер процесса считывания --------
+							panel1->Visible = false;
+							SYSTEMTIME st;
+							GetSystemTime(&st);
+							//label24->Text = "00";  	// секунды
+							//label25->Text = "00";	// минуты	
+							DWORD start_sec = st.wSecond;
+							DWORD start_min = st.wMinute;						
+							//------------------------------------------------	
 								
 							// Выделение памяти для буфера указанного размера.	
 							bufferSize = myBuf;        						
@@ -2520,8 +2613,25 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 							CloseHandle(partition);
 							CloseHandle(file);								
 								
-				//--- / тут вся ботва с чтением и записью ---------									
+				//--- / тут вся ботва с чтением и записью ---------		
 
+							//-- cтоп секундомер -------
+							SYSTEMTIME st1;
+							GetSystemTime(&st1);
+							//- секунды ---
+							if(st1.wSecond>start_sec)		label24->Text = (st1.wSecond-start_sec).ToString("D2");
+							else{
+								if(st1.wSecond<start_sec)	label24->Text = ((60-start_sec)+st1.wSecond).ToString("D2");
+								else /* == */				label24->Text = "";
+							}
+							//- минуты ---
+							if(st1.wMinute>start_min)		label25->Text = (st1.wMinute-start_min).ToString("D2");
+							else{
+								if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
+								else /* == */				label25->Text = "";						
+							}	
+							panel1->Visible = true;
+							//--------------------------
 						}
 						else 
 						{
