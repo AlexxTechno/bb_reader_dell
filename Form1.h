@@ -1,8 +1,6 @@
 #pragma once
 #include <windows.h>
 
-SYSTEMTIME sm;
-
 namespace BB_reader_all_dell {
 
 	using namespace System;
@@ -65,6 +63,8 @@ namespace BB_reader_all_dell {
 	//---- таймер длительности процессов -------------------------
 	private: static WORD sec = 0;
 	private: static WORD min = 0; 
+	//--- определение версии аппаратуры --------------------------
+	private: static unsigned char vers = 0;		// 0- нет  1-АУКП.01  2- АУКП.02
 		
 	private: System::Windows::Forms::TabControl^  tabControl1;
 	protected: 
@@ -146,6 +146,7 @@ private: System::Windows::Forms::RichTextBox^  richTextBox1;
 private: System::Windows::Forms::Label^  label24;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::Label^  label25;
+private: System::Windows::Forms::Panel^  panel1;
 private: System::ComponentModel::IContainer^  components;
 
 
@@ -166,9 +167,10 @@ private: System::ComponentModel::IContainer^  components;
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->label26 = (gcnew System::Windows::Forms::Label());
 			this->label25 = (gcnew System::Windows::Forms::Label());
-			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->label22 = (gcnew System::Windows::Forms::Label());
@@ -242,6 +244,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->saveFileDialog2 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
 			this->tabPage2->SuspendLayout();
 			this->SuspendLayout();
@@ -259,9 +262,7 @@ private: System::ComponentModel::IContainer^  components;
 			// tabPage1
 			// 
 			this->tabPage1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
-			this->tabPage1->Controls->Add(this->label26);
-			this->tabPage1->Controls->Add(this->label25);
-			this->tabPage1->Controls->Add(this->label24);
+			this->tabPage1->Controls->Add(this->panel1);
 			this->tabPage1->Controls->Add(this->label23);
 			this->tabPage1->Controls->Add(this->button8);
 			this->tabPage1->Controls->Add(this->label22);
@@ -331,43 +332,55 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			// 
+			// panel1
+			// 
+			this->panel1->BackColor = System::Drawing::SystemColors::Control;
+			this->panel1->Controls->Add(this->label24);
+			this->panel1->Controls->Add(this->label26);
+			this->panel1->Controls->Add(this->label25);
+			this->panel1->Location = System::Drawing::Point(837, 552);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(50, 23);
+			this->panel1->TabIndex = 24;
+			// 
+			// label24
+			// 
+			this->label24->AutoSize = true;
+			this->label24->Font = (gcnew System::Drawing::Font(L"Technic", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(2)));
+			this->label24->Location = System::Drawing::Point(26, 4);
+			this->label24->Margin = System::Windows::Forms::Padding(3, 0, 1, 0);
+			this->label24->Name = L"label24";
+			this->label24->Size = System::Drawing::Size(21, 14);
+			this->label24->TabIndex = 21;
+			this->label24->Text = L"00";
+			// 
 			// label26
 			// 
 			this->label26->AutoSize = true;
-			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label26->Location = System::Drawing::Point(391, 551);
+			this->label26->Location = System::Drawing::Point(19, 3);
 			this->label26->Name = L"label26";
-			this->label26->Size = System::Drawing::Size(16, 24);
+			this->label26->Size = System::Drawing::Size(12, 16);
 			this->label26->TabIndex = 23;
 			this->label26->Text = L":";
 			// 
 			// label25
 			// 
 			this->label25->AutoSize = true;
-			this->label25->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label25->Location = System::Drawing::Point(364, 552);
+			this->label25->Font = (gcnew System::Drawing::Font(L"Technic", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(2)));
+			this->label25->Location = System::Drawing::Point(2, 4);
 			this->label25->Name = L"label25";
-			this->label25->Size = System::Drawing::Size(32, 24);
+			this->label25->Size = System::Drawing::Size(21, 14);
 			this->label25->TabIndex = 22;
 			this->label25->Text = L"00";
-			// 
-			// label24
-			// 
-			this->label24->AutoSize = true;
-			this->label24->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label24->Location = System::Drawing::Point(402, 552);
-			this->label24->Name = L"label24";
-			this->label24->Size = System::Drawing::Size(32, 24);
-			this->label24->TabIndex = 21;
-			this->label24->Text = L"00";
 			// 
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(560, 558);
+			this->label23->Location = System::Drawing::Point(520, 558);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(41, 13);
 			this->label23->TabIndex = 20;
@@ -375,7 +388,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// button8
 			// 
-			this->button8->Location = System::Drawing::Point(717, 552);
+			this->button8->Location = System::Drawing::Point(665, 552);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(169, 23);
 			this->button8->TabIndex = 19;
@@ -1075,6 +1088,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
+			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->EndInit();
 			this->tabPage2->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -1248,8 +1263,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 						//-- Старт секундомер процесса считывания --------
 							SYSTEMTIME st;
 							GetSystemTime(&st);
-							label24->Text = "00";  	// секунды
-							label25->Text = "00";	// минуты	
+							//label24->Text = "00";  	// секунды
+							//label25->Text = "00";	// минуты	
 							DWORD start_sec = st.wSecond;
 							DWORD start_min = st.wMinute;						
 						//------------------------------------------------	
@@ -1293,7 +1308,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 							else{
 								if(st1.wMinute<start_min)	label25->Text = ((60-start_min)+st1.wMinute).ToString("D2");
 								else /* == */				label25->Text = "";						
-							}							
+							}	
+							panel1->Visible = true;
 							//--------------------------
 							
 							result_date();
@@ -2077,6 +2093,7 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		label24->Text = "00";
 		label25->Text = "00";
 		label26->Text = ":";
+		panel1->Visible = false;
 		progressBar1->Visible=false;
 		
 		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
@@ -2099,17 +2116,17 @@ private: System::Void analise_date(unsigned char buf[513]){
 
 		if((buf[511]==13)&&(buf[512]==10))		// есть хвост блока
 		{
-			//--- Тип аппаратуры		
-			switch (buf[501])
+			//--- Тип аппаратуры				
+			switch (buf[489])
 			{
 				case 59:
-				label22->Text = "АУКП.02";
+				vers = 2;
 				break;
 				case 77:
-				label22->Text = "АУКП.01";
+				vers = 1;				
 				break;
 				default:
-				label22->Text = "--";						
+				vers = 0;						
 			}
 							
 			//----- цикл разбора пяти строк в блоке 512 --------------------
@@ -2168,6 +2185,19 @@ private: void result_date(){
 			//--- выбор  на max --------
 			monthCalendar1->SelectionStart = System::DateTime( max_G+2000, max_M, max_D , 0, 0, 0, 0 );		// выбор работает 	
 					
+			//--- версия аппаратуры -----							
+			switch (vers)
+			{
+				case 2:
+				label22->Text = "АУКП.02";
+				break;
+				case 1:
+				label22->Text = "АУКП.01";				
+				break;
+				default:
+				label22->Text = "-";						
+			}			
+			
 			if(label21->Text!=""){		//-- если от кнопки Открыть Файл
 			//--- показываю кнопки ----------
 				button4->Enabled  = true;  // выбрать все 
@@ -2257,6 +2287,19 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 			if ( File::Exists( file )==true )	MessageBox::Show("Файл уже существует и будет перезаписан!" );			
 			else								MessageBox::Show("Данные будут сохранены в файл: " +  file);
 			
+			//--- версия аппаратуры -------
+			String^ vers_pdf;
+			switch (vers){
+				case 2:
+				vers_pdf = "АУКП.02";
+				break;
+				case 1:
+				vers_pdf = "АУКП.01";
+				break;
+				default:
+				vers_pdf = "АУКП";				
+			}
+
 			FileStream ^stream = gcnew FileStream(file, FileMode::Create); 				
 			
 			int n = dataGridView1->Columns->Count;
@@ -2294,7 +2337,7 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 			{              
 				document->Open(); 
 				document->NewPage();
-				document->Add(gcnew Phrase("Архив данных о работе проходческого комбайна с аппаратурой АУКП зав. №____ " + /*zav_N.ToString() + */ "\n" + "производства МЗША от " + (monthCalendar1->SelectionStart.Day).ToString("D2") + "." + monthCalendar1->SelectionStart.Month.ToString("D2") + "." + monthCalendar1->SelectionStart.Year.ToString()  + " г.", font));
+				document->Add(gcnew Phrase("Архив данных о работе проходческого комбайна с аппаратурой " + vers_pdf + " зав. №____ " + /*zav_N.ToString() + */ "\n" + "производства МЗША от " + (monthCalendar1->SelectionStart.Day).ToString("D2") + "." + monthCalendar1->SelectionStart.Month.ToString("D2") + "." + monthCalendar1->SelectionStart.Year.ToString()  + " г.", font));
 				document->Add(tabl);
 				document->Close();
 				stream->Close(); 
