@@ -147,6 +147,7 @@ private: System::Windows::Forms::Label^  label24;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::Label^  label25;
 private: System::Windows::Forms::Panel^  panel1;
+
 private: System::ComponentModel::IContainer^  components;
 
 
@@ -1424,6 +1425,14 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		// кнопка Uсети - напр€жение и блокировки по току и Uсети
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {	
 
+		//--- проверка на правильную дату
+		if (date_exist()==0) ;
+		else 
+		{
+			MessageBox::Show("ƒанных с выбранной датой не зафиксированно!\n"+"¬ыберите дату из списка.");
+			return;
+		}
+			 
 		//--- заморозить кнопки и др. ------------		
 		button1->Enabled=false;
 		button2->Enabled=false;
@@ -1732,7 +1741,15 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		// кнопка —рабатывание защит и блокировок
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		
-		//--- заморозить кнопки и др. ------------		
+		//--- проверка на правильную дату
+		if (date_exist()==0) ;
+		else 
+		{
+			MessageBox::Show("ƒанных с выбранной датой не зафиксированно!\n"+"¬ыберите дату из списка.");
+			return;
+		}
+			 
+		 //--- заморозить кнопки и др. ------------		
 		button1->Enabled=false;
 		button2->Enabled=false;
 		button3->Enabled=false;
@@ -2307,9 +2324,18 @@ private: unsigned int power(int n){
 			result *= 2;
 		}
 		return result;
-	}	
-//*****************************************************************************
-		//--- внутренний метод добавлени€ строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
+	}
+	
+	//--- проверка выбора даты календар€ на наличие в listBox1 ----
+private: unsigned int date_exist(){
+		if (listBox1->Items->Contains((monthCalendar1->SelectionStart.Day).ToString("D2")+"-"+(monthCalendar1->SelectionStart.Month).ToString("D2")+"-"+(monthCalendar1->SelectionStart.Year).ToString("D4")+" г")) 
+		{		
+			return 0;
+		}
+		else 	return 1;		
+	}
+
+	//--- внутренний метод добавлени€ строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
 private: void AddRow(unsigned char my_hour, unsigned char my_minute, unsigned char my_second, String^ error, unsigned char n, DataTable ^tabl)
 		{
 			switch (n)
