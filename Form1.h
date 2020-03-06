@@ -254,6 +254,8 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
+			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
 			this->tabControl1->Location = System::Drawing::Point(0, 3);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
@@ -328,7 +330,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->Controls->Add(this->shapeContainer1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
-			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage1->Padding = System::Windows::Forms::Padding(3, 3, 3, 3);
 			this->tabPage1->Size = System::Drawing::Size(892, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
@@ -350,7 +352,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label24->Font = (gcnew System::Drawing::Font(L"Technic", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(2)));
 			this->label24->Location = System::Drawing::Point(26, 4);
-			this->label24->Margin = System::Windows::Forms::Padding(3, 0, 1, 0);
+			this->label24->Margin = System::Windows::Forms::Padding(3, 0, 2, 0);
 			this->label24->Name = L"label24";
 			this->label24->Size = System::Drawing::Size(21, 14);
 			this->label24->TabIndex = 21;
@@ -361,7 +363,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label26->AutoSize = true;
 			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label26->Location = System::Drawing::Point(19, 3);
+			this->label26->Location = System::Drawing::Point(20, 3);
 			this->label26->Name = L"label26";
 			this->label26->Size = System::Drawing::Size(12, 16);
 			this->label26->TabIndex = 23;
@@ -383,15 +385,17 @@ private: System::ComponentModel::IContainer^  components;
 			this->label23->AutoSize = true;
 			this->label23->Location = System::Drawing::Point(520, 558);
 			this->label23->Name = L"label23";
-			this->label23->Size = System::Drawing::Size(41, 13);
+			this->label23->Size = System::Drawing::Size(43, 13);
 			this->label23->TabIndex = 20;
 			this->label23->Text = L"label23";
 			// 
 			// button8
 			// 
+			this->button8->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
 			this->button8->Location = System::Drawing::Point(660, 552);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(169, 23);
+			this->button8->Size = System::Drawing::Size(170, 23);
 			this->button8->TabIndex = 19;
 			this->button8->Text = L"Сохранить таблицу в PDF";
 			this->button8->UseVisualStyleBackColor = true;
@@ -402,7 +406,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label22->AutoSize = true;
 			this->label22->Location = System::Drawing::Point(3, 552);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(41, 13);
+			this->label22->Size = System::Drawing::Size(43, 13);
 			this->label22->TabIndex = 18;
 			this->label22->Text = L"label22";
 			// 
@@ -411,7 +415,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label21->AutoSize = true;
 			this->label21->Location = System::Drawing::Point(3, 567);
 			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(41, 13);
+			this->label21->Size = System::Drawing::Size(43, 13);
 			this->label21->TabIndex = 17;
 			this->label21->Text = L"label21";
 			// 
@@ -419,14 +423,15 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->listBox1->BackColor = System::Drawing::SystemColors::MenuBar;
 			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(5, 88);
+			this->listBox1->Location = System::Drawing::Point(4, 88);
 			this->listBox1->Name = L"listBox1";
 			this->listBox1->Size = System::Drawing::Size(96, 95);
 			this->listBox1->TabIndex = 16;
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(167, 522);
+			this->button7->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
+			this->button7->Location = System::Drawing::Point(166, 522);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(88, 23);
 			this->button7->TabIndex = 13;
@@ -437,17 +442,17 @@ private: System::ComponentModel::IContainer^  components;
 			// label20
 			// 
 			this->label20->AutoSize = true;
-			this->label20->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label20->Location = System::Drawing::Point(11, 527);
+			this->label20->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label20->Location = System::Drawing::Point(10, 527);
 			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(77, 16);
+			this->label20->Size = System::Drawing::Size(71, 19);
 			this->label20->TabIndex = 9;
 			this->label20->Text = L"Uсети (В)";
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(167, 447);
+			this->button6->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
+			this->button6->Location = System::Drawing::Point(166, 447);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(88, 23);
 			this->button6->TabIndex = 13;
@@ -457,7 +462,8 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(61, 447);
+			this->button5->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
+			this->button5->Location = System::Drawing::Point(62, 447);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(100, 23);
 			this->button5->TabIndex = 13;
@@ -479,7 +485,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(101, 529);
+			this->checkBox26->Location = System::Drawing::Point(100, 529);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -507,9 +513,10 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// button4
 			// 
+			this->button4->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
 			this->button4->Location = System::Drawing::Point(12, 447);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(43, 23);
+			this->button4->Size = System::Drawing::Size(44, 23);
 			this->button4->TabIndex = 12;
 			this->button4->Text = L"Все";
 			this->button4->UseVisualStyleBackColor = true;
@@ -518,11 +525,10 @@ private: System::ComponentModel::IContainer^  components;
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label17->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label17->Location = System::Drawing::Point(94, 492);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(134, 13);
+			this->label17->Size = System::Drawing::Size(143, 19);
 			this->label17->TabIndex = 7;
 			this->label17->Text = L"Отказ от блокировок";
 			// 
@@ -769,165 +775,154 @@ private: System::ComponentModel::IContainer^  components;
 			// label14
 			// 
 			this->label14->AutoSize = true;
-			this->label14->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label14->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label14->Location = System::Drawing::Point(10, 402);
 			this->label14->Name = L"label14";
-			this->label14->Size = System::Drawing::Size(81, 16);
+			this->label14->Size = System::Drawing::Size(70, 19);
 			this->label14->TabIndex = 9;
 			this->label14->Text = L"Маслобак";
 			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label9->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
 			this->label9->Location = System::Drawing::Point(10, 369);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(142, 16);
+			this->label9->Size = System::Drawing::Size(126, 19);
 			this->label9->TabIndex = 9;
 			this->label9->Text = L"Насос закачки М7";
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label8->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label8->Location = System::Drawing::Point(10, 345);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(148, 16);
+			this->label8->Size = System::Drawing::Size(130, 19);
 			this->label8->TabIndex = 9;
 			this->label8->Text = L"Перегружатель М6";
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label7->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label7->Location = System::Drawing::Point(10, 321);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(161, 16);
+			this->label7->Size = System::Drawing::Size(146, 19);
 			this->label7->TabIndex = 9;
 			this->label7->Text = L"Пылеподавление М5";
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label6->Location = System::Drawing::Point(10, 297);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(104, 16);
+			this->label6->Size = System::Drawing::Size(93, 19);
 			this->label6->TabIndex = 9;
 			this->label6->Text = L"Конвейер М4";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label5->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label5->Location = System::Drawing::Point(10, 273);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(104, 16);
+			this->label5->Size = System::Drawing::Size(93, 19);
 			this->label5->TabIndex = 9;
 			this->label5->Text = L"Конвейер М3";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
+			this->label4->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
 			this->label4->Location = System::Drawing::Point(10, 249);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(139, 16);
+			this->label4->Size = System::Drawing::Size(125, 19);
 			this->label4->TabIndex = 9;
 			this->label4->Text = L"Маслостанция М2";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->label3->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(10, 226);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(54, 16);
+			this->label3->Size = System::Drawing::Size(54, 19);
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"ИО М1";
 			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label13->Location = System::Drawing::Point(233, 305);
+			this->label13->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label13->Location = System::Drawing::Point(231, 302);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(31, 13);
+			this->label13->Size = System::Drawing::Size(33, 19);
 			this->label13->TabIndex = 7;
 			this->label13->Text = L"БКЗ";
 			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label12->Location = System::Drawing::Point(216, 210);
+			this->label12->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label12->Location = System::Drawing::Point(214, 207);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(32, 13);
+			this->label12->Size = System::Drawing::Size(35, 19);
 			this->label12->TabIndex = 7;
 			this->label12->Text = L"БКИ";
 			// 
 			// label16
 			// 
 			this->label16->AutoSize = true;
-			this->label16->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label16->Location = System::Drawing::Point(199, 398);
+			this->label16->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label16->Location = System::Drawing::Point(199, 396);
 			this->label16->Name = L"label16";
-			this->label16->Size = System::Drawing::Size(55, 13);
+			this->label16->Size = System::Drawing::Size(58, 19);
 			this->label16->TabIndex = 7;
 			this->label16->Text = L"уровень";
 			// 
 			// label15
 			// 
 			this->label15->AutoSize = true;
-			this->label15->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label15->Location = System::Drawing::Point(176, 397);
+			this->label15->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label15->Location = System::Drawing::Point(175, 396);
 			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(16, 13);
+			this->label15->Size = System::Drawing::Size(23, 19);
 			this->label15->TabIndex = 7;
 			this->label15->Text = L"t°";
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label11->Location = System::Drawing::Point(198, 210);
+			this->label11->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label11->Location = System::Drawing::Point(196, 208);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(16, 13);
+			this->label11->Size = System::Drawing::Size(23, 19);
 			this->label11->TabIndex = 7;
 			this->label11->Text = L"t°";
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label10->Location = System::Drawing::Point(170, 210);
+			this->label10->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label10->Location = System::Drawing::Point(169, 207);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(27, 13);
+			this->label10->Size = System::Drawing::Size(29, 19);
 			this->label10->TabIndex = 7;
 			this->label10->Text = L"ток";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(9, 191);
+			this->label2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)), 
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(13, 185);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(245, 15);
+			this->label2->Size = System::Drawing::Size(233, 19);
 			this->label2->TabIndex = 7;
 			this->label2->Text = L"Срабатывание защит и блокировок";
 			// 
@@ -936,12 +931,13 @@ private: System::ComponentModel::IContainer^  components;
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(4, 5);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(132, 13);
+			this->label1->Size = System::Drawing::Size(133, 13);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Откройте диск или файл";
 			// 
 			// button3
 			// 
+			this->button3->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
 			this->button3->Location = System::Drawing::Point(3, 66);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(98, 21);
@@ -952,6 +948,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// button2
 			// 
+			this->button2->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
 			this->button2->Location = System::Drawing::Point(3, 44);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(98, 21);
@@ -970,12 +967,13 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// monthCalendar1
 			// 
-			this->monthCalendar1->Location = System::Drawing::Point(103, 22);
+			this->monthCalendar1->Location = System::Drawing::Point(104, 22);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 2;
 			// 
 			// button1
 			// 
+			this->button1->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
 			this->button1->Location = System::Drawing::Point(3, 22);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(98, 21);
@@ -1034,7 +1032,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage2->Controls->Add(this->richTextBox1);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
-			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage2->Padding = System::Windows::Forms::Padding(3, 3, 3, 3);
 			this->tabPage2->Size = System::Drawing::Size(892, 584);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
@@ -1043,6 +1041,8 @@ private: System::ComponentModel::IContainer^  components;
 			// richTextBox1
 			// 
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
 			this->richTextBox1->Location = System::Drawing::Point(9, 0);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(466, 514);
