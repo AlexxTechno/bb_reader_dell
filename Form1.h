@@ -120,7 +120,7 @@ namespace BB_reader_all_dell {
 	private: Microsoft::VisualBasic::PowerPacks::ShapeContainer^  shapeContainer1;
 	private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape1;
 	private: System::Windows::Forms::Button^  button4;
-	private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape2;
+
 	private: System::Windows::Forms::Label^  label19;
 	private: System::Windows::Forms::CheckBox^  checkBox26;
 	private: System::Windows::Forms::Label^  label18;
@@ -235,7 +235,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->shapeContainer1 = (gcnew Microsoft::VisualBasic::PowerPacks::ShapeContainer());
 			this->lineShape3 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
-			this->lineShape2 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->lineShape1 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
@@ -330,18 +329,18 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->Controls->Add(this->shapeContainer1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
-			this->tabPage1->Padding = System::Windows::Forms::Padding(3, 3, 3, 3);
+			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage1->Size = System::Drawing::Size(892, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			// 
 			// panel1
 			// 
-			this->panel1->BackColor = System::Drawing::SystemColors::Control;
+			this->panel1->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->panel1->Controls->Add(this->label24);
 			this->panel1->Controls->Add(this->label26);
 			this->panel1->Controls->Add(this->label25);
-			this->panel1->Location = System::Drawing::Point(837, 552);
+			this->panel1->Location = System::Drawing::Point(837, 553);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(50, 23);
 			this->panel1->TabIndex = 24;
@@ -383,7 +382,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(520, 558);
+			this->label23->Location = System::Drawing::Point(522, 559);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(43, 13);
 			this->label23->TabIndex = 20;
@@ -393,7 +392,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->button8->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button8->Location = System::Drawing::Point(660, 552);
+			this->button8->Location = System::Drawing::Point(660, 553);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(170, 23);
 			this->button8->TabIndex = 19;
@@ -404,7 +403,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(3, 552);
+			this->label22->Location = System::Drawing::Point(219, 5);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(43, 13);
 			this->label22->TabIndex = 18;
@@ -413,7 +412,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label21
 			// 
 			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(3, 567);
+			this->label21->Location = System::Drawing::Point(4, 559);
 			this->label21->Name = L"label21";
 			this->label21->Size = System::Drawing::Size(43, 13);
 			this->label21->TabIndex = 17;
@@ -443,7 +442,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label20->Location = System::Drawing::Point(10, 527);
+			this->label20->Location = System::Drawing::Point(10, 524);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(71, 19);
 			this->label20->TabIndex = 9;
@@ -776,7 +775,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label14->AutoSize = true;
 			this->label14->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label14->Location = System::Drawing::Point(10, 402);
+			this->label14->Location = System::Drawing::Point(10, 408);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(70, 19);
 			this->label14->TabIndex = 9;
@@ -787,7 +786,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label9->AutoSize = true;
 			this->label9->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label9->Location = System::Drawing::Point(10, 369);
+			this->label9->Location = System::Drawing::Point(10, 367);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(126, 19);
 			this->label9->TabIndex = 9;
@@ -797,7 +796,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label8->Location = System::Drawing::Point(10, 345);
+			this->label8->Location = System::Drawing::Point(10, 343);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(130, 19);
 			this->label8->TabIndex = 9;
@@ -807,7 +806,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label7->Location = System::Drawing::Point(10, 321);
+			this->label7->Location = System::Drawing::Point(10, 319);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(146, 19);
 			this->label7->TabIndex = 9;
@@ -817,7 +816,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label6->AutoSize = true;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label6->Location = System::Drawing::Point(10, 297);
+			this->label6->Location = System::Drawing::Point(10, 295);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(93, 19);
 			this->label6->TabIndex = 9;
@@ -827,7 +826,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label5->Location = System::Drawing::Point(10, 273);
+			this->label5->Location = System::Drawing::Point(10, 271);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(93, 19);
 			this->label5->TabIndex = 9;
@@ -837,7 +836,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label4->Location = System::Drawing::Point(10, 249);
+			this->label4->Location = System::Drawing::Point(10, 247);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(125, 19);
 			this->label4->TabIndex = 9;
@@ -848,7 +847,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(10, 226);
+			this->label3->Location = System::Drawing::Point(10, 224);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(54, 19);
 			this->label3->TabIndex = 8;
@@ -997,8 +996,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->shapeContainer1->Location = System::Drawing::Point(3, 3);
 			this->shapeContainer1->Margin = System::Windows::Forms::Padding(0);
 			this->shapeContainer1->Name = L"shapeContainer1";
-			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(3) {this->lineShape3, 
-				this->lineShape2, this->lineShape1});
+			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(2) {this->lineShape3, 
+				this->lineShape1});
 			this->shapeContainer1->Size = System::Drawing::Size(886, 578);
 			this->shapeContainer1->TabIndex = 11;
 			this->shapeContainer1->TabStop = false;
@@ -1011,16 +1010,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->lineShape3->Y1 = 478;
 			this->lineShape3->Y2 = 478;
 			// 
-			// lineShape2
-			// 
-			this->lineShape2->Name = L"lineShape2";
-			this->lineShape2->X1 = 10;
-			this->lineShape2->X2 = 250;
-			this->lineShape2->Y1 = 432;
-			this->lineShape2->Y2 = 432;
-			// 
 			// lineShape1
 			// 
+			this->lineShape1->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->lineShape1->BorderStyle = System::Drawing::Drawing2D::DashStyle::Dot;
 			this->lineShape1->Name = L"lineShape1";
 			this->lineShape1->X1 = 9;
 			this->lineShape1->X2 = 250;
@@ -1032,7 +1025,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage2->Controls->Add(this->richTextBox1);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
-			this->tabPage2->Padding = System::Windows::Forms::Padding(3, 3, 3, 3);
+			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage2->Size = System::Drawing::Size(892, 584);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
