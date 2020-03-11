@@ -2233,14 +2233,22 @@ private: System::Void analise_date(unsigned char buf[513]){
 					if((buf[1+(100*s)]<32)&&(buf[1+(100*s)]>0)&&(buf[2+(100*s)]<13)&&(buf[2+(100*s)]>0)&&(buf[3+(100*s)]<100)&&(buf[3+(100*s)]>0))
 					{
 						//-- определяеи минимум
-						if(buf[1+(100*s)]<min_D) min_D = buf[1+(100*s)];			
-						if(buf[2+(100*s)]<min_M) min_M = buf[2+(100*s)];			
-						if(buf[3+(100*s)]<min_G) min_G = buf[3+(100*s)];
+						//if(buf[1+(100*s)]<min_D) min_D = buf[1+(100*s)];			
+						//if(buf[2+(100*s)]<min_M) min_M = buf[2+(100*s)];			
+						//if(buf[3+(100*s)]<min_G) min_G = buf[3+(100*s)];
+						
+						if (buf[3+(100*s)]<min_G) min_G = buf[3+(100*s)];
+						if ((buf[3+(100*s)]==min_G)&&(buf[2+(100*s)]<min_M)) min_M = buf[2+(100*s)];
+						if ((buf[3+(100*s)]==min_G)&&(buf[2+(100*s)]==min_M)&&(buf[1+(100*s)]<min_D)) min_D = buf[1+(100*s)];
 					
 						//-- определяеи максимум
-						if(buf[1+(100*s)]>max_D) max_D = buf[1+(100*s)];
-						if(buf[2+(100*s)]>max_M) max_M = buf[2+(100*s)];
-						if(buf[3+(100*s)]>max_G) max_G = buf[3+(100*s)];
+						//if(buf[1+(100*s)]>max_D) max_D = buf[1+(100*s)];
+						//if(buf[2+(100*s)]>max_M) max_M = buf[2+(100*s)];
+						//if(buf[3+(100*s)]>max_G) max_G = buf[3+(100*s)];
+						
+						if (buf[3+(100*s)]>max_G) max_G = buf[3+(100*s)];
+						if ((buf[3+(100*s)]==max_G)&&(buf[2+(100*s)]>max_M)) max_M = buf[2+(100*s)];
+						if ((buf[3+(100*s)]==max_G)&&(buf[2+(100*s)]==max_M)&&(buf[1+(100*s)]>max_D)) max_D = buf[1+(100*s)];
 
 						norma = 1;
 										
