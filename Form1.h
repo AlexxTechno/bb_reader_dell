@@ -258,7 +258,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabControl1->Location = System::Drawing::Point(0, 3);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(900, 610);
+			this->tabControl1->Size = System::Drawing::Size(985, 610);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -330,7 +330,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(892, 584);
+			this->tabPage1->Size = System::Drawing::Size(977, 584);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			// 
@@ -340,7 +340,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->panel1->Controls->Add(this->label24);
 			this->panel1->Controls->Add(this->label26);
 			this->panel1->Controls->Add(this->label25);
-			this->panel1->Location = System::Drawing::Point(837, 553);
+			this->panel1->Location = System::Drawing::Point(920, 553);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(50, 23);
 			this->panel1->TabIndex = 24;
@@ -348,12 +348,12 @@ private: System::ComponentModel::IContainer^  components;
 			// label24
 			// 
 			this->label24->AutoSize = true;
-			this->label24->Font = (gcnew System::Drawing::Font(L"Technic", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(2)));
+			this->label24->Font = (gcnew System::Drawing::Font(L"Roboto", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
 			this->label24->Location = System::Drawing::Point(26, 4);
 			this->label24->Margin = System::Windows::Forms::Padding(3, 0, 2, 0);
 			this->label24->Name = L"label24";
-			this->label24->Size = System::Drawing::Size(21, 14);
+			this->label24->Size = System::Drawing::Size(21, 15);
 			this->label24->TabIndex = 21;
 			this->label24->Text = L"00";
 			// 
@@ -371,18 +371,18 @@ private: System::ComponentModel::IContainer^  components;
 			// label25
 			// 
 			this->label25->AutoSize = true;
-			this->label25->Font = (gcnew System::Drawing::Font(L"Technic", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(2)));
+			this->label25->Font = (gcnew System::Drawing::Font(L"Roboto", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
 			this->label25->Location = System::Drawing::Point(2, 4);
 			this->label25->Name = L"label25";
-			this->label25->Size = System::Drawing::Size(21, 14);
+			this->label25->Size = System::Drawing::Size(21, 15);
 			this->label25->TabIndex = 22;
 			this->label25->Text = L"00";
 			// 
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(522, 559);
+			this->label23->Location = System::Drawing::Point(605, 559);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(43, 13);
 			this->label23->TabIndex = 20;
@@ -392,7 +392,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->button8->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button8->Location = System::Drawing::Point(660, 553);
+			this->button8->Location = System::Drawing::Point(743, 553);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(170, 23);
 			this->button8->TabIndex = 19;
@@ -403,7 +403,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(219, 5);
+			this->label22->Location = System::Drawing::Point(216, 5);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(43, 13);
 			this->label22->TabIndex = 18;
@@ -960,13 +960,13 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->progressBar1->Location = System::Drawing::Point(270, 4);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(616, 20);
+			this->progressBar1->Size = System::Drawing::Size(707, 20);
 			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 3;
 			// 
 			// monthCalendar1
 			// 
-			this->monthCalendar1->Location = System::Drawing::Point(104, 22);
+			this->monthCalendar1->Location = System::Drawing::Point(103, 22);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 2;
 			// 
@@ -983,12 +983,14 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCells;
+			this->dataGridView1->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::AllCells;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->GridColor = System::Drawing::SystemColors::Control;
-			this->dataGridView1->Location = System::Drawing::Point(270, 4);
+			this->dataGridView1->Location = System::Drawing::Point(269, 4);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(616, 540);
+			this->dataGridView1->Size = System::Drawing::Size(710, 540);
 			this->dataGridView1->TabIndex = 0;
 			// 
 			// shapeContainer1
@@ -998,7 +1000,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->shapeContainer1->Name = L"shapeContainer1";
 			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(2) {this->lineShape3, 
 				this->lineShape1});
-			this->shapeContainer1->Size = System::Drawing::Size(886, 578);
+			this->shapeContainer1->Size = System::Drawing::Size(971, 578);
 			this->shapeContainer1->TabIndex = 11;
 			this->shapeContainer1->TabStop = false;
 			// 
@@ -1073,7 +1075,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(904, 612);
+			this->ClientSize = System::Drawing::Size(984, 612);
 			this->Controls->Add(this->tabControl1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
