@@ -1424,7 +1424,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		if (date_exist()==0) ;
 		else 
 		{
-			MessageBox::Show("Данных с выбранной датой не зафиксированно!\n"+"Выберите дату из списка.");
+			MessageBox::Show("Данных с выбранной датой не зафиксировано!\n"+"Выберите дату из списка.");
 			return;
 		}
 			 
@@ -1699,6 +1699,10 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_U;		// заполнить таблицу
+
+		//-- сразу упорядочить по первому столбцу (время) по возрастанию
+		dataGridView1->Sort( dataGridView1->Columns[0], ListSortDirection::Ascending);
+
 		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
 		
 		
@@ -2088,6 +2092,9 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		
 		dataGridView1->Visible=true;			// показать таблицу
 		dataGridView1->DataSource = tabl_z;		// заполнить таблицу
+		//-- сразу упорядочить по первому столбцу (время) по возрастанию
+		dataGridView1->Sort( dataGridView1->Columns[0], ListSortDirection::Ascending);
+
 		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
 		
 		//-- cтоп секундомер -------
