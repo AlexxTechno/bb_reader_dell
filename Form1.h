@@ -147,6 +147,7 @@ private: System::Windows::Forms::Label^  label24;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::Label^  label25;
 private: System::Windows::Forms::Panel^  panel1;
+private: System::Diagnostics::Process^  process1;
 
 private: System::ComponentModel::IContainer^  components;
 
@@ -242,6 +243,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->saveFileDialog2 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->process1 = (gcnew System::Diagnostics::Process());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->panel1->SuspendLayout();
@@ -1028,7 +1030,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(892, 584);
+			this->tabPage2->Size = System::Drawing::Size(977, 584);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -1070,6 +1072,16 @@ private: System::ComponentModel::IContainer^  components;
 			this->saveFileDialog2->DefaultExt = L"dat";
 			this->saveFileDialog2->Filter = L"(*.dat)|*.dat";
 			this->saveFileDialog2->InitialDirectory = L"MyComputer";
+			// 
+			// process1
+			// 
+			this->process1->StartInfo->Domain = L"";
+			this->process1->StartInfo->LoadUserProfile = false;
+			this->process1->StartInfo->Password = nullptr;
+			this->process1->StartInfo->StandardErrorEncoding = nullptr;
+			this->process1->StartInfo->StandardOutputEncoding = nullptr;
+			this->process1->StartInfo->UserName = L"";
+			this->process1->SynchronizingObject = this;
 			// 
 			// Form1
 			// 
