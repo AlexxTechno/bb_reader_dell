@@ -117,31 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="lineShape2.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>12, 375, 241, 0</value>
+  </metadata>
+  <metadata name="lineShape2.Size" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>241, 0</value>
+  </metadata>
+  <metadata name="lineShape2.Location" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>12, 375</value>
+  </metadata>
   <metadata name="lineShape3.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>12, 478, 238, 0</value>
+    <value>12, 485, 238, 0</value>
   </metadata>
   <metadata name="lineShape3.Size" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>238, 0</value>
   </metadata>
   <metadata name="lineShape3.Location" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>12, 478</value>
+    <value>12, 485</value>
   </metadata>
   <metadata name="lineShape1.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>9, 390, 241, 0</value>
+    <value>12, 412, 241, 0</value>
   </metadata>
   <metadata name="lineShape1.Size" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>241, 0</value>
   </metadata>
   <metadata name="lineShape1.Location" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>9, 390</value>
+    <value>12, 412</value>
   </metadata>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>BB_Reader версия v3.0
+    <value>BB_Reader версия v3.1
 *****************************************************************************************
 Программа предназначена для расшифровки данных, записанных 
 на SD карте блока дисплея аппаратуры управления проходческими комбайнами
 АУКП.01 и АУКП.02.
-
 *****************************************************************************************
 --------------- Вкладка "Защиты и блокировки" ----
      --- Кнопка "Открыть Диск"--
@@ -165,7 +173,11 @@
 - После нажатия на кнопку "Показать" будет сформирована таблица с сохраненными данными.
 - Дли просмотра значений напряженения питания, а также неактивных блокировок по току и напряжению питания в нижней части окна выбрать необходимое.
 - После нажатия на кнопку "Показать" будет сформирована таблица с сохраненными данными.
-- Для сохранения таблицы нажать на кнопку "Сохранить таблицу в PDF", выбрать имя и местонахождение для будущего файла PDF формата.</value>
+- Для сохранения таблицы нажать на кнопку "Сохранить таблицу в PDF", выбрать имя и местонахождение для будущего файла PDF формата.
+
+     --- Добавления --
+  В версии 3.1 по сравнению с версией 3.0 добавлено:
+- Возможность отображения текущих токовых значений и напряжение питания в таблице с защитами и блокировками.</value>
   </data>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

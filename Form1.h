@@ -1786,7 +1786,8 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		if((maska&power(6))||(maska&power(13))||(maska&power(19))||(maska&power(22)))	tabl_z->Columns->Add("М6");  // М6
 		if((maska&power(7))||(maska&power(14))||(maska&power(20)))						tabl_z->Columns->Add("М7");  // М7	
 		if((maska&power(23))||(maska&power(24)))										tabl_z->Columns->Add("Маслобак");  // Маслобак
-		*/
+		*/		
+		
 		// шапка всегда для всех позиций
 		tabl_z->Columns->Add("Время");  	// время 
 		tabl_z->Columns->Add("М1");  		// М1
@@ -1806,7 +1807,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		//label25->Text = "00";		// минуты	
 		DWORD start_sec = st.wSecond;
 		DWORD start_min = st.wMinute;						
-			//------------------------------------------------	
+		//------------------------------------------------	
 		
 		//*****************************************************************************
 		//--- Работа с файлом --------
