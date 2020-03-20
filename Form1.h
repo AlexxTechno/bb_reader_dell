@@ -2826,7 +2826,7 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 			{              
 				document->Open(); 
 				document->NewPage();
-				document->Add(gcnew Phrase("Архив данных о работе проходческого комбайна с аппаратурой " + vers_pdf + " зав. №____ " + /*zav_N.ToString() + */ "\n" + "производства МЗША от " + (monthCalendar1->SelectionStart.Day).ToString("D2") + "." + monthCalendar1->SelectionStart.Month.ToString("D2") + "." + monthCalendar1->SelectionStart.Year.ToString()  + " г.", font));
+				document->Add(gcnew Phrase("Архив данных о работе проходческого комбайна с аппаратурой " + vers_pdf + " зав. №____ " + /*zav_N.ToString() + */ "\n" + "производства МЗША от " + (monthCalendar1->SelectionStart.Day).ToString("D2") + "." + monthCalendar1->SelectionStart.Month.ToString("D2") + "." + monthCalendar1->SelectionStart.Year.ToString()  + " г. Номинальное напряжение сети " + label33->Text +".", font));
 				document->Add(tabl);
 				document->Close();
 				stream->Close(); 
