@@ -10,7 +10,7 @@ namespace BB_reader_all_dell {
 	using namespace System::Windows;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
-//	using namespace System::Drawing;
+	using namespace System::Drawing;
 //	using namespace System::Drawing::Printing;
 	using namespace System::IO;
 //	using namespace System::Text;
@@ -50,7 +50,7 @@ namespace BB_reader_all_dell {
 		}
 		
 	//--- Глобальные переменные	-----------------------------------	
-	private: unsigned int maska;	// маска защит и блокировок по приводам	
+	private:  unsigned int maska;	// маска защит и блокировок по приводам	
 	//-- Переменные для определения дат записи
 	private: static unsigned char norma = 0;		// данные в блоке есть
 	//--- диапазон дат в данных архива ------------------
@@ -72,7 +72,7 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::TabPage^  tabPage2;
 	private: System::Windows::Forms::MonthCalendar^  monthCalendar1;
 	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::DataGridView^  dataGridView1;
+
 	private: System::Windows::Forms::ProgressBar^  progressBar1;
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::Button^  button2;
@@ -147,6 +147,23 @@ private: System::Windows::Forms::Label^  label24;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::Label^  label25;
 private: System::Windows::Forms::Panel^  panel1;
+private: System::Windows::Forms::DataGridView^  dataGridView1;
+private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape2;
+private: System::Windows::Forms::Label^  label29;
+private: System::Windows::Forms::Label^  label28;
+private: System::Windows::Forms::Label^  label27;
+private: System::Windows::Forms::CheckBox^  checkBox28;
+private: System::Windows::Forms::CheckBox^  checkBox27;
+private: System::Windows::Forms::Label^  label30;
+private: System::Windows::Forms::Label^  label31;
+private: System::Windows::Forms::Label^  label33;
+private: System::Windows::Forms::Label^  label32;
+private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape4;
+private: System::Windows::Forms::TabPage^  tabPage3;
+private: System::Windows::Forms::PictureBox^  pictureBox1;
+private: System::Windows::Forms::Button^  button9;
+
+
 
 
 private: System::ComponentModel::IContainer^  components;
@@ -166,9 +183,19 @@ private: System::ComponentModel::IContainer^  components;
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->label33 = (gcnew System::Windows::Forms::Label());
+			this->label32 = (gcnew System::Windows::Forms::Label());
+			this->label31 = (gcnew System::Windows::Forms::Label());
+			this->label30 = (gcnew System::Windows::Forms::Label());
+			this->checkBox28 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox27 = (gcnew System::Windows::Forms::CheckBox());
+			this->label29 = (gcnew System::Windows::Forms::Label());
+			this->label28 = (gcnew System::Windows::Forms::Label());
+			this->label27 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->label26 = (gcnew System::Windows::Forms::Label());
@@ -235,8 +262,13 @@ private: System::ComponentModel::IContainer^  components;
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->shapeContainer1 = (gcnew Microsoft::VisualBasic::PowerPacks::ShapeContainer());
+			this->lineShape4 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
+			this->lineShape2 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->lineShape3 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
 			this->lineShape1 = (gcnew Microsoft::VisualBasic::PowerPacks::LineShape());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->button9 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
@@ -247,12 +279,15 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
+			this->tabPage3->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->tabPage2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
+			this->tabControl1->Controls->Add(this->tabPage3);
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
@@ -265,6 +300,15 @@ private: System::ComponentModel::IContainer^  components;
 			// tabPage1
 			// 
 			this->tabPage1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->tabPage1->Controls->Add(this->label33);
+			this->tabPage1->Controls->Add(this->label32);
+			this->tabPage1->Controls->Add(this->label31);
+			this->tabPage1->Controls->Add(this->label30);
+			this->tabPage1->Controls->Add(this->checkBox28);
+			this->tabPage1->Controls->Add(this->checkBox27);
+			this->tabPage1->Controls->Add(this->label29);
+			this->tabPage1->Controls->Add(this->label28);
+			this->tabPage1->Controls->Add(this->label27);
 			this->tabPage1->Controls->Add(this->panel1);
 			this->tabPage1->Controls->Add(this->label23);
 			this->tabPage1->Controls->Add(this->button8);
@@ -335,13 +379,109 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			// 
+			// label33
+			// 
+			this->label33->AutoSize = true;
+			this->label33->Location = System::Drawing::Point(75, 551);
+			this->label33->Name = L"label33";
+			this->label33->Size = System::Drawing::Size(41, 13);
+			this->label33->TabIndex = 28;
+			this->label33->Text = L"1140 В";
+			// 
+			// label32
+			// 
+			this->label32->AutoSize = true;
+			this->label32->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label32->Location = System::Drawing::Point(5, 550);
+			this->label32->Name = L"label32";
+			this->label32->Size = System::Drawing::Size(67, 14);
+			this->label32->TabIndex = 27;
+			this->label32->Text = L"Uсети ном.:";
+			// 
+			// label31
+			// 
+			this->label31->AutoSize = true;
+			this->label31->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label31->Location = System::Drawing::Point(161, 549);
+			this->label31->Name = L"label31";
+			this->label31->Size = System::Drawing::Size(47, 14);
+			this->label31->TabIndex = 27;
+			this->label31->Text = L"Версия:";
+			// 
+			// label30
+			// 
+			this->label30->AutoSize = true;
+			this->label30->Font = (gcnew System::Drawing::Font(L"Roboto", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label30->Location = System::Drawing::Point(5, 566);
+			this->label30->Name = L"label30";
+			this->label30->Size = System::Drawing::Size(37, 14);
+			this->label30->TabIndex = 26;
+			this->label30->Text = L"Файл:";
+			// 
+			// checkBox28
+			// 
+			this->checkBox28->AutoSize = true;
+			this->checkBox28->Location = System::Drawing::Point(218, 393);
+			this->checkBox28->Name = L"checkBox28";
+			this->checkBox28->Size = System::Drawing::Size(15, 14);
+			this->checkBox28->TabIndex = 25;
+			this->checkBox28->UseVisualStyleBackColor = true;
+			// 
+			// checkBox27
+			// 
+			this->checkBox27->AutoSize = true;
+			this->checkBox27->Location = System::Drawing::Point(177, 393);
+			this->checkBox27->Name = L"checkBox27";
+			this->checkBox27->Size = System::Drawing::Size(15, 14);
+			this->checkBox27->TabIndex = 25;
+			this->checkBox27->UseVisualStyleBackColor = true;
+			this->checkBox27->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
+			// 
+			// label29
+			// 
+			this->label29->AutoSize = true;
+			this->label29->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(204)));
+			this->label29->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+			this->label29->Location = System::Drawing::Point(210, 379);
+			this->label29->Name = L"label29";
+			this->label29->Size = System::Drawing::Size(36, 13);
+			this->label29->TabIndex = 7;
+			this->label29->Text = L"Uпит";
+			// 
+			// label28
+			// 
+			this->label28->AutoSize = true;
+			this->label28->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
+			this->label28->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+			this->label28->Location = System::Drawing::Point(170, 375);
+			this->label28->Name = L"label28";
+			this->label28->Size = System::Drawing::Size(29, 19);
+			this->label28->TabIndex = 7;
+			this->label28->Text = L"ток";
+			// 
+			// label27
+			// 
+			this->label27->AutoSize = true;
+			this->label27->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label27->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+			this->label27->Location = System::Drawing::Point(11, 389);
+			this->label27->Name = L"label27";
+			this->label27->Size = System::Drawing::Size(134, 19);
+			this->label27->TabIndex = 9;
+			this->label27->Text = L"Числовые значения";
+			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->panel1->Controls->Add(this->label24);
 			this->panel1->Controls->Add(this->label26);
 			this->panel1->Controls->Add(this->label25);
-			this->panel1->Location = System::Drawing::Point(920, 553);
+			this->panel1->Location = System::Drawing::Point(920, 549);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(50, 23);
 			this->panel1->TabIndex = 24;
@@ -383,7 +523,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(605, 559);
+			this->label23->Location = System::Drawing::Point(605, 552);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(43, 13);
 			this->label23->TabIndex = 20;
@@ -393,7 +533,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->button8->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->button8->Location = System::Drawing::Point(743, 553);
+			this->button8->Location = System::Drawing::Point(743, 549);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(170, 23);
 			this->button8->TabIndex = 19;
@@ -404,7 +544,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(216, 5);
+			this->label22->Location = System::Drawing::Point(207, 550);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(43, 13);
 			this->label22->TabIndex = 18;
@@ -413,7 +553,7 @@ private: System::ComponentModel::IContainer^  components;
 			// label21
 			// 
 			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(4, 559);
+			this->label21->Location = System::Drawing::Point(40, 567);
 			this->label21->Name = L"label21";
 			this->label21->Size = System::Drawing::Size(43, 13);
 			this->label21->TabIndex = 17;
@@ -431,7 +571,7 @@ private: System::ComponentModel::IContainer^  components;
 			// button7
 			// 
 			this->button7->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
-			this->button7->Location = System::Drawing::Point(166, 522);
+			this->button7->Location = System::Drawing::Point(166, 514);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(88, 23);
 			this->button7->TabIndex = 13;
@@ -443,7 +583,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label20->Location = System::Drawing::Point(10, 524);
+			this->label20->Location = System::Drawing::Point(10, 516);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(71, 19);
 			this->label20->TabIndex = 9;
@@ -452,7 +592,7 @@ private: System::ComponentModel::IContainer^  components;
 			// button6
 			// 
 			this->button6->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
-			this->button6->Location = System::Drawing::Point(166, 447);
+			this->button6->Location = System::Drawing::Point(166, 454);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(88, 23);
 			this->button6->TabIndex = 13;
@@ -463,7 +603,7 @@ private: System::ComponentModel::IContainer^  components;
 			// button5
 			// 
 			this->button5->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
-			this->button5->Location = System::Drawing::Point(62, 447);
+			this->button5->Location = System::Drawing::Point(62, 454);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(100, 23);
 			this->button5->TabIndex = 13;
@@ -476,7 +616,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label19->Location = System::Drawing::Point(93, 511);
+			this->label19->Location = System::Drawing::Point(93, 506);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(36, 13);
 			this->label19->TabIndex = 7;
@@ -485,7 +625,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox26
 			// 
 			this->checkBox26->AutoSize = true;
-			this->checkBox26->Location = System::Drawing::Point(100, 529);
+			this->checkBox26->Location = System::Drawing::Point(100, 521);
 			this->checkBox26->Name = L"checkBox26";
 			this->checkBox26->Size = System::Drawing::Size(15, 14);
 			this->checkBox26->TabIndex = 10;
@@ -496,7 +636,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->label18->Location = System::Drawing::Point(130, 511);
+			this->label18->Location = System::Drawing::Point(130, 506);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(27, 13);
 			this->label18->TabIndex = 7;
@@ -505,7 +645,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox25
 			// 
 			this->checkBox25->AutoSize = true;
-			this->checkBox25->Location = System::Drawing::Point(138, 529);
+			this->checkBox25->Location = System::Drawing::Point(138, 521);
 			this->checkBox25->Name = L"checkBox25";
 			this->checkBox25->Size = System::Drawing::Size(15, 14);
 			this->checkBox25->TabIndex = 10;
@@ -514,7 +654,7 @@ private: System::ComponentModel::IContainer^  components;
 			// button4
 			// 
 			this->button4->Font = (gcnew System::Drawing::Font(L"Calibri", 9.75F, System::Drawing::FontStyle::Bold));
-			this->button4->Location = System::Drawing::Point(12, 447);
+			this->button4->Location = System::Drawing::Point(12, 454);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(44, 23);
 			this->button4->TabIndex = 12;
@@ -526,7 +666,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label17->AutoSize = true;
 			this->label17->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label17->Location = System::Drawing::Point(94, 492);
+			this->label17->Location = System::Drawing::Point(94, 487);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(143, 19);
 			this->label17->TabIndex = 7;
@@ -535,7 +675,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox24
 			// 
 			this->checkBox24->AutoSize = true;
-			this->checkBox24->Location = System::Drawing::Point(220, 414);
+			this->checkBox24->Location = System::Drawing::Point(220, 435);
 			this->checkBox24->Name = L"checkBox24";
 			this->checkBox24->Size = System::Drawing::Size(15, 14);
 			this->checkBox24->TabIndex = 10;
@@ -545,7 +685,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox23
 			// 
 			this->checkBox23->AutoSize = true;
-			this->checkBox23->Location = System::Drawing::Point(178, 414);
+			this->checkBox23->Location = System::Drawing::Point(178, 435);
 			this->checkBox23->Name = L"checkBox23";
 			this->checkBox23->Size = System::Drawing::Size(15, 14);
 			this->checkBox23->TabIndex = 10;
@@ -555,7 +695,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox22
 			// 
 			this->checkBox22->AutoSize = true;
-			this->checkBox22->Location = System::Drawing::Point(240, 347);
+			this->checkBox22->Location = System::Drawing::Point(240, 331);
 			this->checkBox22->Name = L"checkBox22";
 			this->checkBox22->Size = System::Drawing::Size(15, 14);
 			this->checkBox22->TabIndex = 10;
@@ -565,7 +705,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox21
 			// 
 			this->checkBox21->AutoSize = true;
-			this->checkBox21->Location = System::Drawing::Point(240, 323);
+			this->checkBox21->Location = System::Drawing::Point(240, 310);
 			this->checkBox21->Name = L"checkBox21";
 			this->checkBox21->Size = System::Drawing::Size(15, 14);
 			this->checkBox21->TabIndex = 10;
@@ -575,7 +715,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox20
 			// 
 			this->checkBox20->AutoSize = true;
-			this->checkBox20->Location = System::Drawing::Point(219, 371);
+			this->checkBox20->Location = System::Drawing::Point(219, 352);
 			this->checkBox20->Name = L"checkBox20";
 			this->checkBox20->Size = System::Drawing::Size(15, 14);
 			this->checkBox20->TabIndex = 10;
@@ -585,7 +725,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox19
 			// 
 			this->checkBox19->AutoSize = true;
-			this->checkBox19->Location = System::Drawing::Point(219, 347);
+			this->checkBox19->Location = System::Drawing::Point(219, 331);
 			this->checkBox19->Name = L"checkBox19";
 			this->checkBox19->Size = System::Drawing::Size(15, 14);
 			this->checkBox19->TabIndex = 10;
@@ -595,7 +735,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox18
 			// 
 			this->checkBox18->AutoSize = true;
-			this->checkBox18->Location = System::Drawing::Point(219, 323);
+			this->checkBox18->Location = System::Drawing::Point(219, 310);
 			this->checkBox18->Name = L"checkBox18";
 			this->checkBox18->Size = System::Drawing::Size(15, 14);
 			this->checkBox18->TabIndex = 10;
@@ -605,7 +745,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox17
 			// 
 			this->checkBox17->AutoSize = true;
-			this->checkBox17->Location = System::Drawing::Point(219, 287);
+			this->checkBox17->Location = System::Drawing::Point(219, 280);
 			this->checkBox17->Name = L"checkBox17";
 			this->checkBox17->Size = System::Drawing::Size(15, 14);
 			this->checkBox17->TabIndex = 10;
@@ -615,7 +755,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox16
 			// 
 			this->checkBox16->AutoSize = true;
-			this->checkBox16->Location = System::Drawing::Point(219, 251);
+			this->checkBox16->Location = System::Drawing::Point(219, 249);
 			this->checkBox16->Name = L"checkBox16";
 			this->checkBox16->Size = System::Drawing::Size(15, 14);
 			this->checkBox16->TabIndex = 10;
@@ -635,7 +775,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox14
 			// 
 			this->checkBox14->AutoSize = true;
-			this->checkBox14->Location = System::Drawing::Point(198, 371);
+			this->checkBox14->Location = System::Drawing::Point(198, 352);
 			this->checkBox14->Name = L"checkBox14";
 			this->checkBox14->Size = System::Drawing::Size(15, 14);
 			this->checkBox14->TabIndex = 10;
@@ -645,7 +785,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox13
 			// 
 			this->checkBox13->AutoSize = true;
-			this->checkBox13->Location = System::Drawing::Point(198, 347);
+			this->checkBox13->Location = System::Drawing::Point(198, 331);
 			this->checkBox13->Name = L"checkBox13";
 			this->checkBox13->Size = System::Drawing::Size(15, 14);
 			this->checkBox13->TabIndex = 10;
@@ -655,7 +795,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox12
 			// 
 			this->checkBox12->AutoSize = true;
-			this->checkBox12->Location = System::Drawing::Point(198, 323);
+			this->checkBox12->Location = System::Drawing::Point(198, 310);
 			this->checkBox12->Name = L"checkBox12";
 			this->checkBox12->Size = System::Drawing::Size(15, 14);
 			this->checkBox12->TabIndex = 10;
@@ -665,7 +805,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox11
 			// 
 			this->checkBox11->AutoSize = true;
-			this->checkBox11->Location = System::Drawing::Point(198, 299);
+			this->checkBox11->Location = System::Drawing::Point(198, 290);
 			this->checkBox11->Name = L"checkBox11";
 			this->checkBox11->Size = System::Drawing::Size(15, 14);
 			this->checkBox11->TabIndex = 10;
@@ -675,7 +815,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox10
 			// 
 			this->checkBox10->AutoSize = true;
-			this->checkBox10->Location = System::Drawing::Point(198, 275);
+			this->checkBox10->Location = System::Drawing::Point(198, 270);
 			this->checkBox10->Name = L"checkBox10";
 			this->checkBox10->Size = System::Drawing::Size(15, 14);
 			this->checkBox10->TabIndex = 10;
@@ -685,7 +825,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox9
 			// 
 			this->checkBox9->AutoSize = true;
-			this->checkBox9->Location = System::Drawing::Point(198, 251);
+			this->checkBox9->Location = System::Drawing::Point(198, 249);
 			this->checkBox9->Name = L"checkBox9";
 			this->checkBox9->Size = System::Drawing::Size(15, 14);
 			this->checkBox9->TabIndex = 10;
@@ -705,7 +845,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox7
 			// 
 			this->checkBox7->AutoSize = true;
-			this->checkBox7->Location = System::Drawing::Point(177, 371);
+			this->checkBox7->Location = System::Drawing::Point(177, 352);
 			this->checkBox7->Name = L"checkBox7";
 			this->checkBox7->Size = System::Drawing::Size(15, 14);
 			this->checkBox7->TabIndex = 10;
@@ -715,7 +855,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox6
 			// 
 			this->checkBox6->AutoSize = true;
-			this->checkBox6->Location = System::Drawing::Point(177, 347);
+			this->checkBox6->Location = System::Drawing::Point(177, 331);
 			this->checkBox6->Name = L"checkBox6";
 			this->checkBox6->Size = System::Drawing::Size(15, 14);
 			this->checkBox6->TabIndex = 10;
@@ -725,7 +865,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox5
 			// 
 			this->checkBox5->AutoSize = true;
-			this->checkBox5->Location = System::Drawing::Point(177, 323);
+			this->checkBox5->Location = System::Drawing::Point(177, 310);
 			this->checkBox5->Name = L"checkBox5";
 			this->checkBox5->Size = System::Drawing::Size(15, 14);
 			this->checkBox5->TabIndex = 10;
@@ -735,7 +875,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox4
 			// 
 			this->checkBox4->AutoSize = true;
-			this->checkBox4->Location = System::Drawing::Point(177, 299);
+			this->checkBox4->Location = System::Drawing::Point(177, 290);
 			this->checkBox4->Name = L"checkBox4";
 			this->checkBox4->Size = System::Drawing::Size(15, 14);
 			this->checkBox4->TabIndex = 10;
@@ -745,7 +885,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox3
 			// 
 			this->checkBox3->AutoSize = true;
-			this->checkBox3->Location = System::Drawing::Point(177, 275);
+			this->checkBox3->Location = System::Drawing::Point(177, 270);
 			this->checkBox3->Name = L"checkBox3";
 			this->checkBox3->Size = System::Drawing::Size(15, 14);
 			this->checkBox3->TabIndex = 10;
@@ -755,7 +895,7 @@ private: System::ComponentModel::IContainer^  components;
 			// checkBox2
 			// 
 			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(177, 251);
+			this->checkBox2->Location = System::Drawing::Point(177, 249);
 			this->checkBox2->Name = L"checkBox2";
 			this->checkBox2->Size = System::Drawing::Size(15, 14);
 			this->checkBox2->TabIndex = 10;
@@ -776,7 +916,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label14->AutoSize = true;
 			this->label14->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label14->Location = System::Drawing::Point(10, 408);
+			this->label14->Location = System::Drawing::Point(10, 430);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(70, 19);
 			this->label14->TabIndex = 9;
@@ -787,7 +927,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label9->AutoSize = true;
 			this->label9->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label9->Location = System::Drawing::Point(10, 367);
+			this->label9->Location = System::Drawing::Point(10, 348);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(126, 19);
 			this->label9->TabIndex = 9;
@@ -797,7 +937,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label8->Location = System::Drawing::Point(10, 343);
+			this->label8->Location = System::Drawing::Point(10, 327);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(130, 19);
 			this->label8->TabIndex = 9;
@@ -807,7 +947,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label7->Location = System::Drawing::Point(10, 319);
+			this->label7->Location = System::Drawing::Point(10, 306);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(146, 19);
 			this->label7->TabIndex = 9;
@@ -817,7 +957,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label6->AutoSize = true;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label6->Location = System::Drawing::Point(10, 295);
+			this->label6->Location = System::Drawing::Point(10, 286);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(93, 19);
 			this->label6->TabIndex = 9;
@@ -827,7 +967,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label5->Location = System::Drawing::Point(10, 271);
+			this->label5->Location = System::Drawing::Point(10, 266);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(93, 19);
 			this->label5->TabIndex = 9;
@@ -837,7 +977,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label4->Location = System::Drawing::Point(10, 247);
+			this->label4->Location = System::Drawing::Point(10, 245);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(125, 19);
 			this->label4->TabIndex = 9;
@@ -858,7 +998,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label13->AutoSize = true;
 			this->label13->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label13->Location = System::Drawing::Point(231, 302);
+			this->label13->Location = System::Drawing::Point(231, 291);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(33, 19);
 			this->label13->TabIndex = 7;
@@ -878,7 +1018,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label16->AutoSize = true;
 			this->label16->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label16->Location = System::Drawing::Point(199, 396);
+			this->label16->Location = System::Drawing::Point(199, 417);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(58, 19);
 			this->label16->TabIndex = 7;
@@ -888,7 +1028,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label15->AutoSize = true;
 			this->label15->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label15->Location = System::Drawing::Point(175, 396);
+			this->label15->Location = System::Drawing::Point(175, 417);
 			this->label15->Name = L"label15";
 			this->label15->Size = System::Drawing::Size(23, 19);
 			this->label15->TabIndex = 7;
@@ -908,7 +1048,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->label10->AutoSize = true;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Bold));
-			this->label10->Location = System::Drawing::Point(169, 207);
+			this->label10->Location = System::Drawing::Point(170, 206);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(29, 19);
 			this->label10->TabIndex = 7;
@@ -991,6 +1131,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->dataGridView1->GridColor = System::Drawing::SystemColors::Control;
 			this->dataGridView1->Location = System::Drawing::Point(269, 4);
 			this->dataGridView1->Name = L"dataGridView1";
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView1->RowsDefaultCellStyle = dataGridViewCellStyle1;
 			this->dataGridView1->Size = System::Drawing::Size(710, 540);
 			this->dataGridView1->TabIndex = 0;
 			// 
@@ -999,29 +1141,77 @@ private: System::ComponentModel::IContainer^  components;
 			this->shapeContainer1->Location = System::Drawing::Point(3, 3);
 			this->shapeContainer1->Margin = System::Windows::Forms::Padding(0);
 			this->shapeContainer1->Name = L"shapeContainer1";
-			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(2) {this->lineShape3, 
-				this->lineShape1});
+			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(4) {this->lineShape4, 
+				this->lineShape2, this->lineShape3, this->lineShape1});
 			this->shapeContainer1->Size = System::Drawing::Size(971, 578);
 			this->shapeContainer1->TabIndex = 11;
 			this->shapeContainer1->TabStop = false;
+			// 
+			// lineShape4
+			// 
+			this->lineShape4->Name = L"lineShape4";
+			this->lineShape4->X1 = 5;
+			this->lineShape4->X2 = 260;
+			this->lineShape4->Y1 = 540;
+			this->lineShape4->Y2 = 540;
+			// 
+			// lineShape2
+			// 
+			this->lineShape2->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->lineShape2->BorderStyle = System::Drawing::Drawing2D::DashStyle::Dot;
+			this->lineShape2->Name = L"lineShape2";
+			this->lineShape2->X1 = 12;
+			this->lineShape2->X2 = 253;
+			this->lineShape2->Y1 = 367;
+			this->lineShape2->Y2 = 367;
 			// 
 			// lineShape3
 			// 
 			this->lineShape3->Name = L"lineShape3";
 			this->lineShape3->X1 = 12;
 			this->lineShape3->X2 = 250;
-			this->lineShape3->Y1 = 478;
-			this->lineShape3->Y2 = 478;
+			this->lineShape3->Y1 = 479;
+			this->lineShape3->Y2 = 479;
 			// 
 			// lineShape1
 			// 
 			this->lineShape1->BorderColor = System::Drawing::SystemColors::AppWorkspace;
 			this->lineShape1->BorderStyle = System::Drawing::Drawing2D::DashStyle::Dot;
 			this->lineShape1->Name = L"lineShape1";
-			this->lineShape1->X1 = 9;
-			this->lineShape1->X2 = 250;
-			this->lineShape1->Y1 = 390;
-			this->lineShape1->Y2 = 390;
+			this->lineShape1->X1 = 12;
+			this->lineShape1->X2 = 253;
+			this->lineShape1->Y1 = 409;
+			this->lineShape1->Y2 = 409;
+			// 
+			// tabPage3
+			// 
+			this->tabPage3->Controls->Add(this->button9);
+			this->tabPage3->Controls->Add(this->pictureBox1);
+			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Name = L"tabPage3";
+			this->tabPage3->Size = System::Drawing::Size(977, 584);
+			this->tabPage3->TabIndex = 0;
+			this->tabPage3->Text = L"График";
+			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// button9
+			// 
+			this->button9->Location = System::Drawing::Point(865, 552);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(75, 23);
+			this->button9->TabIndex = 1;
+			this->button9->Text = L"Чертить";
+			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Click += gcnew System::EventHandler(this, &Form1::button9_Click);
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackColor = System::Drawing::Color::Gainsboro;
+			this->pictureBox1->Location = System::Drawing::Point(40, 30);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(900, 500);
+			this->pictureBox1->TabIndex = 0;
+			this->pictureBox1->TabStop = false;
 			// 
 			// tabPage2
 			// 
@@ -1041,7 +1231,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(204)));
 			this->richTextBox1->Location = System::Drawing::Point(9, 0);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(466, 514);
+			this->richTextBox1->Size = System::Drawing::Size(496, 575);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
 			// 
@@ -1080,7 +1270,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Controls->Add(this->tabControl1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
-			this->Text = L"BB_reader v3.0";
+			this->Text = L"BB_reader v3.1";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
@@ -1088,6 +1278,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->EndInit();
+			this->tabPage3->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->EndInit();
 			this->tabPage2->ResumeLayout(false);
 			this->ResumeLayout(false);
 
@@ -1119,7 +1311,11 @@ private: System::ComponentModel::IContainer^  components;
 				checkBox21->Checked = true;
 				checkBox22->Checked = true;
 				checkBox23->Checked = true;
-				checkBox24->Checked = true;				
+				checkBox24->Checked = true;	
+
+				//--- числовые значения -----
+				checkBox27->Checked = true;
+				checkBox28->Checked = true;
 				
 				checkBox1_CheckedChanged(sender, e);
 			 }
@@ -1447,6 +1643,9 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		String^ block_U ;		// фраза для блоокировки по Uсети
 		String^ block_I ;		// фраза для блоокировки по I
 
+		//--- для однократного определения 660/1140		
+		unsigned char U_da = 0;
+
 		//--- таблица в dataGridView1 ---------
 		DataTable ^ tabl_U = gcnew DataTable();
 		//-- шапка таблицы -------------
@@ -1526,6 +1725,15 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		// подготавливаем строки если корректный блок
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 				{
+					//--- вывод признака напряжения
+					// если во третьей и четвертой строке - один признак и эти строки имеют хвосты 
+					// (z[53]&16) =1 (1140)    =0 (660)
+					if(U_da == 0)
+					{
+						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10)&&(z[353]&16)&&(z[453]&16)) {	label33->Text = "1140 В"; U_da = 1; }
+						else 						 {	label33->Text = "660 В";  U_da = 1; }
+					}
+
 //------------------------------------- -1-	---------------------------------------------------
 					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)) 
 					{	
@@ -1539,7 +1747,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 
 						/*-- Напряжение питания --*/
 						if (z[53]&16) 	U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/66).ToString()  + "%Uном)" ;	// 660В
+						else			U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/66).ToString()  + "%Uном)" ;		// 660В
 						
 						switch (ch)
 						{
@@ -1704,7 +1912,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		//-- сразу упорядочить по первому столбцу (время) по возрастанию
 		dataGridView1->Sort( dataGridView1->Columns[0], ListSortDirection::Ascending);
 
-		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
+		label23->Text = "Данные от: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
 		
 		
 		progressBar1->Visible=false;			// спрятать прогресс
@@ -1771,6 +1979,10 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 
 		//--- фразы отказов ----
 		String^ m_error = "";		
+		
+		//--- для однократного отображения строки с уставками и однократного определения 660/1140
+		unsigned char ustavki_da = 0;
+		unsigned char U_da = 0;
 
 		//--- таблица в dataGridView1 ---------
 		DataTable ^ tabl_z = gcnew DataTable();
@@ -1849,14 +2061,39 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		// подготавливаем строки если корректный блок
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 				{
-				
+
+					//--- вывод признака напряжения
+					// если во третьей и четвертой строке - один признак и эти строки имеют хвосты
+					// (z[53]&16) =1 (1140)    =0 (660)
+					if(U_da == 0)
+					{
+						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10)&&(z[353]&16)&&(z[453]&16)) {	label33->Text = "1140 В"; U_da = 1; }
+						else 						 {	label33->Text = "660 В";  U_da = 1; }
+					}
+
+			//--- вывод уставок по приводам если они выбраны
+					// признак что выбран хотя бы один привод
+					// if(((maska&power(1))||(maska&power(2))||(maska&power(3))||(maska&power(4))||(maska&power(5))||(maska&power(6))||(maska&power(7)))&&(ustavki_da==0)){
+					if(((maska&power(1))||(maska&power(2))||(maska&power(3))||(maska&power(4))||(maska&power(5))||(maska&power(6))||(maska&power(7)))&&(ustavki_da==0)){
+					//	  дата    М1         М2         М3         М4         М5         М6         М7      маслобак
+						tabl_z->Rows->Add("--", ustavki(1), ustavki(2), ustavki(3), ustavki(4), ustavki(5), ustavki(6), ustavki(7), "--");
+						ustavki_da = 1;
+					}
+									
 			//----- цикл разбора пяти строк в блоке 512 --------------------
 					for(int s = 0; s < 5; s++)
 					{						
 						if ((z[99+(100*s)]==13)&&(z[100+(100*s)]==10)&&(z[1+(100*s)]==(monthCalendar1->SelectionStart.Day))&&(z[2+(100*s)]==(monthCalendar1->SelectionStart.Month))&&(z[3+(100*s)]==(monthCalendar1->SelectionStart.Year)-2000)) 
 						{	
 						//--- M1 --------------------------------------------------------------------------------
-							/*-- М1 Ток БКТ1 или БКТ2   --*/			
+							//-- Значение тока, по БКТ1
+							if((maska&power(1))&&(maska&power(27)))
+							{	m_error=(256*(15&z[7+(100*s)]) + z[8+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 1, tabl_z);
+							}
+							
+							//--- Защиты по току --------------
+							/*-- М1 Ток БКТ1 или БКТ2 --*/			
 							if((maska&power(1))&&(((z[45+(100*s)]&24)==8)||((z[48+(100*s)]&24)==8)))	
 							{	m_error="Тех перегруз";	//+++++++++++ новая строка +++++++++++					
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 1, tabl_z);
@@ -2097,7 +2334,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 		//-- сразу упорядочить по первому столбцу (время) по возрастанию
 		dataGridView1->Sort( dataGridView1->Columns[0], ListSortDirection::Ascending);
 
-		label23->Text = "Данные за: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
+		label23->Text = "Данные от: " + monthCalendar1->SelectionStart.Day.ToString("D2")+"-"+monthCalendar1->SelectionStart.Month.ToString("D2")+"-"+monthCalendar1->SelectionStart.Year.ToString("D4")+" г";	
 		
 		//-- cтоп секундомер -------
 		SYSTEMTIME st1;
@@ -2179,8 +2416,48 @@ private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::
 		if(checkBox24->Checked==true) maska |= power(24);
 		else						  maska &= ~power(24);		// 2^23
 		
+		if(checkBox27->Checked==true) maska |= power(27);
+		else						  maska &= ~power(27);		// 2^27
+		if(checkBox28->Checked==true) maska |= power(28);
+		else						  maska &= ~power(28);		// 2^28		
+		
+				
 		if((maska>0)&&label21->Text != "") 	button6->Enabled=true;		// выбрано и есть откуда читать 
 		else								button6->Enabled=false;		// спрятать кнопку если ничего не выбрано
+
+		//--- числовые значения токов и напрыжения - доступны если выбираются защиты по току
+		if((checkBox1->Checked==true)||(checkBox2->Checked==true)||(checkBox3->Checked==true)||(checkBox4->Checked==true)||(checkBox5->Checked==true)||(checkBox6->Checked==true)||(checkBox7->Checked==true))
+		{
+			checkBox27->Enabled = true;
+			label27->ForeColor = System::Drawing::Color::Black;
+			label28->ForeColor = System::Drawing::Color::Black;
+		}
+		else
+		{
+			checkBox27->Enabled = false;
+			checkBox27->Checked = false;
+			checkBox28->Enabled = false;
+			checkBox28->Checked = false;
+			label27->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+			label28->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+			label28->ForeColor = System::Drawing::SystemColors::ButtonShadow;
+		}
+
+		//--- напряжение питания в зависимости от тока ---
+		if(checkBox27->Checked==true)
+		{
+			checkBox28->Enabled = true;
+			label29->ForeColor = System::Drawing::Color::Black;			
+		}
+		else
+		{
+			checkBox28->Enabled = false;
+			checkBox28->Checked = false;			
+			label29->ForeColor = System::Drawing::SystemColors::ButtonShadow;			
+		}
+
+		//label30->Text = maska.ToString();
+
 	}
 	//--- инициализация/первая прогрузка формы
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -2197,8 +2474,13 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		label24->Text = "00";
 		label25->Text = "00";
 		label26->Text = ":";
+		label33->Text = "";
 		panel1->Visible = false;
 		progressBar1->Visible=false;
+		
+		//-- числовые значения токов, напряжения в блоке защит и блокировок
+		checkBox27->Enabled = false;
+		checkBox28->Enabled = false;
 		
 		//label21->Text = "E:\Работа_mzsha\VS\BB_Reader\Файлы dat\4 все.dat";
 	}
@@ -2329,10 +2611,10 @@ private: void result_date(){
 	}
 	
 	//--- power(1) = 2^0 ----
-private: unsigned int power(int n){
+private: unsigned int power(unsigned int n){
 		unsigned int result = 1;
 		if (n==0) return 1;
-		for(int i=0; i<(n-1); i++){ 
+		for(unsigned int i=0; i<(n-1); i++){ 
 			result *= 2;
 		}
 		return result;
@@ -2346,6 +2628,92 @@ private: unsigned int date_exist(){
 		}
 		else 	return 1;		
 	}
+	
+	//-- вывод уставок по току двигателей, если выбраны нужные чекбоксы
+private: String ^ ustavki(unsigned char m){
+		switch (m){
+			case 1:		// Двигатель М1 выбран
+			if(maska&power(1)){
+				return ("P = "       + "110"  + " кВт" + "\n" +
+						"Iном = "    + "110"  + " A"   + "\n" +
+						"Iт.пер. = " + "165"  + " A"   + "\n" +
+						"Iопр. = "   + "270"  + " A"   + "\n" +
+						"Iмакс. = "  + "1450" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 2:		// Двигатель М2 выбран
+			if(maska&power(2)){
+				return ("P = "       + "55"  + " кВт" + "\n" +
+						"Iном = "    + "60"  + " A"   + "\n" +
+						"Iт.пер. = " + "75"  + " A"   + "\n" +
+						"Iопр. = "   + "130" + " A"   + "\n" +
+						"Iмакс. = "  + "720" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 3:		// Двигатель М3 выбран
+			if(maska&power(3)){
+				return ("P = "       + "18"  + " кВт" + "\n" +
+						"Iном = "    + "18"  + " A"   + "\n" +
+						"Iт.пер. = " + "25"  + " A"   + "\n" +
+						"Iопр. = "   + "40"  + " A"   + "\n" +
+						"Iмакс. = "  + "220" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 4:		// Двигатель М4 выбран
+			if(maska&power(4)){
+				return ("P = "       + "18"  + " кВт" + "\n" +
+						"Iном = "    + "18"  + " A"   + "\n" +
+						"Iт.пер. = " + "25"  + " A"   + "\n" +
+						"Iопр. = "   + "40"  + " A"   + "\n" +
+						"Iмакс. = "  + "220" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 5:		// Двигатель М5 выбран
+			if(maska&power(5)){
+				return ("P = "       + "18"  + " кВт" + "\n" +
+						"Iном = "    + "18"  + " A"   + "\n" +
+						"Iт.пер. = " + "25"  + " A"   + "\n" +
+						"Iопр. = "   + "40"  + " A"   + "\n" +
+						"Iмакс. = "  + "220" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 6:		// Двигатель М6 выбран
+			if(maska&power(6)){
+				return ("P = "       + "18"  + " кВт" + "\n" +
+						"Iном = "    + "18"  + " A"   + "\n" +
+						"Iт.пер. = " + "25"  + " A"   + "\n" +
+						"Iопр. = "   + "40"  + " A"   + "\n" +
+						"Iмакс. = "  + "220" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			case 7:		// Двигатель М7 выбран
+			if(maska&power(7)){
+				return ("P = "       + "18"  + " кВт" + "\n" +
+						"Iном = "    + "18"  + " A"   + "\n" +
+						"Iт.пер. = " + "25"  + " A"   + "\n" +
+						"Iопр. = "   + "40"  + " A"   + "\n" +
+						"Iмакс. = "  + "220" + " A"			);		
+			}
+			else	return ("");		
+			break;
+			
+			default:
+			return ("");			
+		}
+		
+	}	
 
 	//--- внутренний метод добавления строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
 private: void AddRow(unsigned char my_hour, unsigned char my_minute, unsigned char my_second, String^ error, unsigned char n, DataTable ^tabl)
@@ -2685,6 +3053,23 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			MessageBox::Show( "Диск не выбран!" );	
 			label21->Text= "";
 		}			
+	}
+
+	//--- Чертить------------------
+private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
+		
+		//-- инициализация битового поля внутри pictureBox1----
+		System::Drawing::Bitmap^ Mybmp = gcnew Bitmap(900,500);
+		this->pictureBox1->Image=Mybmp;		
+		Graphics^ g;
+		g=Graphics::FromImage(Mybmp);
+		
+		//-- карандаши ---------------------------------------------
+		Pen^ black_2 = gcnew Pen(System::Drawing::Color::Black, 2.0);
+		
+		//-- оси координат -------------------------
+		g->DrawLine(black_2,1,1,1,500);		//-ось Y
+		g->DrawLine(black_2,1,500,900,500); //-ось X
 	}
 
 };
