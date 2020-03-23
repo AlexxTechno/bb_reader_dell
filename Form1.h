@@ -65,6 +65,16 @@ namespace BB_reader_all_dell {
 	private: static WORD min = 0; 
 	//--- определение версии аппаратуры --------------------------
 	private: static unsigned char vers = 0;		// 0- нет  1-АУКП.01  2- АУКП.02
+	//--- мощности приводов --------
+	private: static unsigned char P_m1 ;
+	private: static unsigned char P_m2 ;
+	private: static unsigned char P_m3 ;
+	private: static unsigned char P_m4 ;
+	private: static unsigned char P_m5 ;
+	private: static unsigned char P_m6 ;
+	private: static unsigned char P_m7 ;
+    //--- Уставка по напряжению питания 660/1140 В ---
+	private: static unsigned ust_U ;
 		
 	private: System::Windows::Forms::TabControl^  tabControl1;
 	protected: 
@@ -133,7 +143,6 @@ namespace BB_reader_all_dell {
 	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 
-
 	private: System::Windows::Forms::ListBox^  listBox1;
 	private: System::Windows::Forms::Label^  label21;
 	private: System::Windows::Forms::Label^  label22;
@@ -163,12 +172,7 @@ private: System::Windows::Forms::TabPage^  tabPage3;
 private: System::Windows::Forms::PictureBox^  pictureBox1;
 private: System::Windows::Forms::Button^  button9;
 
-
-
-
 private: System::ComponentModel::IContainer^  components;
-
-
 
 	private:
 		/// <summary>
@@ -372,10 +376,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->tabPage1->Controls->Add(this->button1);
 			this->tabPage1->Controls->Add(this->dataGridView1);
 			this->tabPage1->Controls->Add(this->shapeContainer1);
-			this->tabPage1->Location = System::Drawing::Point(4, 22);
+			this->tabPage1->Location = System::Drawing::Point(4, 23);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(977, 584);
+			this->tabPage1->Size = System::Drawing::Size(977, 583);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Защиты и блокировки";
 			// 
@@ -384,7 +388,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label33->AutoSize = true;
 			this->label33->Location = System::Drawing::Point(75, 551);
 			this->label33->Name = L"label33";
-			this->label33->Size = System::Drawing::Size(41, 13);
+			this->label33->Size = System::Drawing::Size(40, 14);
 			this->label33->TabIndex = 28;
 			this->label33->Text = L"1140 В";
 			// 
@@ -395,7 +399,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(204)));
 			this->label32->Location = System::Drawing::Point(5, 550);
 			this->label32->Name = L"label32";
-			this->label32->Size = System::Drawing::Size(67, 14);
+			this->label32->Size = System::Drawing::Size(70, 14);
 			this->label32->TabIndex = 27;
 			this->label32->Text = L"Uсети ном.:";
 			// 
@@ -406,7 +410,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(204)));
 			this->label31->Location = System::Drawing::Point(161, 549);
 			this->label31->Name = L"label31";
-			this->label31->Size = System::Drawing::Size(47, 14);
+			this->label31->Size = System::Drawing::Size(50, 14);
 			this->label31->TabIndex = 27;
 			this->label31->Text = L"Версия:";
 			// 
@@ -417,7 +421,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(204)));
 			this->label30->Location = System::Drawing::Point(5, 566);
 			this->label30->Name = L"label30";
-			this->label30->Size = System::Drawing::Size(37, 14);
+			this->label30->Size = System::Drawing::Size(39, 14);
 			this->label30->TabIndex = 26;
 			this->label30->Text = L"Файл:";
 			// 
@@ -525,7 +529,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label23->AutoSize = true;
 			this->label23->Location = System::Drawing::Point(605, 552);
 			this->label23->Name = L"label23";
-			this->label23->Size = System::Drawing::Size(43, 13);
+			this->label23->Size = System::Drawing::Size(41, 14);
 			this->label23->TabIndex = 20;
 			this->label23->Text = L"label23";
 			// 
@@ -544,9 +548,9 @@ private: System::ComponentModel::IContainer^  components;
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(207, 550);
+			this->label22->Location = System::Drawing::Point(213, 549);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(43, 13);
+			this->label22->Size = System::Drawing::Size(41, 14);
 			this->label22->TabIndex = 18;
 			this->label22->Text = L"label22";
 			// 
@@ -555,7 +559,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label21->AutoSize = true;
 			this->label21->Location = System::Drawing::Point(40, 567);
 			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(43, 13);
+			this->label21->Size = System::Drawing::Size(41, 14);
 			this->label21->TabIndex = 17;
 			this->label21->Text = L"label21";
 			// 
@@ -563,9 +567,10 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->listBox1->BackColor = System::Drawing::SystemColors::MenuBar;
 			this->listBox1->FormattingEnabled = true;
+			this->listBox1->ItemHeight = 14;
 			this->listBox1->Location = System::Drawing::Point(4, 88);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(96, 95);
+			this->listBox1->Size = System::Drawing::Size(96, 88);
 			this->listBox1->TabIndex = 16;
 			// 
 			// button7
@@ -1071,7 +1076,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(4, 5);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(133, 13);
+			this->label1->Size = System::Drawing::Size(132, 14);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Откройте диск или файл";
 			// 
@@ -1143,7 +1148,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->shapeContainer1->Name = L"shapeContainer1";
 			this->shapeContainer1->Shapes->AddRange(gcnew cli::array< Microsoft::VisualBasic::PowerPacks::Shape^  >(4) {this->lineShape4, 
 				this->lineShape2, this->lineShape3, this->lineShape1});
-			this->shapeContainer1->Size = System::Drawing::Size(971, 578);
+			this->shapeContainer1->Size = System::Drawing::Size(971, 577);
 			this->shapeContainer1->TabIndex = 11;
 			this->shapeContainer1->TabStop = false;
 			// 
@@ -1187,9 +1192,9 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->tabPage3->Controls->Add(this->button9);
 			this->tabPage3->Controls->Add(this->pictureBox1);
-			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Location = System::Drawing::Point(4, 23);
 			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Size = System::Drawing::Size(977, 584);
+			this->tabPage3->Size = System::Drawing::Size(977, 583);
 			this->tabPage3->TabIndex = 0;
 			this->tabPage3->Text = L"График";
 			this->tabPage3->UseVisualStyleBackColor = true;
@@ -1216,10 +1221,10 @@ private: System::ComponentModel::IContainer^  components;
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->richTextBox1);
-			this->tabPage2->Location = System::Drawing::Point(4, 22);
+			this->tabPage2->Location = System::Drawing::Point(4, 23);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(977, 584);
+			this->tabPage2->Size = System::Drawing::Size(977, 583);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"О программе";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -2062,21 +2067,138 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 				if((z[511]==13)&&(z[512]==10))		// есть хвост блока
 				{
 
-					//--- вывод признака напряжения
-					// если во третьей и четвертой строке - один признак и эти строки имеют хвосты
-					// (z[53]&16) =1 (1140)    =0 (660)
+	///--- вывод признака напряжения
+	/// если в третьей и четвертой строке - один признак и эти строки имеют хвосты
+	/// (z[53]&16) =1 (1140)    =0 (660)
+	///--- мощности приводов
+	///--------- М1 -------------|-------- М2 ---------------|------------ М3 -----------|------------ М4 -----------|------------ М5 -----------|------------ М6 -----------|------------ М7 -----------|      
+	///- z[7]-БКТ1-|- z[9]-БКТ2--|- z[11]-БКТ1-|- z[13]-БКТ2-|- z[15]-БКТ1-|- z[17]-БКТ2-|- z[19]-БКТ1-|- z[21]-БКТ2-|- z[23]-БКТ1-|- z[25]-БКТ2-|- z[27]-БКТ1-|- z[29]-БКТ2-|- z[31]-БКТ1-|- z[33]-БКТ2-|
+	/// (z[7]&48)==48  P_m1= 200 | 							 |			                 |                           |                           | (z[27]&64)==32  P_m6= 22  |
+	/// (z[7]&48)==32  P_m1= 160 | (z[11]&48)==32  P_m2= 110 | (z[15]&48)==32  P_m3= 22  | (z[19]&48)==32  P_m4= 22  |	                         | (z[27]&48)==32  P_m6= 18  | (z[31]&48)==32  P_m6= 18  |
+	/// (z[7]&48)==16  P_m1= 132 | (z[11]&48)==16  P_m2= 75  | (z[15]&48)==16  P_m3= 18  | (z[19]&48)==16  P_m4= 18  | (z[23]&48)==16  P_m5= 37  | (z[27]&48)==16  P_m6= 15  | (z[31]&48)==16  P_m6= 15  |  
+	/// (z[7]&48)==0   P_m1= 110 | (z[11]&48)==0   P_m2= 55  | (z[15]&48)==0   P_m3= 15  | (z[19]&48)==0   P_m4= 15  | (z[23]&48)==0   P_m5= 30  | (z[27]&48)==0   P_m6= 11  | (z[31]&48)==0   P_m6= 5   |   
+					
 					if(U_da == 0)
 					{
-						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10)&&(z[353]&16)&&(z[453]&16)) {	label33->Text = "1140 В"; U_da = 1; }
-						else 						 {	label33->Text = "660 В";  U_da = 1; }
+						
+						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10)&&(z[353]&16)&&(z[453]&16)) {	label33->Text = "1140 В"; ust_U = 1140;}
+						else 						 {	label33->Text = "660 В";  ust_U = 660;  }
+						
+						//--- Определяем мощности приводов ---------------
+						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10))
+						{
+							//--- М1 БКТ1  ------
+							switch(z[7]&48){
+								case 48:
+									P_m1= 200;
+								break;
+								case 32:
+									P_m1= 160;
+								break;
+								case 16:
+									P_m1= 132;
+								break;
+								case 0:
+									P_m1= 110;
+								break;
+								default:
+									P_m1= 0;
+							}
+							//--- М2 БКТ1  ------
+							switch(z[11]&48){
+								case 32:
+									P_m2= 110;
+								break;
+								case 16:
+									P_m2= 75;
+								break;
+								case 0:
+									P_m2= 55;
+								break;
+								default:
+									P_m2= 0;
+							}
+							//--- М3 БКТ1  ------
+							switch(z[15]&48){
+								case 32:
+									P_m3= 22;
+								break;
+								case 16:
+									P_m3= 18;
+								break;
+								case 0:
+									P_m3= 15;
+								break;
+								default:
+									P_m3= 0;
+							}
+							//--- М4 БКТ1  ------
+							switch(z[19]&48){
+								case 32:
+									P_m4= 22;
+								break;
+								case 16:
+									P_m4= 18;
+								break;
+								case 0:
+									P_m4= 15;
+								break;
+								default:
+									P_m4= 0;
+							}
+							//--- М5 БКТ1  ------
+							switch(z[23]&48){
+								case 16:
+									P_m5= 37;
+								break;
+								case 0:
+									P_m5= 30;
+								break;
+								default:
+									P_m5= 0;
+							}
+							//--- М6 БКТ1  ------
+							switch(z[27]&48){
+								case 48:
+									P_m6= 22;
+								break;
+								case 32:
+									P_m6= 18;
+								break;
+								case 16:
+									P_m6= 15;
+								break;
+								case 0:
+									P_m6= 11;
+								break;
+								default:
+									P_m6= 0;
+							}
+							//--- М7 БКТ1  ------
+							switch(z[31]&48){
+								case 32:
+									P_m7= 18;
+								break;
+								case 16:
+									P_m7= 15;
+								break;
+								case 0:
+									P_m7= 5;
+								break;
+								default:
+									P_m7= 0;
+							}
+						}
+						
+						U_da = 1;
 					}
 
-			//--- вывод уставок по приводам если они выбраны
-					// признак что выбран хотя бы один привод
+					//--- вывод уставок по приводам если они выбраны
+					// признак что выбран хотя бы один привод выбран
 					// if(((maska&power(1))||(maska&power(2))||(maska&power(3))||(maska&power(4))||(maska&power(5))||(maska&power(6))||(maska&power(7)))&&(ustavki_da==0)){
 					if(((maska&power(1))||(maska&power(2))||(maska&power(3))||(maska&power(4))||(maska&power(5))||(maska&power(6))||(maska&power(7)))&&(ustavki_da==0)){
 					//	  дата    М1         М2         М3         М4         М5         М6         М7      маслобак
-						tabl_z->Rows->Add("--", ustavki(1), ustavki(2), ustavki(3), ustavki(4), ustavki(5), ustavki(6), ustavki(7), "--");
+						tabl_z->Rows->Add("--", privod(1), privod(2), privod(3), privod(4), privod(5), privod(6), privod(7), "--");
 						ustavki_da = 1;
 					}
 									
@@ -2122,6 +2244,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}
 								
 						//--- M2 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(2))&&(maska&power(27)))
+							{	m_error=(256*(15&z[11+(100*s)]) + z[12+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 2, tabl_z);
+							}							
+							
 							/*-- М2 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(2))&&(((z[45+(100*s)]&3)==1)||((z[48+(100*s)]&3)==1)))
 							{	m_error="Тех перегруз";	//+++++++++++ новая строка +++++++++++
@@ -2153,6 +2281,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}						
 								
 						//--- M3 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(3))&&(maska&power(27)))
+							{	m_error=(256*(15&z[15+(100*s)]) + z[16+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 3, tabl_z);
+							}	
+							
 							/*-- М3 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(3))&&(((z[46+(100*s)]&12)==4)||((z[49+(100*s)]&12)==4)))
 							{	m_error="Тех перегруз";			//+++++++++++ новая строка +++++++++++					
@@ -2184,6 +2318,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}
 							
 						//--- M4 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(4))&&(maska&power(27)))
+							{	m_error=(256*(15&z[19+(100*s)]) + z[20+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 4, tabl_z);
+							}
+							
 							/*-- М4 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(4))&&(((z[46+(100*s)]&3)==1)||((z[49+(100*s)]&3)==1)))
 							{	m_error="Тех перегруз";		//+++++++++++ новая строка +++++++++++					
@@ -2205,6 +2345,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}						
 													
 						//--- M5 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(5))&&(maska&power(27)))
+							{	m_error=(256*(15&z[23+(100*s)]) + z[24+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 5, tabl_z);
+							}
+							
 							/*-- М5 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(5))&&(((z[47+(100*s)]&192)==64)||((z[50+(100*s)]&192)==64)))	
 							{	m_error="Тех перегруз";			//+++++++++++ новая строка +++++++++++					
@@ -2242,6 +2388,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}						
 										
 						//--- M6 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(6))&&(maska&power(27)))
+							{	m_error=(256*(15&z[27+(100*s)]) + z[28+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 6, tabl_z);
+							}
+							
 							/*-- М6 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(6))&&(((z[47+(100*s)]&48)==16)||((z[50+(100*s)]&48)==16)))	
 							{	m_error="Тех перегруз";		//+++++++++++ новая строка +++++++++++					
@@ -2279,6 +2431,12 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							}
 							
 						//--- M7 --------------------------------------------------------------------------------	
+							//-- Значение тока, по БКТ1
+							if((maska&power(7))&&(maska&power(27)))
+							{	m_error=(256*(15&z[31+(100*s)]) + z[32+(100*s)]).ToString() + " А";	// ток по БКТ1				
+								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 7, tabl_z);
+							}
+							
 							/*-- М7 Ток БКТ1 или БКТ2   --*/
 							if((maska&power(7))&&(((z[47+(100*s)]&3)==1)||((z[50+(100*s)]&3)==1)))	
 							{	m_error="Тех перегруз";		//+++++++++++ новая строка +++++++++++					
@@ -2628,92 +2786,277 @@ private: unsigned int date_exist(){
 		}
 		else 	return 1;		
 	}
-	
 	//-- вывод уставок по току двигателей, если выбраны нужные чекбоксы
-private: String ^ ustavki(unsigned char m){
-		switch (m){
-			case 1:		// Двигатель М1 выбран
-			if(maska&power(1)){
-				return ("P = "       + "110"  + " кВт" + "\n" +
-						"Iном = "    + "110"  + " A"   + "\n" +
-						"Iт.пер. = " + "165"  + " A"   + "\n" +
-						"Iопр. = "   + "270"  + " A"   + "\n" +
-						"Iмакс. = "  + "1450" + " A"			);		
-			}
-			else	return ("");		
+private: String ^ privod(unsigned char nnn){	// - nnn-номер привода	
+		switch (nnn){
+			case 1:
+				if(maska&power(1))	return ustavki(P_m1);				
+				else	return ("");	
+			break;
+			case 2:
+				if(maska&power(2))	return ustavki(P_m2);				
+				else	return ("");	
+			break;
+			case 3:
+				if(maska&power(3))	return ustavki(P_m3);				
+				else	return ("");				
+			break;
+			case 4:
+				if(maska&power(4))	return ustavki(P_m4);				
+				else	return ("");	
+			break;
+			case 5:
+				if(maska&power(5))	return ustavki(P_m5);				
+				else	return ("");	
+			break;
+			case 6:
+				if(maska&power(6))	return ustavki(P_m6);				
+				else	return ("");	
+			break;
+			case 7:
+				if(maska&power(7))	return ustavki(P_m7);				
+				else	return ("");	
+			break;
+			default:
+			return ("");
+		}
+}
+	
+	//-- вывод уставок по току двигателей в зависимости от
+	//-- уставки напряжения питания 660/1140, мощности привода и исполнения аппаратуры 01/02
+private: String ^ ustavki(unsigned char m){	// - m-мощность привода		
+		
+		String ^ i820_720  ;
+		String ^ i820_470  ;
+		String ^ i400_250  ;
+		String ^ i400_195  ;
+	
+		//--- версия аппаратуры -----							
+		switch (vers)
+		{
+			case 2:
+			i820_720 = "820";
+			i820_470 = "820";	// label22->Text = "АУКП.02";
+			i400_250 = "400";
+			i400_195 = "400";
 			break;
 			
-			case 2:		// Двигатель М2 выбран
-			if(maska&power(2)){
-				return ("P = "       + "55"  + " кВт" + "\n" +
-						"Iном = "    + "60"  + " A"   + "\n" +
-						"Iт.пер. = " + "75"  + " A"   + "\n" +
-						"Iопр. = "   + "130" + " A"   + "\n" +
-						"Iмакс. = "  + "720" + " A"			);		
-			}
-			else	return ("");		
-			break;
-			
-			case 3:		// Двигатель М3 выбран
-			if(maska&power(3)){
-				return ("P = "       + "18"  + " кВт" + "\n" +
-						"Iном = "    + "18"  + " A"   + "\n" +
-						"Iт.пер. = " + "25"  + " A"   + "\n" +
-						"Iопр. = "   + "40"  + " A"   + "\n" +
-						"Iмакс. = "  + "220" + " A"			);		
-			}
-			else	return ("");		
-			break;
-			
-			case 4:		// Двигатель М4 выбран
-			if(maska&power(4)){
-				return ("P = "       + "18"  + " кВт" + "\n" +
-						"Iном = "    + "18"  + " A"   + "\n" +
-						"Iт.пер. = " + "25"  + " A"   + "\n" +
-						"Iопр. = "   + "40"  + " A"   + "\n" +
-						"Iмакс. = "  + "220" + " A"			);		
-			}
-			else	return ("");		
-			break;
-			
-			case 5:		// Двигатель М5 выбран
-			if(maska&power(5)){
-				return ("P = "       + "18"  + " кВт" + "\n" +
-						"Iном = "    + "18"  + " A"   + "\n" +
-						"Iт.пер. = " + "25"  + " A"   + "\n" +
-						"Iопр. = "   + "40"  + " A"   + "\n" +
-						"Iмакс. = "  + "220" + " A"			);		
-			}
-			else	return ("");		
-			break;
-			
-			case 6:		// Двигатель М6 выбран
-			if(maska&power(6)){
-				return ("P = "       + "18"  + " кВт" + "\n" +
-						"Iном = "    + "18"  + " A"   + "\n" +
-						"Iт.пер. = " + "25"  + " A"   + "\n" +
-						"Iопр. = "   + "40"  + " A"   + "\n" +
-						"Iмакс. = "  + "220" + " A"			);		
-			}
-			else	return ("");		
-			break;
-			
-			case 7:		// Двигатель М7 выбран
-			if(maska&power(7)){
-				return ("P = "       + "18"  + " кВт" + "\n" +
-						"Iном = "    + "18"  + " A"   + "\n" +
-						"Iт.пер. = " + "25"  + " A"   + "\n" +
-						"Iопр. = "   + "40"  + " A"   + "\n" +
-						"Iмакс. = "  + "220" + " A"			);		
-			}
-			else	return ("");		
+			case 1:
+			i820_720 = "720";
+			i820_470 = "470";	// label22->Text = "АУКП.01";
+			i400_250 = "250";
+			i400_195 = "195";			
 			break;
 			
 			default:
-			return ("");			
+			i820_720 = "820";
+			i820_470 = "820";	// label22->Text = "АУКП.02";
+			i400_250 = "400";
+			i400_195 = "400";						
 		}
 		
-	}	
+		switch (ust_U){	
+				case 660: //---  660 В ----------------------		
+					switch (m){
+						case 200:	// кВт				
+						return     ("P = "       + "200"  + " кВт" + "\n" +
+									"Iном = "    + "223"  + " A"   + "\n" +
+									"Iт.пер. = " + "267"  + " A"   + "\n" +
+									"Iопр. = "   + "557"  + " A"   + "\n" +
+									"Iмакс. = "  + "2676" + " A"		  );						
+						break;				
+						case 160:	// кВт		
+							return ("P = "       + "160"  + " кВт" + "\n" +
+									"Iном = "    + "176"  + " A"   + "\n" +
+									"Iт.пер. = " + "211"  + " A"   + "\n" +
+									"Iопр. = "   + "440"  + " A"   + "\n" +
+									"Iмакс. = "  + "2112" + " A"		  );				
+						break;				
+						case 132:	// кВт	
+							return ("P = "       + "132"  + " кВт" + "\n" +
+									"Iном = "    + "144"  + " A"   + "\n" +
+									"Iт.пер. = " + "173"  + " A"   + "\n" +
+									"Iопр. = "   + "360"  + " A"   + "\n" +
+									"Iмакс. = "  + "1730" + " A"		  );					
+						break;	
+						case 110:	// кВт	
+							return ("P = "       + "110"  + " кВт" + "\n" +
+									"Iном = "    + "121"  + " A"   + "\n" +
+									"Iт.пер. = " + "145"  + " A"   + "\n" +
+									"Iопр. = "   + "304"  + " A"   + "\n" +
+									"Iмакс. = "  + "1450" + " A"	  	 );						
+						break;
+						case 75:	// кВт		
+							return ("P = "       + "75"   + " кВт" + "\n" +
+									"Iном = "    + "82"   + " A"   + "\n" +
+									"Iт.пер. = " + "99"   + " A"   + "\n" +
+									"Iопр. = "   + "207"  + " A"   + "\n" +
+									"Iмакс. = "  + "1000" + " A"		  );							
+						break;				
+						case 55:	// кВт	
+							return ("P = "       + "55"  + " кВт" + "\n" +
+									"Iном = "    + "60"  + " A"   + "\n" +
+									"Iт.пер. = " + "72"  + " A"   + "\n" +
+									"Iопр. = "   + "151" + " A"   + "\n" +
+									"Iмакс. = "  + i820_720 + " A"		 );		//  01 Макс - 720 А	 02 Макс - 820 А			
+						break;				
+						case 37:
+							return ("P = "       + "37"  + " кВт" + "\n" +
+									"Iном = "    + "43"  + " A"   + "\n" +
+									"Iт.пер. = " + "52"  + " A"   + "\n" +
+									"Iопр. = "   + "109" + " A"   + "\n" +
+									"Iмакс. = "  + "520" + " A"			 );		
+						break;				
+						case 30:
+							return ("P = "       + "30"  + " кВт" + "\n" +
+									"Iном = "    + "31"  + " A"   + "\n" +
+									"Iт.пер. = " + "37"  + " A"   + "\n" +
+									"Iопр. = "   + "77"  + " A"   + "\n" +
+									"Iмакс. = "  + "370" + " A"			 );		
+						break;	
+						case 22:
+							return ("P = "       + "22"  + " кВт" + "\n" +
+									"Iном = "    + "18"  + " A"   + "\n" +
+									"Iт.пер. = " + "28"  + " A"   + "\n" +
+									"Iопр. = "   + "58"  + " A"   + "\n" +
+									"Iмакс. = "  + i400_250 + " A"		 );		 //  01 Макс - 250 А
+						break;			
+						case 18:
+							return ("P = "       + "18,5"  + " кВт" + "\n" +
+									"Iном = "    + "21"    + " A"   + "\n" +
+									"Iт.пер. = " + "25"    + " A"   + "\n" +
+									"Iопр. = "   + "53"    + " A"   + "\n" +
+									"Iмакс. = "  + i400_250   + " A"	   );	 //  01 Макс - 250 А			
+						break;				
+						case 15:
+							return ("P = "       + "15"    + " кВт" + "\n" +
+									"Iном = "    + "17,5"  + " A"   + "\n" +
+									"Iт.пер. = " + "21"    + " A"   + "\n" +
+									"Iопр. = "   + "44"    + " A"   + "\n" +
+									"Iмакс. = "  + i400_250   + " A"	   );	 //  01 Макс - 250 А				
+						break;	
+						case 11:
+							return ("P = "       + "11"    + " кВт" + "\n" +
+									"Iном = "    + "12,5"  + " A"   + "\n" +
+									"Iт.пер. = " + "15"    + " A"   + "\n" +
+									"Iопр. = "   + "31"    + " A"   + "\n" +
+									"Iмакс. = "  + i400_250   + " A"	   );	 //  01 Макс - 250 А			
+						break;	
+						case 5:
+							return ("P = "       + "5,5"   + " кВт" + "\n" +
+									"Iном = "    + "6,6"   + " A"   + "\n" +
+									"Iт.пер. = " + "7,9"   + " A"   + "\n" +
+									"Iопр. = "   + "16,9"  + " A"   + "\n" +
+									"Iмакс. = "  + "79"    + " A"	  	   );			
+						break;				
+						default:
+						return ("");			
+					}
+				break;	
+				
+				case 1140:	//---  1140 В ----------------------	
+					switch (m){
+						case 200:	// кВт				
+						return     ("P = "       + "200"  + " кВт" + "\n" +
+									"Iном = "    + "128"  + " A"   + "\n" +
+									"Iт.пер. = " + "154"  + " A"   + "\n" +
+									"Iопр. = "   + "332"  + " A"   + "\n" +
+									"Iмакс. = "  + "1694" + " A"		  );						
+						break;				
+						case 160:	// кВт		
+							return ("P = "       + "160"  + " кВт" + "\n" +
+									"Iном = "    + "100"  + " A"   + "\n" +
+									"Iт.пер. = " + "121"  + " A"   + "\n" +
+									"Iопр. = "   + "252"  + " A"   + "\n" +
+									"Iмакс. = "  + "1200" + " A"		  );				
+						break;				
+						case 132:	// кВт	
+							return ("P = "       + "132"  + " кВт" + "\n" +
+									"Iном = "    + "82"   + " A"   + "\n" +
+									"Iт.пер. = " + "98"   + " A"   + "\n" +
+									"Iопр. = "   + "205"  + " A"   + "\n" +
+									"Iмакс. = "  + "1012" + " A"		  );						
+						break;	
+						case 110:	// кВт	
+							return ("P = "       + "110" + " кВт" + "\n" +
+									"Iном = "    + "71"  + " A"   + "\n" +
+									"Iт.пер. = " + "85"  + " A"   + "\n" +
+									"Iопр. = "   + "176" + " A"   + "\n" +
+									"Iмакс. = "  + "870" + " A"			 );						
+						break;
+						case 75:	// кВт		
+							return ("P = "       + "75"  + " кВт" + "\n" +
+									"Iном = "    + "47"  + " A"   + "\n" +
+									"Iт.пер. = " + "57"  + " A"   + "\n" +
+									"Iопр. = "   + "120" + " A"   + "\n" +
+									"Iмакс. = "  + "570" + " A"			 );							
+						break;				
+						case 55:	// кВт	
+							return ("P = "       + "55"  + " кВт" + "\n" +
+									"Iном = "    + "35"  + " A"   + "\n" +
+									"Iт.пер. = " + "42"  + " A"   + "\n" +
+									"Iопр. = "   + "88"  + " A"   + "\n" +
+									"Iмакс. = "  + i820_470 + " A"		 );	   //  01 Макс - 470 А				
+						break;				
+						case 37:
+							return ("P = "       + "37"  + " кВт" + "\n" +
+									"Iном = "    + "25"  + " A"   + "\n" +
+									"Iт.пер. = " + "30"  + " A"   + "\n" +
+									"Iопр. = "   + "63"  + " A"   + "\n" +
+									"Iмакс. = "  + "300" + " A"			 );		
+						break;				
+						case 30:
+							return ("P = "       + "30"  + " кВт" + "\n" +
+									"Iном = "    + "18"  + " A"   + "\n" +
+									"Iт.пер. = " + "22"  + " A"   + "\n" +
+									"Iопр. = "   + "45"  + " A"   + "\n" +
+									"Iмакс. = "  + "220" + " A"			 );		
+						break;				
+						case 18:
+							return ("P = "       + "18,5"  + " кВт" + "\n" +
+									"Iном = "    + "12,5"  + " A"   + "\n" +
+									"Iт.пер. = " + "15"    + " A"   + "\n" +
+									"Iопр. = "   + "31"    + " A"   + "\n" +
+									"Iмакс. = "  + i400_195   + " A"	   ); 	 //  01 Макс - 195  А				
+						break;
+						case 22:
+							return ("P = "       + "22"   + " кВт" + "\n" +
+									"Iном = "    + "13"   + " A"   + "\n" +
+									"Iт.пер. = " + "16"   + " A"   + "\n" +
+									"Iопр. = "   + "34"   + " A"   + "\n" +
+									"Iмакс. = "  + i400_195  + " A"		  ); 	 //  01 Макс - 195  А				
+						break;						
+						case 15:
+							return ("P = "       + "15"  + " кВт" + "\n" +
+									"Iном = "    + "10"  + " A"   + "\n" +
+									"Iт.пер. = " + "12"  + " A"   + "\n" +
+									"Iопр. = "   + "25"  + " A"   + "\n" +
+									"Iмакс. = "  + i400_195 + " A"		 );	//  01 Макс - 195 А			
+						break;	
+						case 11:
+							return ("P = "       + "11"   + " кВт" + "\n" +
+									"Iном = "    + "7,5"  + " A"   + "\n" +
+									"Iт.пер. = " + "9"    + " A"   + "\n" +
+									"Iопр. = "   + "19"   + " A"   + "\n" +
+									"Iмакс. = "  + i400_195  + " A"		  );	//  01 Макс - 195 А				
+						break;	
+						case 5:
+							return ("P = "       + "5,5"  + " кВт" + "\n" +
+									"Iном = "    + "3,8"  + " A"   + "\n" +
+									"Iт.пер. = " + "4,6"  + " A"   + "\n" +
+									"Iопр. = "   + "9,5"  + " A"   + "\n" +
+									"Iмакс. = "  + "46"   + " A"		  );			
+						break;					
+						default:
+						return ("");			
+					}
+				break;
+
+				default:
+					return ("");				
+			}
+		}
+		
 
 	//--- внутренний метод добавления строки в таблицу если выбран чекбокс и есть срабатывание защиты/блокировки	
 private: void AddRow(unsigned char my_hour, unsigned char my_minute, unsigned char my_second, String^ error, unsigned char n, DataTable ^tabl)
