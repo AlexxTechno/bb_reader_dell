@@ -1696,7 +1696,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 					}
 
 //------------------------------------- -1-	---------------------------------------------------
-					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)) 
+					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[4]<60)&&(z[5]<60)&&(z[6]<60)) 
 					{	
 						/*-- Блокировка по Uсети --*/
 						if((z[36]&4)>0) block_U = "отключена";
@@ -1730,7 +1730,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 							
 					}					
 //------------------------------------- -2-	---------------------------------------------------					
-					if ((z[199]==13)&&(z[200]==10)&&(z[101]==(monthCalendar1->SelectionStart.Day))&&(z[102]==(monthCalendar1->SelectionStart.Month))&&(z[103]==(monthCalendar1->SelectionStart.Year)-2000))
+					if ((z[199]==13)&&(z[200]==10)&&(z[101]==(monthCalendar1->SelectionStart.Day))&&(z[102]==(monthCalendar1->SelectionStart.Month))&&(z[103]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[104]<60)&&(z[105]<60)&&(z[106]<60))
 					{
 						/*-- Блокировка по Uсети --*/
 						if((z[136]&4)>0) block_U = "отключена";
@@ -1763,7 +1763,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 						}
 					}
 //------------------------------------- -3- ---------------------------------------------------
-					if ((z[299]==13)&&(z[300]==10)&&(z[201]==(monthCalendar1->SelectionStart.Day))&&(z[202]==(monthCalendar1->SelectionStart.Month))&&(z[203]==(monthCalendar1->SelectionStart.Year)-2000))
+					if ((z[299]==13)&&(z[300]==10)&&(z[201]==(monthCalendar1->SelectionStart.Day))&&(z[202]==(monthCalendar1->SelectionStart.Month))&&(z[203]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[204]<60)&&(z[205]<60)&&(z[206]<60))
 					{
 						/*-- Блокировка по Uсети --*/
 						if((z[236]&4)>0) block_U = "отключена";
@@ -1796,7 +1796,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 						}
 					}
 //------------------------------------- -4- ---------------------------------------------------
-					if ((z[399]==13)&&(z[400]==10)&&(z[301]==(monthCalendar1->SelectionStart.Day))&&(z[302]==(monthCalendar1->SelectionStart.Month))&&(z[303]==(monthCalendar1->SelectionStart.Year)-2000))
+					if ((z[399]==13)&&(z[400]==10)&&(z[301]==(monthCalendar1->SelectionStart.Day))&&(z[302]==(monthCalendar1->SelectionStart.Month))&&(z[303]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[304]<60)&&(z[305]<60)&&(z[306]<60))
 					{
 						/*-- Блокировка по Uсети --*/
 						if((z[336]&4)>0) block_U = "отключена";
@@ -1829,7 +1829,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 						}
 					}
 //------------------------------------- -5- ---------------------------------------------------
-					if ((z[499]==13)&&(z[500]==10)&&(z[401]==(monthCalendar1->SelectionStart.Day))&&(z[402]==(monthCalendar1->SelectionStart.Month))&&(z[403]==(monthCalendar1->SelectionStart.Year)-2000))
+					if ((z[499]==13)&&(z[500]==10)&&(z[401]==(monthCalendar1->SelectionStart.Day))&&(z[402]==(monthCalendar1->SelectionStart.Month))&&(z[403]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[404]<60)&&(z[405]<60)&&(z[406]<60))
 					{
 						/*-- Блокировка по Uсети --*/
 						if((z[436]&4)>0) block_U = "отключена";
@@ -2165,13 +2165,13 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 									
 			//----- цикл разбора пяти строк в блоке 512 --------------------
 					for(int s = 0; s < 5; s++)
-					{						
-						if ((z[99+(100*s)]==13)&&(z[100+(100*s)]==10)&&(z[1+(100*s)]==(monthCalendar1->SelectionStart.Day))&&(z[2+(100*s)]==(monthCalendar1->SelectionStart.Month))&&(z[3+(100*s)]==(monthCalendar1->SelectionStart.Year)-2000)) 
+					{	//-  |-------------- хвост строки------------|----------------- выбранная дата -----------------------------------------------------------------------------------------------------------------------------------------|------------------- Адекватное время ------------------					
+						if ((z[99+(100*s)]==13)&&(z[100+(100*s)]==10)&&(z[1+(100*s)]==(monthCalendar1->SelectionStart.Day))&&(z[2+(100*s)]==(monthCalendar1->SelectionStart.Month))&&(z[3+(100*s)]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[4+(100*s)]<60)&&(z[5+(100*s)]<60)&&(z[6+(100*s)]<60)) 
 						{	
 						//--- M1 --------------------------------------------------------------------------------
 							//-- Значение тока, по БКТ
 							if((maska&power(1))&&(maska&power(27)))
-							{	m_error = (256*(15&z[7+(100*s)]) + z[8+(100*s)]).ToString() + " | ";		// ток по БКТ1	
+							{	m_error = (256*(15&z[7+(100*s)]) + z[8+(100*s)]).ToString() + "\n";		// 	" | "	ток по БКТ1	
 								m_error +=(256*(15&z[9+(100*s)]) + z[10+(100*s)]).ToString();				// ток по БКТ2	
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 1, tabl_z);
 							}
@@ -2208,7 +2208,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M2 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(2))&&(maska&power(27)))
-							{	m_error  =(256*(15&z[11+(100*s)]) + z[12+(100*s)]).ToString() + " | ";	// ток по БКТ1	
+							{	m_error  =(256*(15&z[11+(100*s)]) + z[12+(100*s)]).ToString() +  "\n";	// ток по БКТ1	
 								m_error +=(256*(15&z[13+(100*s)]) + z[14+(100*s)]).ToString();			// ток по БКТ2	
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 2, tabl_z);
 							}							
@@ -2246,7 +2246,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M3 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(3))&&(maska&power(27)))
-							{	m_error  =(256*(15&z[15+(100*s)]) + z[16+(100*s)]).ToString() + " | ";	// ток по БКТ1	
+							{	m_error  =(256*(15&z[15+(100*s)]) + z[16+(100*s)]).ToString() +  "\n";	// ток по БКТ1	
 								m_error +=(256*(15&z[17+(100*s)]) + z[18+(100*s)]).ToString();			// ток по БКТ2	
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 3, tabl_z);
 							}	
@@ -2284,7 +2284,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M4 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(4))&&(maska&power(27)))
-							{	m_error  =(256*(15&z[19+(100*s)]) + z[20+(100*s)]).ToString() + " | ";	// ток по БКТ1	
+							{	m_error  =(256*(15&z[19+(100*s)]) + z[20+(100*s)]).ToString() +  "\n";	// ток по БКТ1	
 								m_error +=(256*(15&z[21+(100*s)]) + z[22+(100*s)]).ToString();			// ток по БКТ2	
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 4, tabl_z);
 							}
@@ -2312,7 +2312,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M5 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(5))&&(maska&power(27)))
-							{	m_error  =(256*(15&z[23+(100*s)]) + z[24+(100*s)]).ToString() + " | ";	// ток по БКТ1
+							{	m_error  =(256*(15&z[23+(100*s)]) + z[24+(100*s)]).ToString() +  "\n";	// ток по БКТ1
 								m_error +=(256*(15&z[25+(100*s)]) + z[26+(100*s)]).ToString();			// ток по БКТ2
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 5, tabl_z);
 							}
@@ -2356,7 +2356,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M6 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(6))&&(maska&power(27)))
-							{	m_error  =(256*(15&z[27+(100*s)]) + z[28+(100*s)]).ToString() + " | ";	// ток по БКТ1	
+							{	m_error  =(256*(15&z[27+(100*s)]) + z[28+(100*s)]).ToString() +  "\n";	// ток по БКТ1	
 								m_error +=(256*(15&z[27+(100*s)]) + z[28+(100*s)]).ToString();			// ток по БКТ2
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 6, tabl_z);
 							}
@@ -2400,7 +2400,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 						//--- M7 --------------------------------------------------------------------------------	
 							//-- Значение тока, по БКТ
 							if((maska&power(7))&&(maska&power(27)))
-							{	m_error  =(0.1*(256*(15&z[31+(100*s)]) + z[32+(100*s)])).ToString() + " | ";	// ток по БКТ1	
+							{	m_error  =(0.1*(256*(15&z[31+(100*s)]) + z[32+(100*s)])).ToString() +  "\n";	// ток по БКТ1	
 								m_error +=(0.1*(256*(15&z[33+(100*s)]) + z[34+(100*s)])).ToString();			// ток по БКТ2
 								AddRow(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)], m_error, 7, tabl_z);
 							}
@@ -2792,7 +2792,7 @@ private: String ^ privod(unsigned char nnn){	// - nnn-номер привода
 }
 
 private: String ^ bkt1_2(unsigned char i){
-		if(maska&power(i))	return "  Ток (А)" + "\n" + "  БКТ1   |  БКТ2";				
+		if(maska&power(i))	return "  Ток (А)" + "\n" + "  БКТ1" + "\n"  + "  БКТ2";				
 		else	return ("");
 }
 	
