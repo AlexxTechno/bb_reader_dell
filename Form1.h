@@ -172,6 +172,14 @@ private: Microsoft::VisualBasic::PowerPacks::LineShape^  lineShape4;
 
 
 
+
+
+
+
+
+
+
+
 private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -1192,9 +1200,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
-			this->richTextBox1->Location = System::Drawing::Point(9, 0);
+			this->richTextBox1->Location = System::Drawing::Point(0, 0);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(496, 575);
+			this->richTextBox1->Size = System::Drawing::Size(561, 575);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
 			// 
@@ -1694,173 +1702,43 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 						if ((z[399]==13)&&(z[400]==10)&&(z[499]==13)&&(z[500]==10)&&(z[353]&16)&&(z[453]&16)) {	label33->Text = "1140 В"; U_da = 1; }
 						else 						 {	label33->Text = "660 В";  U_da = 1; }
 					}
-
-//------------------------------------- -1-	---------------------------------------------------
-					if ((z[99] ==13)&&(z[100]==10)&&(z[1]==(monthCalendar1->SelectionStart.Day))&&(z[2]==(monthCalendar1->SelectionStart.Month))&&(z[3]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[4]<60)&&(z[5]<60)&&(z[6]<60)) 
-					{	
-						/*-- Блокировка по Uсети --*/
-						if((z[36]&4)>0) block_U = "отключена";
-						else 			block_U = "";
 					
-						/*-- Блокировка по I --*/
-						if((z[36]&8)>0) block_I = "отключена";
-						else 			block_I = "";
-
-						/*-- Напряжение питания --*/
-						if (z[53]&16) 	U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[54]*7).ToString() + " (" + ((z[54]*70)/66).ToString()  + "%Uном)" ;		// 660В
+					//----- цикл разбора пяти строк в блоке 512 --------------------
+					for(int s = 0; s < 5; s++)
+					{
+						if ((z[99+(100*s)] ==13)&&(z[100+(100*s)]==10)&&(z[1+(100*s)]==(monthCalendar1->SelectionStart.Day))&&(z[2+(100*s)]==(monthCalendar1->SelectionStart.Month))&&(z[3+(100*s)]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[4+(100*s)]<60)&&(z[5+(100*s)]<60)&&(z[6+(100*s)]<60)) 
+						{	
+							/*-- Блокировка по Uсети --*/
+							if((z[36+(100*s)]&4)>0) block_U = "отключена";
+							else 			block_U = "";
 						
-						switch (ch)
-						{
-							case 3:								
-							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_U, block_I);
-							break;
+							/*-- Блокировка по I --*/
+							if((z[36+(100*s)]&8)>0) block_I = "отключена";
+							else 			block_I = "";
+
+							/*-- Напряжение питания --*/
+							if (z[53+(100*s)]&16) 	U_error =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+							else					U_error =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/66).ToString()  + "%Uном)" ;		// 660В
 							
-							case 2:								
-							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_I);
-							break;
-							
-							case 1:								
-							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error, block_U);
-							break;
-							
-							case 0:								
-							tabl_U->Rows->Add(my_time(z[4], z[5], z[6]), U_error);
+							switch (ch)
+							{
+								case 3:								
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_U, block_I);
+								break;
+								
+								case 2:								
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_I);
+								break;
+								
+								case 1:								
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_U);
+								break;
+								
+								case 0:								
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error);
+							}								
 						}	
-							
-					}					
-//------------------------------------- -2-	---------------------------------------------------					
-					if ((z[199]==13)&&(z[200]==10)&&(z[101]==(monthCalendar1->SelectionStart.Day))&&(z[102]==(monthCalendar1->SelectionStart.Month))&&(z[103]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[104]<60)&&(z[105]<60)&&(z[106]<60))
-					{
-						/*-- Блокировка по Uсети --*/
-						if((z[136]&4)>0) block_U = "отключена";
-						else 			 block_U = "";
-					
-						/*-- Блокировка по I --*/
-						if((z[136]&8)>0) block_I = "отключена";
-						else 			 block_I = "";
-
-						/*-- Напряжение питания --*/						
-						if (z[153]&16) 	U_error =(z[154]*7).ToString() + " (" + ((z[154]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[154]*7).ToString() + " (" + ((z[154]*70)/66).ToString()  + "%Uном)" ;	// 660В
-						
-						switch (ch)
-						{
-							case 3:								
-							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_U, block_I);
-							break;
-							
-							case 2:								
-							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_I);
-							break;
-							
-							case 1:								
-							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error, block_U);
-							break;
-							
-							case 0:								
-							tabl_U->Rows->Add(my_time(z[104], z[105], z[106]), U_error);
-						}
-					}
-//------------------------------------- -3- ---------------------------------------------------
-					if ((z[299]==13)&&(z[300]==10)&&(z[201]==(monthCalendar1->SelectionStart.Day))&&(z[202]==(monthCalendar1->SelectionStart.Month))&&(z[203]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[204]<60)&&(z[205]<60)&&(z[206]<60))
-					{
-						/*-- Блокировка по Uсети --*/
-						if((z[236]&4)>0) block_U = "отключена";
-						else 			 block_U = "";
-					
-						/*-- Блокировка по I --*/
-						if((z[236]&8)>0) block_I = "отключена";
-						else 			 block_I = "";
-
-						/*-- Напряжение питания --*/
-						if (z[253]&16) 	U_error =(z[254]*7).ToString() + " (" + ((z[254]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[254]*7).ToString() + " (" + ((z[254]*70)/66).ToString()  + "%Uном)" ;	// 660В
-						
-						switch (ch)
-						{
-							case 3:								
-							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_U, block_I);
-							break;
-							
-							case 2:								
-							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_I);
-							break;
-							
-							case 1:								
-							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error, block_U);
-							break;
-							
-							case 0:								
-							tabl_U->Rows->Add(my_time(z[204], z[205], z[206]), U_error);
-						}
-					}
-//------------------------------------- -4- ---------------------------------------------------
-					if ((z[399]==13)&&(z[400]==10)&&(z[301]==(monthCalendar1->SelectionStart.Day))&&(z[302]==(monthCalendar1->SelectionStart.Month))&&(z[303]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[304]<60)&&(z[305]<60)&&(z[306]<60))
-					{
-						/*-- Блокировка по Uсети --*/
-						if((z[336]&4)>0) block_U = "отключена";
-						else 			 block_U = "";
-					
-						/*-- Блокировка по I --*/
-						if((z[336]&8)>0) block_I = "отключена";
-						else 			 block_I = "";
-
-						/*-- Напряжение питания --*/
-						if (z[353]&16) 	U_error =(z[354]*7).ToString() + " (" + ((z[354]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[354]*7).ToString() + " (" + ((z[354]*70)/66).ToString()  + "%Uном)" ;	// 660В
-						
-						switch (ch)
-						{
-							case 3:								
-							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_U, block_I);
-							break;
-							
-							case 2:								
-							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_I);
-							break;
-							
-							case 1:								
-							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error, block_U);
-							break;
-							
-							case 0:								
-							tabl_U->Rows->Add(my_time(z[304], z[305], z[306]), U_error);
-						}
-					}
-//------------------------------------- -5- ---------------------------------------------------
-					if ((z[499]==13)&&(z[500]==10)&&(z[401]==(monthCalendar1->SelectionStart.Day))&&(z[402]==(monthCalendar1->SelectionStart.Month))&&(z[403]==(monthCalendar1->SelectionStart.Year)-2000)&&(z[404]<60)&&(z[405]<60)&&(z[406]<60))
-					{
-						/*-- Блокировка по Uсети --*/
-						if((z[436]&4)>0) block_U = "отключена";
-						else 			 block_U = "";
-					
-						/*-- Блокировка по I --*/
-						if((z[436]&8)>0) block_I = "отключена";
-						else 			 block_I = "";
-
-						/*-- Напряжение питания --*/
-						if (z[453]&16) 	U_error =(z[454]*7).ToString() + " (" + ((z[454]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-						else			U_error =(z[454]*7).ToString() + " (" + ((z[454]*70)/66).ToString()  + "%Uном)" ;	// 660В
-												
-						switch (ch)
-						{
-							case 3:								
-							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_U, block_I);
-							break;
-							
-							case 2:								
-							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_I);
-							break;
-							
-							case 1:								
-							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error, block_U);
-							break;
-							
-							case 0:								
-							tabl_U->Rows->Add(my_time(z[404], z[405], z[406]), U_error);
-						}
-					}
+					}		
 				}	
 			}
 		}	
