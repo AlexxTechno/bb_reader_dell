@@ -1608,9 +1608,11 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		//- путь в label21
 		int lim = 121875*30;	// для 1872 000 000 байт
 		unsigned char z[513];
-		String^ U_error;		// напряжение сети + %от Uном		
+		String^ U_set;			// напряжение сети + %от Uном		
 		String^ block_U ;		// фраза для блоокировки по Uсети
 		String^ block_I ;		// фраза для блоокировки по I
+		String^ error_U ;		// фраза для отказа по Uсети
+		
 
 		//--- для однократного определения 660/1140		
 		unsigned char U_da = 0;
@@ -1619,15 +1621,16 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 		DataTable ^ tabl_U = gcnew DataTable();
 		//-- шапка таблицы -------------
 		tabl_U->Columns->Add("Время");
-		tabl_U->Columns->Add("Uсети, В");		
+		tabl_U->Columns->Add("Uсети,В");	
+		tabl_U->Columns->Add("Отказы" + "\n" + "по Uсети");	
 		
 		// переменная для определения столбцов в будущей таблице
 		unsigned char ch = 0;
 		if ((checkBox26->Checked==true)&&(checkBox25->Checked==true)) 
 		{
 			ch = 3;
-			tabl_U->Columns->Add("Блокировка по Uсети");
-			tabl_U->Columns->Add("Блокировка по току");
+			tabl_U->Columns->Add("Блокировка" + "\n" + "по Uсети");
+			tabl_U->Columns->Add("Блокировка" + "\n" + "по току");			
 		}
 		else 
 		{
@@ -1710,32 +1713,38 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 						{	
 							/*-- Блокировка по Uсети --*/
 							if((z[36+(100*s)]&4)>0) block_U = "отключена";
-							else 			block_U = "";
+							else 					block_U = "";
 						
 							/*-- Блокировка по I --*/
 							if((z[36+(100*s)]&8)>0) block_I = "отключена";
-							else 			block_I = "";
+							else 					block_I = "";
+							
+							/*-- Отказы по Uсети --*/	
+							if((z[53+(100*s)]&4)==0) 	error_U = "неверное" + "\n" + "чередование фаз";
+							else 						error_U = "";		
+							if(z[53+(100*s)]&8) 		error_U = "обрыв фазы";
+							else 						error_U = "";
 
 							/*-- Напряжение питания --*/
-							if (z[53+(100*s)]&16) 	U_error =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
-							else					U_error =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/66).ToString()  + "%Uном)" ;		// 660В
+							if (z[53+(100*s)]&16) 	U_set =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/114).ToString() + "%Uном)" ; 	// 1140В	
+							else					U_set =(z[54+(100*s)]*7).ToString() + " (" + ((z[54+(100*s)]*70)/66).ToString()  + "%Uном)" ;	// 660В
 							
 							switch (ch)
 							{
 								case 3:								
-								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_U, block_I);
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_set, error_U, block_U, block_I);
 								break;
 								
 								case 2:								
-								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_I);
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_set, error_U, block_I);
 								break;
 								
 								case 1:								
-								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error, block_U);
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_set, error_U, block_U);
 								break;
 								
 								case 0:								
-								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_error);
+								tabl_U->Rows->Add(my_time(z[4+(100*s)], z[5+(100*s)], z[6+(100*s)]), U_set, error_U);
 							}								
 						}	
 					}		
